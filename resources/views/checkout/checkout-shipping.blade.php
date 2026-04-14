@@ -17,18 +17,18 @@
     rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon/favicon-16x16.png">
-  <link rel="mask-icon" href="./assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 
   <!-- Vendor CSS -->
-  <link rel="stylesheet" href="./assets/css/libs.bundle.css" />
+  <link rel="stylesheet" href="/css/libs.bundle.css" />
 
   <!-- Main CSS -->
-  <link rel="stylesheet" href="./assets/css/theme.bundle.css" />
+  <link rel="stylesheet" href="/css/theme.bundle.css" />
 
   <!-- Fix for custom scrollbar if JS is disabled-->
   <noscript>
@@ -56,7 +56,7 @@
                 <div class="col-lg-7 pt-5 pt-lg-10">
                     <div class="pe-lg-5">
                         <!-- Logo-->
-                        <a class="navbar-brand fw-bold fs-3 flex-shrink-0 mx-0 px-0" href="index.html">
+                        <a class="navbar-brand fw-bold fs-3 flex-shrink-0 mx-0 px-0" href="index.blade.php">
                                 <div class="d-flex align-items-center">
                                     <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26"><path d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z" fill="currentColor" fill-rule="evenodd"/></svg>
                                 </div>
@@ -65,13 +65,13 @@
                         <nav class="d-none d-md-block">
                             <ul class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="cart.html">Your Cart</a></li>
+                                        href="cart.blade.php">Your Cart</a></li>
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="checkout.html">Information</a></li>
+                                        href="checkout.blade.php">Information</a></li>
                                 <li class="me-4"><a class="nav-link-checkout active"
                                         href="./checkout-shipping.html">Shipping</a></li>
                                 <li><a class="nav-link-checkout nav-link-last "
-                                        href="checkout-payment.html">Payment</a></li>
+                                        href="checkout-payment.blade.php">Payment</a></li>
                             </ul>
                         </nav>                        <div class="mt-5">
                             <!-- Checkout Information Summary -->
@@ -81,7 +81,7 @@
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Contact</span>
                                         <span class="small">test@email.com</span>
                                     </div>
-                                    <a href="checkout.html" class="text-muted small" role="button">Change</a>
+                                    <a href="checkout.blade.php" class="text-muted small" role="button">Change</a>
                                 </li>
                             </ul><!-- / Checkout Information Summary-->
 
@@ -131,8 +131,8 @@
                             </div>
 
                             <div class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
-                              <a href="checkout.html" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0" role="button">Back to information</a>
-                              <a href="checkout-payment.html" class="btn btn-dark w-100 w-md-auto" role="button">Proceed to payment</a>
+                              <a href="checkout.blade.php" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0" role="button">Back to information</a>
+                              <a href="checkout-payment.blade.php" class="btn btn-dark w-100 w-md-auto" role="button">Proceed to payment</a>
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                                 <div class="col-2 position-relative">
                                         <span class="checkout-item-qty">3</span>
                                     <picture class="d-block border">
-                                        <img class="img-fluid" src="./assets/images/products/product-cart-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                        <img class="img-fluid" src="/images/products/product-cart-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                     </picture>
                                 </div>
                                 <div class="col-9 offset-1">
@@ -164,7 +164,7 @@
                                 <div class="col-2 position-relative">
                                         <span class="checkout-item-qty">3</span>
                                     <picture class="d-block border">
-                                        <img class="img-fluid" src="./assets/images/products/product-cart-2.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                        <img class="img-fluid" src="/images/products/product-cart-2.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                     </picture>
                                 </div>
                                 <div class="col-9 offset-1">
@@ -215,10 +215,10 @@
 
     <!-- Theme JS -->
     <!-- Vendor JS -->
-    <script src="./assets/js/vendor.bundle.js"></script>
+    <script src="{{ asset('/js/vendor.bundle.js') }}"></script>
 
     <!-- Theme JS -->
-    <script src="./assets/js/theme.bundle.js"></script>
+    <script src="{{ asset('/js/theme.bundle.js') }}"></script>
 </body>
 
 </html>
