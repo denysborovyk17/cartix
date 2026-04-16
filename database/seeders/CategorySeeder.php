@@ -12,11 +12,13 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $men = Category::create(['name' => 'Men', 'slug' => 'men']);
-        $women = Category::create(['name' => 'Women', 'slug' => 'women']);
-        $children = Category::create(['name' => 'Children', 'slug' => 'children']);
-
         $categories = [
+            Category::create(['name' => 'Men', 'slug' => 'men']),
+            Category::create(['name' => 'Women', 'slug' => 'women']),
+            Category::create(['name' => 'Children', 'slug' => 'children']),
+        ];
+
+        $subcategories = [
             'Jackets' => 'jackets',
             'T-Shirts' => 't-shirts',
             'Pants' => 'pants',
@@ -24,24 +26,14 @@ class CategorySeeder extends Seeder
             'Shoes' => 'shoes',
         ];
 
-        foreach ($categories as $name => $slug) {
-            Category::create([
-                'name' => $name,
-                'slug' => $men->slug.'-'.$slug,
-                'parent_id' => $men->id
-            ]);
-
-            Category::create([
-                'name' => $name,
-                'slug' => $women->slug.'-'.$slug,
-                'parent_id' => $women->id
-            ]);
-
-            Category::create([
-                'name' => $name,
-                'slug' => $children->slug.'-'.$slug,
-                'parent_id' => $children->id
-            ]);
+        foreach ($categories as $category) {
+            foreach ($subcategories as $name => $slug) {
+                Category::firstOrCreate([
+                    'name' => $category->name . ' ' . $name,
+                    'slug' => $category->slug . '-' . $slug,
+                    'parent_id' => $category->id
+                ]);
+            }
         }
     }
 }
