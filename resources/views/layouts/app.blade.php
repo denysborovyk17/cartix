@@ -43,11 +43,10 @@
     </noscript>
 
     <!-- Page Title -->
-    <title>OldSkool | Bootstrap 5 HTML Template</title>
+    <title>@yield('title')</title>
 
 </head>
 <body class="">
-
 <!-- Navbar -->
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white flex-column border-0  ">
@@ -98,7 +97,7 @@
 
                     <!-- Navbar Login-->
                     <li class="ms-1 d-none d-lg-inline-block">
-                        <a class="nav-link text-body" href="auth/login.blade.php">
+                        <a class="nav-link text-body" href="./login.html">
                             Account
                         </a>
                     </li>
@@ -108,13 +107,13 @@
                     <li class="ms-1 d-inline-block position-relative dropdown-cart">
                         <button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body"
                                 type="button">
-                            Bag (2)
+                            Bag
                         </button>
                         <div class="cart-dropdown dropdown-menu">
 
                             <!-- Cart Header-->
                             <div class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-4">
-                                <h6 class="fw-bolder m-0">Cart Summary (2 items)</h6>
+                                <h6 class="fw-bolder m-0">Cart Summary</h6>
                                 <i class="ri-close-circle-line text-muted ri-lg cursor-pointer btn-close-cart"></i>
                             </div>
                             <!-- / Cart Header-->
@@ -172,8 +171,8 @@
                                         <p class="m-0 fs-5 fw-bold">$422.99</p>
                                     </div>
                                 </div>
-                                <a href="cart.blade.php" class="btn btn-outline-dark w-100 text-center mt-4" role="button">View Cart</a>
-                                <a href="checkout/checkout.blade.php" class="btn btn-dark w-100 text-center mt-2" role="button">Proceed To Checkout</a>
+                                <a href="./cart.html" class="btn btn-outline-dark w-100 text-center mt-4" role="button">View Cart</a>
+                                <a href="./checkout.html" class="btn btn-dark w-100 text-center mt-2" role="button">Proceed To Checkout</a>
                             </div>
                             <!-- / Cart Summary-->
                         </div>
@@ -206,15 +205,15 @@
                                                 <div class="col">
                                                     <h6 class="dropdown-heading">Coats & Jackets</h6>
                                                     <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Waterproof Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Insulated Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Down Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Softshell Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Casual Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Windproof Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Breathable Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Cleaning & Proofing</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="category.blade.php">View All</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Waterproof Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Insulated Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Down Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Softshell Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Casual Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Windproof Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Breathable Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Cleaning & Proofing</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="./category.html">View All</a></li>
                                                     </ul>
                                                 </div>
                                                 <!-- / menu row-->
@@ -223,15 +222,15 @@
                                                 <div class="col">
                                                     <h6 class="dropdown-heading">Insulated</h6>
                                                     <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Insulated Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Bodywarmers</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Parkas</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Baselayers & Thermals</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Winter Hats</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Scarves & Neck</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Gloves & Mitts</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Accessories</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="category.blade.php">View All</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Insulated Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Bodywarmers</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Parkas</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Baselayers & Thermals</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Winter Hats</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Scarves & Neck</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Gloves & Mitts</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Accessories</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="./category.html">View All</a></li>
                                                     </ul>
                                                 </div>
                                                 <!-- / menu row-->
@@ -240,15 +239,15 @@
                                                 <div class="d-none d-xxl-block col">
                                                     <h6 class="dropdown-heading">Footwear</h6>
                                                     <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Lifestyle & Casual</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Walking Shoes</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Running Shoes</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Military Boots</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Fabric Walking Boots</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Leather Walking Boots</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Wellies</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="category.blade.php">Winter Footwear</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="category.blade.php">View All</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Lifestyle & Casual</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Walking Shoes</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Running Shoes</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Military Boots</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Fabric Walking Boots</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Leather Walking Boots</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Wellies</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Winter Footwear</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="./category.html">View All</a></li>
                                                     </ul>
                                                 </div>
                                                 <!-- / menu row-->
@@ -257,15 +256,15 @@
                                                 <div class="col">
                                                     <h6 class="dropdown-heading text-danger">Special Offers</h6>
                                                     <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Insulated Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Bodywarmers</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Parkas</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Baselayers & Thermals</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Winter Hats</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Scarves & Neck</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Gloves & Mitts</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="category.blade.php">Accessories</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger dropdown-link-all" href="category.blade.php">View All</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Insulated Jackets</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Bodywarmers</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Parkas</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Baselayers & Thermals</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Winter Hats</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Scarves & Neck</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Gloves & Mitts</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Accessories</a></li>
+                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger dropdown-link-all" href="./category.html">View All</a></li>
                                                     </ul>
                                                 </div>
                                                 <!-- / menu row-->
@@ -273,42 +272,42 @@
 
                                             <div class="align-items-center justify-content-between mt-5 d-none d-lg-flex">
                                                 <div class="me-5 f-w-20">
-                                                    <a class="d-block" href="category.blade.php">
+                                                    <a class="d-block" href="./category.html">
                                                         <picture>
                                                             <img class="img-fluid d-table mx-auto" src="/images/logos/logo-1.svg" alt="">
                                                         </picture>
                                                     </a>
                                                 </div>
                                                 <div class="me-5 f-w-20">
-                                                    <a class="d-block" href="category.blade.php">
+                                                    <a class="d-block" href="./category.html">
                                                         <picture>
                                                             <img class="img-fluid d-table mx-auto" src="/images/logos/logo-2.svg" alt="">
                                                         </picture>
                                                     </a>
                                                 </div>
                                                 <div class="me-5 f-w-20">
-                                                    <a class="d-block" href="category.blade.php">
+                                                    <a class="d-block" href="./category.html">
                                                         <picture>
                                                             <img class="img-fluid d-table mx-auto" src="/images/logos/logo-3.svg" alt="">
                                                         </picture>
                                                     </a>
                                                 </div>
                                                 <div class="me-5 f-w-20">
-                                                    <a class="d-block" href="category.blade.php">
+                                                    <a class="d-block" href="./category.html">
                                                         <picture>
                                                             <img class="img-fluid d-table mx-auto" src="/images/logos/logo-4.svg" alt="">
                                                         </picture>
                                                     </a>
                                                 </div>
                                                 <div class="me-5 f-w-20">
-                                                    <a class="d-block" href="category.blade.php">
+                                                    <a class="d-block" href="./category.html">
                                                         <picture>
                                                             <img class="img-fluid d-table mx-auto" src="/images/logos/logo-5.svg" alt="">
                                                         </picture>
                                                     </a>
                                                 </div>
                                                 <div class="me-5 f-w-20">
-                                                    <a class="d-block" href="category.blade.php">
+                                                    <a class="d-block" href="./category.html">
                                                         <picture>
                                                             <img class="img-fluid d-table mx-auto" src="/images/logos/logo-6.svg" alt="">
                                                         </picture>
@@ -327,7 +326,7 @@
                                                             <picture class="w-100 d-block mb-2 mx-auto">
                                                                 <img class="w-100 rounded" title="" src="/images/banners/banner-12.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                                             </picture>
-                                                            <a class="fw-bolder link-cover" href="category.blade.php">Latest Arrivals</a>
+                                                            <a class="fw-bolder link-cover" href="./category.html">Latest Arrivals</a>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6">
@@ -335,7 +334,7 @@
                                                             <picture class="w-100 d-block mb-2 mx-auto">
                                                                 <img class="w-100 rounded" title="" src="/images/banners/banner-13.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                                             </picture>
-                                                            <a class="fw-bolder link-cover" href="category.blade.php">Accessories</a>
+                                                            <a class="fw-bolder link-cover" href="./category.html">Accessories</a>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6">
@@ -343,7 +342,7 @@
                                                             <picture class="w-100 d-block mb-2 mx-auto">
                                                                 <img class="w-100 rounded" title="" src="/images/banners/banner-14.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                                             </picture>
-                                                            <a class="fw-bolder link-cover" href="category.blade.php">T-Shirts</a>
+                                                            <a class="fw-bolder link-cover" href="./category.html">T-Shirts</a>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6">
@@ -351,11 +350,11 @@
                                                             <picture class="w-100 d-block mb-2 mx-auto">
                                                                 <img class="w-100 rounded" title="" src="/images/banners/banner-15.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                                             </picture>
-                                                            <a class="fw-bolder link-cover" href="category.blade.php">Jackets</a>
+                                                            <a class="fw-bolder link-cover" href="./category.html">Jackets</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="category.blade.php" class="btn btn-link p-0 fw-bolder text-link-border mt-5 text-dark mx-auto d-table">Visit Mens Section</a>
+                                                <a href="./category.html" class="btn btn-link p-0 fw-bolder text-link-border mt-5 text-dark mx-auto d-table">Visit Mens Section</a>
                                             </div>
                                         </div>
                                         <!-- Menswear Dropdown Menu Images Section-->
@@ -369,21 +368,21 @@
                                 Women
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="category.blade.php">Tops</a></li>
-                                <li><a class="dropdown-item" href="category.blade.php">Bottoms</a></li>
-                                <li><a class="dropdown-item" href="category.blade.php">Jeans</a></li>
-                                <li><a class="dropdown-item" href="category.blade.php">T-Shirts</a></li>
-                                <li><a class="dropdown-item" href="category.blade.php">Shoes</a></li>
-                                <li><a class="dropdown-item" href="category.blade.php">Accessories</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Tops</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Bottoms</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Jeans</a></li>
+                                <li><a class="dropdown-item" href="./category.html">T-Shirts</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Shoes</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Accessories</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="category.blade.php" role="button">
+                            <a class="nav-link" href="./category.html" role="button">
                                 Kids
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="category.blade.php" role="button">
+                            <a class="nav-link" href="./category.html" role="button">
                                 Sale
                             </a>
                         </li>
@@ -393,22 +392,31 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="./index.html">Homepage</a></li>
-                                <li><a class="dropdown-item" href="category.blade.php">Category</a></li>
-                                <li><a class="dropdown-item" href="product.blade.php">Product</a></li>
-                                <li><a class="dropdown-item" href="cart.blade.php">Cart</a></li>
-                                <li><a class="dropdown-item" href="checkout/checkout.blade.php">Checkout</a></li>
-                                <li><a class="dropdown-item" href="auth/login.blade.php">Login</a></li>
-                                <li><a class="dropdown-item" href="auth/register.blade.php">Register</a></li>
-                                <li><a class="dropdown-item" href="forgotten-password.blade.php">Forgotten Password</a></li>
+                                <li><a class="dropdown-item" href="./category.html">Category</a></li>
+                                <li><a class="dropdown-item" href="./product.html">Product</a></li>
+                                <li><a class="dropdown-item" href="./cart.html">Cart</a></li>
+                                <li><a class="dropdown-item" href="./checkout.html">Checkout</a></li>
+                                <li><a class="dropdown-item" href="./login.html">Login</a></li>
+                                <li><a class="dropdown-item" href="./register.html">Register</a></li>
+                                <li><a class="dropdown-item" href="./forgotten-password.html">Forgotten Password</a></li>
                             </ul>
                         </li>
                     </ul>                    <!-- / Menu-->
 
                 </div>
                 <!-- / Main Navigation-->
-
             </div>
         </div>
     </div>
 </nav>
 <!-- / Navbar-->    <!-- / Navbar-->
+<main>
+    @yield('content')
+</main>
+
+<footer>
+    @include('components.footer')
+</footer>
+
+</body>
+</html>
