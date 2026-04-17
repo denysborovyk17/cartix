@@ -11,6 +11,7 @@ class ProductController extends Controller
     public function show(Product $product): View
     {
         $relatedProducts = Product::query()
+            ->with('category')
             ->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
             ->latest()
