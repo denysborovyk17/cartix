@@ -55,7 +55,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap">
 
                 <!-- Logo-->
-                <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="./index.html">
+                <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="{{ route('index') }}">
                     <div class="d-flex align-items-center">
                         <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26"><path d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z" fill="currentColor" fill-rule="evenodd"/></svg>
                     </div>
@@ -192,7 +192,7 @@
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown dropdown position-static">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Men
+                                Categories
                             </a>
                             <!-- Menswear dropdown menu-->
                             <div class="dropdown-menu dropdown-megamenu">
@@ -201,73 +201,19 @@
                                         <!-- Menswear Dropdown Menu Links Section-->
                                         <div class="col col-lg-8 py-lg-5">
                                             <div class="row py-3 py-lg-0 flex-wrap gx-4 gy-6">
-                                                <!-- menu row-->
-                                                <div class="col">
-                                                    <h6 class="dropdown-heading">Coats & Jackets</h6>
-                                                    <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Waterproof Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Insulated Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Down Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Softshell Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Casual Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Windproof Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Breathable Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Cleaning & Proofing</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="./category.html">View All</a></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- / menu row-->
-
-                                                <!-- menu row-->
-                                                <div class="col">
-                                                    <h6 class="dropdown-heading">Insulated</h6>
-                                                    <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Insulated Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Bodywarmers</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Parkas</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Baselayers & Thermals</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Winter Hats</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Scarves & Neck</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Gloves & Mitts</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Accessories</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="./category.html">View All</a></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- / menu row-->
-
-                                                <!-- menu row-->
-                                                <div class="d-none d-xxl-block col">
-                                                    <h6 class="dropdown-heading">Footwear</h6>
-                                                    <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Lifestyle & Casual</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Walking Shoes</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Running Shoes</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Military Boots</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Fabric Walking Boots</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Leather Walking Boots</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Wellies</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item" href="./category.html">Winter Footwear</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="./category.html">View All</a></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- / menu row-->
-
-                                                <!-- menu row-->
-                                                <div class="col">
-                                                    <h6 class="dropdown-heading text-danger">Special Offers</h6>
-                                                    <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Insulated Jackets</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Bodywarmers</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Parkas</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Baselayers & Thermals</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Winter Hats</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Scarves & Neck</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Gloves & Mitts</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="./category.html">Accessories</a></li>
-                                                        <li class="dropdown-list-item"><a class="dropdown-item text-danger dropdown-link-all" href="./category.html">View All</a></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- / menu row-->
+                                                @foreach($categories as $category)
+                                                    <!-- menu row-->
+                                                    <div class="col">
+                                                        <ul class="list-unstyled">
+                                                            <li class="dropdown-list-item">
+                                                                <a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">
+                                                                    {{ $category->name }}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- / menu row-->
+                                                @endforeach
                                             </div>
 
                                             <div class="align-items-center justify-content-between mt-5 d-none d-lg-flex">
@@ -362,29 +308,6 @@
                                 </div>
                             </div>
                             <!-- / Menswear dropdown menu-->
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Women
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./category.html">Tops</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Bottoms</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Jeans</a></li>
-                                <li><a class="dropdown-item" href="./category.html">T-Shirts</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Shoes</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Accessories</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./category.html" role="button">
-                                Kids
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./category.html" role="button">
-                                Sale
-                            </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

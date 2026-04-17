@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">{{ $product->name }}</a>
+                            <a class="text-decoration-none link-cover" href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a>
                             <small class="text-muted d-block">4 colours, 10 sizes</small>
                             <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span class="text-danger">${{ $product->price }}</span></p>
                         </div>
