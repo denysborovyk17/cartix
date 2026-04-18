@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable([
     'cart_id',
     'product_id',
-    'quantity'
+    'quantity',
+    'price'
 ])]
 class CartItem extends Model
 {
