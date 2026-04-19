@@ -20,6 +20,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'stock',
     'is_active'
 ])]
+/**
+ * @property int|null $category_id
+ * @property int|null $brand_id
+ * @property string $name
+ * @property string $slug
+ * @property string|null $description
+ * @property string|null $image
+ * @property float $price
+ * @property float|null $discount_price
+ */
 class Product extends Model
 {
     use HasFactory;
@@ -32,6 +42,11 @@ class Product extends Model
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function productVariants(): HasMany
+    {
+        return $this->hasMany(ProductVariant::class);
     }
 
     public function cartItems(): HasMany

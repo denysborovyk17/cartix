@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable([
-    'cart_id',
-    'product_variant_id',
-    'quantity',
-    'price'
-])]
-class CartItem extends Model
+#[Fillable(
+    'product_id',
+    'options',
+    'options_hash',
+    'price',
+    'stock'
+)]
+class ProductVariant extends Model
 {
-    public function cart(): BelongsTo
-    {
-        return $this->belongsTo(Cart::class);
-    }
+    protected $casts = [
+        'options' => 'array'
+    ];
 
     public function product(): BelongsTo
     {
