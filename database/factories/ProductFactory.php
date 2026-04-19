@@ -25,6 +25,7 @@ class ProductFactory extends Factory
             'brand_id' => Brand::query()->inRandomOrder()->value('id'),
             'slug' => fake()->unique()->slug(),
             'description' => fake()->sentence(),
+            'image' => 'https://picsum.photos/id/' . fake()->numberBetween(0, 100) . '/800/800/',
             'price' => fake()->randomFloat(2, 10, 1000),
             'discount_price' => null,
             'stock' => fake()->numberBetween(1, 100),
