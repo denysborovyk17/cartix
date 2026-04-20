@@ -79,41 +79,57 @@
                                 <table class="table align-middle">
                                     <tbody class="border-0">
                                         <!-- Cart Item-->
-                                        <div class="row mx-0 py-4 g-0 border-bottom">
-                                            <div class="col-2 position-relative">
-                                                <picture class="d-block border">
-                                                    <img class="img-fluid" src="/products/product-cart-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
-                                                </picture>
-                                            </div>
-                                            <div class="col-9 offset-1">
-                                                <div>
-                                                    <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                        Nike Air VaporMax 2021
-                                                        <i class="ri-close-line ms-3"></i>
-                                                    </h6>
-                                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
+                                        @if (session('cart'))
+                                            @php
+                                                $total = 0;
+                                            @endphp
+                                            @foreach(session('cart') as $cartProduct)
+                                            @php
+                                                $total = $total + $cartProduct['price'] * $cartProduct['quantity']
+                                            @endphp
+                                                <div class="row mx-0 py-4 g-0 border-bottom">
+                                                    <div class="col-2 position-relative">
+                                                        <picture class="d-block border">
+                                                            <img class="img-fluid" src="{{ $cartProduct['image'] }}" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                        </picture>
+                                                    </div>
+
+                                                    <div class="col-9 offset-1 d-flex flex-column justify-content-between">
+
+                                                        <div class="d-flex justify-content-between align-items-start">
+                                                            <div>
+                                                                <h6 class="mb-2">{{ $cartProduct['name'] }}</h6>
+                                                                <form action="" method="POST">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <h6>
+                                                                        Quantity <input type="number"
+                                                                                        class="quantity"
+                                                                                        data-product-slug="{{ $cartProduct['slug'] }}"
+                                                                                        name="quantity" value="{{ $cartProduct['quantity'] }}"
+                                                                                        min="1">
+                                                                    </h6>
+                                                                </form>
+                                                            </div>
+
+                                                            <form action="" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger btn-sm">Delete</button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="mt-auto">
+                                                            <p class="fw-bolder text-end text-muted m-0">${{ $cartProduct['price'] }}</p>
+                                                        </div>
+
+                                                        <p class="m-0 fs-5 fw-bold">${{ $cartProduct['price'] * $cartProduct['quantity'] }}</p>
+
+                                                    </div>
                                                 </div>
-                                                <p class="fw-bolder text-end text-muted m-0">$85.00</p>
-                                            </div>
-                                        </div>                                        <!-- / Cart Item-->
-                                        <!-- Cart Item-->
-                                        <div class="row mx-0 py-4 g-0 border-bottom">
-                                            <div class="col-2 position-relative">
-                                                <picture class="d-block border">
-                                                    <img class="img-fluid" src="/products/product-cart-2.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
-                                                </picture>
-                                            </div>
-                                            <div class="col-9 offset-1">
-                                                <div>
-                                                    <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                        Nike ZoomX Vaporfly
-                                                        <i class="ri-close-line ms-3"></i>
-                                                    </h6>
-                                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11 / Qty: 1</span>
-                                                </div>
-                                                <p class="fw-bolder text-end text-muted m-0">$125.00</p>
-                                            </div>
-                                        </div>                                        <!-- / Cart Item-->
+                                            @endforeach
+                                        @endif
+                                        <!-- / Cart Item-->
                                     </tbody>
                                 </table>
                             </div>
@@ -125,10 +141,9 @@
                         <div class="pb-4 border-bottom">
                             <div class="d-flex flex-column flex-md-row justify-content-md-between mb-4 mb-md-2">
                                 <div>
-                                    <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                    <span class="text-muted small">Inc $45.89 sales tax</span>
+                                    <p class="m-0 fw-bold fs-5">Grand Total: ${{ $total }}</p>
                                 </div>
-                                <p class="m-0 fs-5 fw-bold">$422.99</p>
+
                             </div>
                         </div>
                         <div class="py-4">
@@ -137,7 +152,8 @@
                                 <button class="btn btn-secondary btn-sm px-4">Apply</button>
                             </div>
                         </div>
-                        <a href="checkout/checkout.blade.php" class="btn btn-dark w-100 text-center" role="button">Proceed to checkout</a>                    </div>
+                        <a href="checkout/checkout.blade.php" class="btn btn-dark w-100 text-center" role="button">Proceed to checkout</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,6 +167,42 @@
 
     <!-- Theme JS -->
     <script src="{{ asset('/js/theme.bundle.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('input', async (e) => {
+                if (!e.target.classList.contains('quantity')) {
+                    return;
+                }
+
+                const input = e.target;
+                const quantity = input.value;
+                const productSlug = input.dataset.productSlug;
+
+                console.log(productSlug, quantity);
+
+                try {
+                    const response = await fetch(`/cart/${productSlug}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        },
+                        body: JSON.stringify({quantity})
+                    });
+
+                    if (!response.ok) {
+                        console.log('Request failed');
+                    }
+
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

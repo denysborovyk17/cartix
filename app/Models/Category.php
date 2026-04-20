@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 #[Fillable([
     'name',
@@ -15,9 +15,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 ])]
 class Category extends Model
 {
-    public function products(): HasMany
+    public function productVariants(): HasManyThrough
     {
-        return $this->hasMany(Product::class);
+        return $this->hasManyThrough(
+            ProductVariant::class,
+            Product::class,
+            'category_id',
+            'product_id',
+            'id',
+            'id'
+        );
     }
 
     public function parent(): BelongsTo

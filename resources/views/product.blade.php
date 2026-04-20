@@ -30,22 +30,7 @@
                 <div class="row g-3" data-aos="fade-right">
                     <div class="col-12">
                         <picture>
-                            <img class="img-fluid" data-zoomable src="/images/products/product-page-1.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                        </picture>
-                    </div>
-                    <div class="col-12">
-                        <picture>
-                            <img class="img-fluid" data-zoomable src="/images/products/product-page-2.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                        </picture>
-                    </div>
-                    <div class="col-12">
-                        <picture>
-                            <img class="img-fluid" data-zoomable src="/images/products/product-page-3.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                        </picture>
-                    </div>
-                    <div class="col-12">
-                        <picture>
-                            <img class="img-fluid" data-zoomable src="/images/products/product-page-4.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                            <img class="img-fluid" data-zoomable src="{{ $product->image }}" alt="HTML Bootstrap Template by Pixel Rocket">
                         </picture>
                     </div>
                 </div>
@@ -142,7 +127,8 @@
 
                                             <small>XL</small>
                                         </label>
-                                    </div>                    <div class="form-check-option form-check-rounded">
+                                    </div>
+                                    <div class="form-check-option form-check-rounded">
                                         <input
                                             type="radio"
                                             name="product-option-sizes"
@@ -152,19 +138,7 @@
 
                                             <small>XXL</small>
                                         </label>
-                                    </div>        </div>
-                            </div>
-                            <div class="mb-3">
-                                <small class="text-uppercase pt-4 d-block fw-bolder text-muted">
-                                    Available Designs :
-                                </small>
-                                <div class="mt-4 d-flex justify-content-start flex-wrap align-items-start">
-                                    <picture class="me-2">
-                                        <img class="f-w-24 p-2 bg-light border-bottom border-dark border-2 cursor-pointer" src="/images/products/product-page-thumb-1.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                                    </picture>
-                                    <picture>
-                                        <img class="f-w-24 p-2 bg-light cursor-pointer" src="/images/products/product-page-thumb-2.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                                    </picture>
+                                    </div>
                                 </div>
                             </div>
                             <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow">Add To Shopping Bag</button>
@@ -300,14 +274,14 @@
                                     </div>
                                     <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                     <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title="" src="/images/products/product-1.jpg" alt="">
+                                        <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ $relatedProduct->image }}" alt="">
                                     </picture>
                                     <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                         <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                     </div>
                                 </div>
                                 <div class="card-body px-0">
-                                    <a class="text-decoration-none link-cover" href="./product.html">{{ $relatedProduct->name }}</a>
+                                    <a class="text-decoration-none link-cover" href="{{ route('product.show', $relatedProduct->slug) }}">{{ $relatedProduct->name }}</a>
                                     <small class="text-muted d-block">4 colours, 10 sizes</small>
                                     <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span class="text-danger">${{ $relatedProduct->price }}</span></p>
                                 </div>

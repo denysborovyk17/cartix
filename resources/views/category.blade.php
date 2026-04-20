@@ -55,27 +55,45 @@
         </div>            <!-- /Category Toolbar-->
 
         <!-- Products-->
+        @session('success')
+            <h3 style="color: limegreen">{{ $value }}</h3>
+        @endsession
+
         <div class="row g-4">
-            @foreach($products as $product)
+            @foreach($category->productVariants as $productVariant)
                 <div class="col-12 col-sm-6 col-lg-4">
                     <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
+                    <div class="card border border-transparent h-100 transparent">
+
+                        <div class="card-img position-relative" style="height: 500px; overflow: hidden;">
                             <div class="card-badges">
                                 <span class="badge badge-card"><span class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
                             </div>
                             <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title="" src="/images/products/product-1.jpg" alt="">
+
+                            <picture class="d-block bg-light h-100">
+                                <img class="w-100 h-100 object-fit-cover" src="{{ $productVariant->product->image }}" alt="">
                             </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i>Quick Add</button>
-                            </div>
+
                         </div>
+
+                        <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1; !important; visibility: visible !important;">
+                            <form method="POST" action="{{ route('cart.store', $productVariant->id) }}" style="position: relative; z-index: 51;">
+                                @csrf
+                                <button class="btn btn-quick-add w-100" style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;">
+                                    <i class="ri-add-line me-2"></i>
+                                    Add to Cart</button>
+                            </form>
+                        </div>
+
                         <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a>
+                            <a class="text-decoration-none link-cover" href="{{ route('product.show', $productVariant->product->slug) }}">
+                                {{ $productVariant->product->name }}
+                            </a>
                             <small class="text-muted d-block">4 colours, 10 sizes</small>
-                            <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span class="text-danger">${{ $product->price }}</span></p>
+                            <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s>
+                                <span class="text-danger">${{ $productVariant->price }}</span>
+                            </p>
                         </div>
                     </div>
                     <!--/ Card Product-->
