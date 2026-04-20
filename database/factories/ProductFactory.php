@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,10 +27,16 @@ class ProductFactory extends Factory
             'slug' => fake()->unique()->slug(),
             'description' => fake()->sentence(),
             'image' => 'https://picsum.photos/id/' . fake()->numberBetween(0, 100) . '/800/800/',
-            'price' => fake()->randomFloat(2, 10, 1000),
-            'discount_price' => null,
-            'stock' => fake()->numberBetween(1, 100),
             'is_active' => true,
         ];
+    }
+
+    public function withVariants(): self
+    {
+        return $this->afterCreating(function (Product $product) {
+            ProductVariant::factory()->create([
+                'product_id' => $product->id
+            ]);
+        });
     }
 }
