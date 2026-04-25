@@ -9,7 +9,7 @@ Route::get('/', fn () => view('index'))->name('index');
 
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/categories/{category:slug}/products/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 
 Route::middleware('web')->group(function () {
     Route::resource('/cart', CartController::class);
