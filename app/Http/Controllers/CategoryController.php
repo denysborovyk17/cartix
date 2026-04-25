@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    public function show(Category $category): View
+    public function show(string $slug): View
     {
-        $products = $category->products()->paginate(12);
+        $category = Category::with('productVariants')->where('slug', $slug)->firstOrFail();
 
-        return view('category', compact('category', 'products'));
+        return view('category', compact('category'));
     }
 }
