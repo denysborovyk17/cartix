@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property int|null $category_id
  * @property int|null $brand_id
  * @property string $name
- * @property string $slug
  * @property string|null $description
  * @property string|null $image
  * @property float $price
