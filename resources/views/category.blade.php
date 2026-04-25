@@ -77,13 +77,12 @@
 
                         </div>
 
-                        <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1; !important; visibility: visible !important;">
-                            <form method="POST" action="{{ route('cart.store', $productVariant->id) }}" style="position: relative; z-index: 51;">
-                                @csrf
-                                <button class="btn btn-quick-add w-100" style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;">
-                                    <i class="ri-add-line me-2"></i>
-                                    Add to Cart</button>
-                            </form>
+                        <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
+                            <button class="btn btn-quick-add w-100 add-item"
+                                    style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
+                                    data-product-variant-id="{{ $productVariant->id }}">
+                                Add to Cart
+                            </button>
                         </div>
 
                         <div class="card-body px-0">
@@ -147,7 +146,8 @@
                                 <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
                                 <input type="number" min="00" max="1000" step="1" class="filter-max form-control-sm flex-grow-1 text-muted border-0">
                             </div>
-                        </div>          </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- / Price Filter -->
 
@@ -321,5 +321,8 @@
 
 <!-- Theme JS -->
 <script src="{{ asset('/js/theme.bundle.js') }}"></script>
+
+<!-- AJAX Cart JS -->
+<script src="{{ asset('/js/cart.js') }}"></script>
 
 @endsection

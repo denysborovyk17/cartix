@@ -10,6 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Custom Google Fonts-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -56,7 +57,7 @@
                 <div class="col-12 col-lg-7 pt-5 pt-lg-10">
                     <div class="pe-lg-5">
                         <!-- Logo-->
-                        <a class="navbar-brand fw-bold fs-3 flex-shrink-0 mx-0 px-0" href="index.blade.php">
+                        <a class="navbar-brand fw-bold fs-3 flex-shrink-0 mx-0 px-0" href="{{ route('index') }}">
                                 <div class="d-flex align-items-center">
                                     <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26"><path d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z" fill="currentColor" fill-rule="evenodd"/></svg>
                                 </div>
@@ -81,16 +82,18 @@
                                         <!-- Cart Item-->
                                         @if (session('cart'))
                                             @php
-                                                $total = 0;
+                                                $cartTotal = collect(session('cart'))->sum(fn($item) => $item['price'] * $item['quantity']);
                                             @endphp
-                                            @foreach(session('cart') as $cartProduct)
-                                            @php
-                                                $total = $total + $cartProduct['price'] * $cartProduct['quantity']
-                                            @endphp
-                                                <div class="row mx-0 py-4 g-0 border-bottom">
+
+                                            @foreach(session('cart') as $cartProductVariant)
+                                                @php
+                                                    $itemTotal = floor($cartProductVariant['price'] * $cartProductVariant['quantity']);
+                                                @endphp
+
+                                                <div class="row mx-0 py-4 g-0 border-bottom cart-item" data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
                                                     <div class="col-2 position-relative">
                                                         <picture class="d-block border">
-                                                            <img class="img-fluid" src="{{ $cartProduct['image'] }}" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                            <img class="img-fluid" src="{{ $cartProductVariant['image'] }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                                         </picture>
                                                     </div>
 
@@ -98,37 +101,33 @@
 
                                                         <div class="d-flex justify-content-between align-items-start">
                                                             <div>
-                                                                <h6 class="mb-2">{{ $cartProduct['name'] }}</h6>
-                                                                <form action="" method="POST">
-                                                                    @csrf
-                                                                    @method('PUT')
+                                                                <h6 class="mb-2">{{ $cartProductVariant['name'] }}</h6>
                                                                     <h6>
                                                                         Quantity <input type="number"
                                                                                         class="quantity"
-                                                                                        data-product-slug="{{ $cartProduct['slug'] }}"
-                                                                                        name="quantity" value="{{ $cartProduct['quantity'] }}"
+                                                                                        data-product-variant-id="{{ $cartProductVariant['variant_id'] }}"
+                                                                                        name="quantity" value="{{ $cartProductVariant['quantity'] }}"
                                                                                         min="1">
                                                                     </h6>
-                                                                </form>
                                                             </div>
 
-                                                            <form action="" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button class="btn btn-danger btn-sm">Delete</button>
-                                                            </form>
+                                                            <button class="btn btn-danger btn-sm remove-item"
+                                                                    data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
+                                                                Delete
+                                                            </button>
                                                         </div>
 
                                                         <div class="mt-auto">
-                                                            <p class="fw-bolder text-end text-muted m-0">${{ $cartProduct['price'] }}</p>
+                                                            <p class="fw-bolder text-end text-muted m-0">${{ round($cartProductVariant['price']) }}</p>
                                                         </div>
 
-                                                        <p class="m-0 fs-5 fw-bold">${{ $cartProduct['price'] * $cartProduct['quantity'] }}</p>
+                                                        <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
+                                                            ${{ $itemTotal }}
+                                                        </p>
 
                                                     </div>
                                                 </div>
                                             @endforeach
-                                        @endif
                                         <!-- / Cart Item-->
                                     </tbody>
                                 </table>
@@ -141,9 +140,15 @@
                         <div class="pb-4 border-bottom">
                             <div class="d-flex flex-column flex-md-row justify-content-md-between mb-4 mb-md-2">
                                 <div>
-                                    <p class="m-0 fw-bold fs-5">Grand Total: ${{ $total }}</p>
+                                    <h5 class="m-0 fw-bold">Grand Total:</h5>
+                                    <p class="m-0 fw-bold fs-5 cart-total">
+                                        @php
+                                            $item = $cartProductVariant['variant_id'];
+                                        @endphp
+                                            ${{ (int) $cartTotal = collect(session('cart'))->sum(fn ($item) => $item['price'] * $item['quantity']) ?? ''}}
+                                        @endif
+                                    </p>
                                 </div>
-
                             </div>
                         </div>
                         <div class="py-4">
@@ -168,41 +173,8 @@
     <!-- Theme JS -->
     <script src="{{ asset('/js/theme.bundle.js') }}"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.addEventListener('input', async (e) => {
-                if (!e.target.classList.contains('quantity')) {
-                    return;
-                }
-
-                const input = e.target;
-                const quantity = input.value;
-                const productSlug = input.dataset.productSlug;
-
-                console.log(productSlug, quantity);
-
-                try {
-                    const response = await fetch(`/cart/${productSlug}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({quantity})
-                    });
-
-                    if (!response.ok) {
-                        console.log('Request failed');
-                    }
-
-                    const data = await response.json();
-                    console.log(data);
-                } catch (error) {
-                    console.log(error);
-                }
-            });
-        });
-    </script>
+    <!-- AJAX Cart JS -->
+    <script src="{{ asset('/js/cart.js') }}"></script>
 </body>
 
 </html>
