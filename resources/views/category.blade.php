@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="{{ route('product.show', $productVariant->product->slug) }}">
+                            <a class="text-decoration-none link-cover" href="{{ route('product.show', [$category->slug, $productVariant->product->slug]) }}">
                                 {{ $productVariant->product->name }}
                             </a>
                             <small class="text-muted d-block">4 colours, 10 sizes</small>
