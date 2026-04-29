@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 #[Fillable([
     'category_id',
@@ -16,9 +16,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
     'slug',
     'description',
     'image',
-    'price',
-    'discount_price',
-    'stock',
     'is_active'
 ])]
 /**
@@ -27,8 +24,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string $name
  * @property string|null $description
  * @property string|null $image
- * @property float $price
- * @property float|null $discount_price
  */
 class Product extends Model
 {
@@ -49,14 +44,9 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class);
     }
 
-    public function cartItems(): HasMany
+    public function options(): BelongsToMany
     {
-        return $this->hasMany(CartItem::class);
-    }
-
-    public function orderItems(): HasMany
-    {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsToMany(Option::class, 'product_options');
     }
 
     public function wishlistItems(): HasMany
