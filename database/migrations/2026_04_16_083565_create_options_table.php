@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_variants', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->decimal('price', 8, 2);
-            $table->decimal('discount_price', 8, 2)->nullable();
-            $table->unsignedInteger('stock')->default(1);
+            $table->string('name')->unique();
             $table->timestamps();
-
-            $table->unique(['product_id']);
         });
     }
 
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_variants');
+        Schema::dropIfExists('options');
     }
 };
