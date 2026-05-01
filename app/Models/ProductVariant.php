@@ -29,7 +29,7 @@ class ProductVariant extends Model
             OptionValue::class,
             'product_variant_option_values',
             'product_variant_id',
-            'option_value_id '
+            'option_value_id'
         );
     }
 }
