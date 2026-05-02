@@ -18,8 +18,6 @@ return new class extends Migration
             $table->decimal('discount_price', 8, 2)->nullable();
             $table->unsignedInteger('stock')->default(1);
             $table->timestamps();
-
-            $table->unique(['product_id']);
         });
     }
 
