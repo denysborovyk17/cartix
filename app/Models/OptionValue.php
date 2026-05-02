@@ -22,7 +22,7 @@ class OptionValue extends Model
     {
         return $this->belongsToMany(
             ProductVariant::class,
-            'product_variant_option_value',
+            'product_variant_option_values',
             'option_value_id',
             'product_variant_id'
         );
