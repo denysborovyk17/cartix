@@ -16,6 +16,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 ])]
 class Payment extends Model
 {
+    protected $attributes = [
+        'status' => 'pending'
+    ];
+
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

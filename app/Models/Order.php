@@ -21,6 +21,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 ])]
 class Order extends Model
 {
+    protected $attributes = [
+        'status' => 'pending'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
