@@ -1,10 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Brand;
-use App\Models\Product;
-use App\Models\User;
+use App\Models\{Brand, Product, User};
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,10 +21,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            CategorySeeder::class
+            CategorySeeder::class,
+            OptionSeeder::class
         ]);
 
-        Brand::factory()->count(5)->create();
-        Product::factory()->withVariants()->count(50)->create();
+        Brand::factory()->count(10)->create();
+        Product::factory()->withAllVariants()->count(100)->create();
+        Product::factory()->withOptions()->withAllVariants()->count(100)->create();
     }
 }
