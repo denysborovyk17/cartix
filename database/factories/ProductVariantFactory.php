@@ -20,7 +20,8 @@ class ProductVariantFactory extends Factory
     {
         return [
             'product_id' => Product::factory(),
-            'price' => fake()->randomFloat(2, 10, 1000),
+            'price' => fake()->numberBetween(10000, 100000),
+            'currency' => 'USD',
             'stock' => fake()->numberBetween(1, 100)
         ];
     }
