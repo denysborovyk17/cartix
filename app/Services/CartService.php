@@ -2,7 +2,12 @@
 
 namespace App\Services\Cart;
 
-use App\Repositories\Cart\CartRepository;
+use App\Repositories\CartRepository;
+use Money\Currencies\ISOCurrencies;
+use Money\Currency;
+use Money\Formatter\AggregateMoneyFormatter;
+use Money\Formatter\IntlMoneyFormatter;
+use Money\Money;
 
 class CartService
 {
@@ -25,16 +30,15 @@ class CartService
                 'slug' => $productVariant->product->slug,
                 'image' => $productVariant->product->image,
                 'price' => $productVariant->price,
-                'quantity' => 1,
-                'options' => $productVariant->options
+                'quantity' => 1
             ];
         }
 
         session()->put('cart', $cart);
 
         return [
-            'cart_item' => $cart[$productVariantId],
-            'cart_counter' => count(session('cart', []))
+            'cartItem' => $cart[$productVariantId],
+            'cartCounter' => count(session('cart', []))
         ];
     }
 
@@ -51,12 +55,27 @@ class CartService
         session()->put('cart', $cart);
 
         $item = $cart[$productVariantId];
-        $itemTotal = $item['price'] * $item['quantity'];
-        $cartTotal = collect($cart)->sum(fn ($item) => $item['price'] * $item['quantity']);
+        $dollars = new Money($item['price'], new Currency('USD'));
+
+        $numberFormatter = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
+        $intlFormatter = new IntlMoneyFormatter($numberFormatter, new ISOCurrencies());
+
+        $moneyFormatter = new AggregateMoneyFormatter([
+            'USD' => $intlFormatter
+        ]);
+
+        $itemTotal = $dollars->multiply((int)$item['quantity']);
+
+        $amounts = array_map(function($item) {
+            $dollars = new Money($item['price'], new Currency('USD'));
+            return $dollars->multiply((int)$item['quantity']);
+        }, $cart);
+
+        $cartTotal = Money::sum(...$amounts);
 
         return [
-            'item_total' => $itemTotal,
-            'cart_total' => $cartTotal
+            'itemTotal' => $moneyFormatter->format($itemTotal),
+            'cartTotal' => $moneyFormatter->format($cartTotal)
         ];
     }
 
@@ -75,7 +94,7 @@ class CartService
         $cartTotal = collect(session('cart'))->sum(fn($item) => $item['price'] * $item['quantity']);
 
         return [
-            'cart_total' => $cartTotal
+            'cartTotal' => $cartTotal
         ];
     }
 }
