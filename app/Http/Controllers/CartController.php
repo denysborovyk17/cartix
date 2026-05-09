@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Cart\StoreCartItemRequest;
-use App\Http\Requests\Cart\UpdateCartItemRequest;
+use App\Exceptions\ProductVariantNotFoundException;
+use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
 use App\Models\ProductVariant;
-use App\Services\Cart\CartService;
+use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CartController extends Controller
@@ -30,12 +29,14 @@ class CartController extends Controller
         $service = $this->cartService->addItem($productVariantId);
 
         return response()->json([
-            'cart_item' => $service['cart_item'],
-            'cart_counter' => $service['cart_counter']
+            'cartItem' => $service['cartItem'],
+            'cartCounter' => $service['cartCounter']
         ]);
     }
 
-
+    /**
+     * @throws ProductVariantNotFoundException
+     */
     public function update(int $productVariantId, UpdateCartItemRequest $request): JsonResponse
     {
         $quantity = $request->input('quantity');
@@ -43,18 +44,21 @@ class CartController extends Controller
         $service = $this->cartService->updateItemQuantity($productVariantId, $quantity);
 
         return response()->json([
-            'quantity' => $quantity,
-            'item_total' => (int) $service['item_total'],
-            'cart_total' => (int) $service['cart_total']
+            'quantity' => $service['quantity'],
+            'itemTotal' => $service['itemTotal'],
+            'cartTotal' => $service['cartTotal']
         ]);
     }
 
+    /**
+     * @throws ProductVariantNotFoundException
+     */
     public function destroy(int $productVariantId): JsonResponse
     {
         $service = $this->cartService->removeItem($productVariantId);
 
         return response()->json([
-            'cart_total' => $service['cart_total']
+            'cartTotal' => $service['cartTotal']
         ]);
     }
 }
