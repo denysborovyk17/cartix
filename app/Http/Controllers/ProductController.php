@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Repositories\ProductRepository;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function show(string $categorySlug, string $productSlug): View
+    public function __construct(
+        private readonly ProductRepository $productRepository
+    ) {
+    }
+
+    public function show(string $slug): View
     {
-        $category = Category::query()->where('slug', $categorySlug)->firstOrFail();
-        $product = Product::query()->where('slug', $productSlug)
-            ->where('category_id', $category->id)
-            ->firstOrFail();
+        $product = $this->productRepository->findProductBySlug($slug);
+        $relatedProducts = $this->productRepository->findRelatedProductBySlug($slug);
 
-        $relatedProducts = Product::query()
-            ->with('category')
-            ->where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->latest()
-            ->take(4)
-            ->get();
-
-        return view('product', compact('category', 'product', 'relatedProducts'));
+        return view('product', compact('product', 'relatedProducts'));
     }
 }
