@@ -1,19 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace App\Services\Cart;
+namespace App\Services;
 
+use App\Exceptions\ProductVariantNotFoundException;
 use App\Repositories\CartRepository;
-use Money\Currencies\ISOCurrencies;
-use Money\Currency;
-use Money\Formatter\AggregateMoneyFormatter;
-use Money\Formatter\IntlMoneyFormatter;
-use Money\Money;
+use Money\{Currency, Money};
 
 class CartService
 {
     public function __construct(
-        private readonly CartRepository $cartRepository
-    ) {}
+        private readonly CartRepository $cartRepository,
+        private readonly MoneyFormatterService $moneyService
+    ) {
+    }
 
     public function addItem(int $productVariantId): array
     {
@@ -21,17 +20,16 @@ class CartService
 
         $cart = session('cart', []);
 
-        if (isset($cart[$productVariantId])) {
-            $cart[$productVariantId]['quantity']++;
-        } else {
+        if (!isset($cart[$productVariantId])) {
             $cart[$productVariantId] = [
-                'variant_id' => $productVariantId,
+                'product_variant_id' => $productVariant->id,
                 'name' => $productVariant->product->name,
-                'slug' => $productVariant->product->slug,
                 'image' => $productVariant->product->image,
                 'price' => $productVariant->price,
                 'quantity' => 1
             ];
+        } else {
+            $cart[$productVariantId]['quantity']++;
         }
 
         session()->put('cart', $cart);
@@ -42,59 +40,63 @@ class CartService
         ];
     }
 
+    /**
+     * @throws ProductVariantNotFoundException
+     */
     public function updateItemQuantity(int $productVariantId, int $quantity): array
     {
+        $productVariant = $this->cartRepository->getProductVariant($productVariantId);
+
         $cart = session('cart', []);
 
         if (!isset($cart[$productVariantId])) {
-            // throw Exception
+            // throw new ProductVariantNotFoundException($productVariantId);
         }
 
         $cart[$productVariantId]['quantity'] = $quantity;
 
         session()->put('cart', $cart);
 
-        $item = $cart[$productVariantId];
-        $dollars = new Money($item['price'], new Currency('USD'));
-
-        $numberFormatter = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
-        $intlFormatter = new IntlMoneyFormatter($numberFormatter, new ISOCurrencies());
-
-        $moneyFormatter = new AggregateMoneyFormatter([
-            'USD' => $intlFormatter
-        ]);
-
-        $itemTotal = $dollars->multiply((int)$item['quantity']);
-
-        $amounts = array_map(function($item) {
-            $dollars = new Money($item['price'], new Currency('USD'));
-            return $dollars->multiply((int)$item['quantity']);
-        }, $cart);
-
-        $cartTotal = Money::sum(...$amounts);
+        $itemTotal = (new Money($productVariant->price, new Currency('USD')))->multiply($quantity);
 
         return [
-            'itemTotal' => $moneyFormatter->format($itemTotal),
-            'cartTotal' => $moneyFormatter->format($cartTotal)
+            'quantity' => $quantity,
+            'itemTotal' => $this->moneyService->format($itemTotal),
+            'cartTotal' => $this->moneyService->format($this->calculateCartTotal($cart))
         ];
     }
 
+    /**
+     * @throws ProductVariantNotFoundException
+     */
     public function removeItem(int $productVariantId): array
     {
         $cart = session('cart', []);
 
         if (!isset($cart[$productVariantId])) {
-            // throw Exception
+            // throw new ProductVariantNotFoundException($productVariantId);
         }
 
         unset($cart[$productVariantId]);
 
         session()->put('cart', $cart);
 
-        $cartTotal = collect(session('cart'))->sum(fn($item) => $item['price'] * $item['quantity']);
-
         return [
-            'cartTotal' => $cartTotal
+            'cartTotal' => $this->moneyService->format($this->calculateCartTotal($cart))
         ];
+    }
+
+    private function calculateCartTotal(array $cart): Money|null
+    {
+        $amounts = [];
+        foreach ($cart as $item) {
+            $amounts[] = (new Money($item['price'], new Currency('USD')))->multiply($item['quantity']);
+        }
+
+        if (empty($cart)) {
+            return new Money(0, new Currency('USD'));
+        }
+
+        return Money::sum(...$amounts);
     }
 }
