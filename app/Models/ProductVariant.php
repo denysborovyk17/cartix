@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
     'discount_price',
     'stock'
 ])]
+/** @property mixed $product */
 class ProductVariant extends Model
 {
     use HasFactory;
