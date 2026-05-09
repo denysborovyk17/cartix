@@ -23,7 +23,8 @@ class StoreCartItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_variant_id' => 'required|exists:product_variants,id'
+            'product_variant_id' => 'required|exists:product_variants,id',
+            'quantity' => 'required|integer|min:1',
         ];
     }
 }
