@@ -68,7 +68,7 @@
 
                             <h1 class="mb-1 fs-2 fw-bold">{{ $product->name }}</h1>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-4 m-0">${{ $product->price }}</p>
+                                <p class="fs-4 m-0">${{ $product->variants->first()->price }}</p>
                             </div>
                             <div class="border-top mt-4 mb-3 product-option">
                                 <small class="text-uppercase pt-4 d-block fw-bolder">
@@ -86,17 +86,18 @@
 
                                             <small>S</small>
                                         </label>
-                                    </div>                    <div class="form-check-option form-check-rounded">
+                                    </div>
+                                    <div class="form-check-option form-check-rounded">
                                         <input
                                             type="radio"
                                             name="product-option-sizes"
                                             value="SM"
                                             id="option-sizes-1">
                                         <label for="option-sizes-1">
-
                                             <small>SM</small>
                                         </label>
-                                    </div>                    <div class="form-check-option form-check-rounded">
+                                    </div>
+                                    <div class="form-check-option form-check-rounded">
                                         <input
                                             type="radio"
                                             name="product-option-sizes"
@@ -104,27 +105,26 @@
                                             checked
                                             id="option-sizes-2">
                                         <label for="option-sizes-2">
-
                                             <small>M</small>
                                         </label>
-                                    </div>                    <div class="form-check-option form-check-rounded">
+                                    </div>
+                                    <div class="form-check-option form-check-rounded">
                                         <input
                                             type="radio"
                                             name="product-option-sizes"
                                             value="L"
                                             id="option-sizes-3">
                                         <label for="option-sizes-3">
-
                                             <small>L</small>
                                         </label>
-                                    </div>                    <div class="form-check-option form-check-rounded">
+                                    </div>
+                                    <div class="form-check-option form-check-rounded">
                                         <input
                                             type="radio"
                                             name="product-option-sizes"
                                             value="Xl"
                                             id="option-sizes-4">
                                         <label for="option-sizes-4">
-
                                             <small>XL</small>
                                         </label>
                                     </div>
@@ -135,13 +135,15 @@
                                             value="XXL"
                                             id="option-sizes-5">
                                         <label for="option-sizes-5">
-
                                             <small>XXL</small>
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow">Add To Shopping Bag</button>
+                            <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
+                                    data-product-variant-id="{{ $product->id }}">
+                                Add To Cart
+                            </button>
 
                             <!-- Product Highlights-->
                             <div class="my-5">
@@ -281,9 +283,13 @@
                                     </div>
                                 </div>
                                 <div class="card-body px-0">
-                                    <a class="text-decoration-none link-cover" href="{{ route('product.show', [$relatedProduct->category->slug, $relatedProduct->slug]) }}">{{ $relatedProduct->name }}</a>
+                                    <a class="text-decoration-none link-cover" href="{{ route('products.show', $relatedProduct->slug) }}">
+                                        {{ $relatedProduct->name }}
+                                    </a>
                                     <small class="text-muted d-block">4 colours, 10 sizes</small>
-                                    <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span class="text-danger">${{ $relatedProduct->price }}</span></p>
+                                    <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s>
+                                        <span class="text-danger">${{ $relatedProduct->variants->first()->price }}</span>
+                                    </p>
                                 </div>
                             </div>
                             <!--/ Card Product-->
@@ -620,5 +626,8 @@
 
 <!-- Theme JS -->
 <script src="{{ asset('/js/theme.bundle.js') }}"></script>
+
+<!-- AJAX Cart JS -->
+<script src="{{ asset('/js/cart.js') }}"></script>
 
 @endsection

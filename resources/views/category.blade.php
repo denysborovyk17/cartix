@@ -80,18 +80,19 @@
                         <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
                             <button class="btn btn-quick-add w-100 add-item"
                                     style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
+                                    name="product_variant_id"
                                     data-product-variant-id="{{ $productVariant->id }}">
                                 Add to Cart
                             </button>
                         </div>
 
                         <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="{{ route('product.show', [$category->slug, $productVariant->product->slug]) }}">
+                            <a class="text-decoration-none link-cover" href="{{ route('products.show', $productVariant->product->slug) }}">
                                 {{ $productVariant->product->name }}
                             </a>
                             <small class="text-muted d-block">4 colours, 10 sizes</small>
-                            <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s>
-                                <span class="text-danger">${{ $productVariant->price }}</span>
+                            <p class="mt-2 mb-0 small"><s class="text-muted">${{ $productVariant->discount_price }}</s>
+                                <span>${{ number_format($productVariant->price / 100, 2) }}</span>
                             </p>
                         </div>
                     </div>
@@ -321,8 +322,5 @@
 
 <!-- Theme JS -->
 <script src="{{ asset('/js/theme.bundle.js') }}"></script>
-
-<!-- AJAX Cart JS -->
-<script src="{{ asset('/js/cart.js') }}"></script>
 
 @endsection

@@ -123,26 +123,26 @@
                             <div id="cart-container">
                                 @if(session('cart', []))
                                     @foreach(session('cart', []) as $cartProductVariant)
-                                            <div class="row mx-0 py-4 g-0 border-bottom cart-item" data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
-                                                <div class="col-2 position-relative">
-                                                    <picture class="d-block ">
-                                                        <img class="img-fluid" src="{{ $cartProductVariant['image'] }}" alt="">
-                                                    </picture>
-                                                </div>
-                                                <div class="col-9 offset-1">
-                                                    <div>
-                                                        <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                            {{ $cartProductVariant['name'] }}
-                                                            <i class="ri-close-line ms-3"></i>
-                                                        </h6>
-                                                        <span class="d-block text-muted fw-bolder text-uppercase fs-9">Quantity ({{ $cartProductVariant['quantity'] }})</span>
-                                                    </div>
-                                                    <p class="fw-bolder text-end text-muted m-0"
-                                                       data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
-                                                        ${{ $cartProductVariant['price'] }}
-                                                    </p>
-                                                </div>
+                                        <div class="row mx-0 py-4 g-0 border-bottom cart-item" data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
+                                            <div class="col-2 position-relative">
+                                                <picture class="d-block ">
+                                                    <img class="img-fluid" src="{{ $cartProductVariant['image'] }}" alt="">
+                                                </picture>
                                             </div>
+                                            <div class="col-9 offset-1">
+                                                <div>
+                                                    <h6 class="justify-content-between d-flex align-items-start mb-2">
+                                                        {{ $cartProductVariant['name'] }}
+                                                        <i class="ri-close-line ms-3"></i>
+                                                    </h6>
+                                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Quantity ({{ $cartProductVariant['quantity'] }})</span>
+                                                </div>
+                                                <p class="fw-bolder text-end text-muted m-0"
+                                                   data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
+                                                    ${{ number_format($cartProductVariant['price'] / 100, 2) }}
+                                                </p>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 @endif
                             </div>

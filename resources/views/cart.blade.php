@@ -81,16 +81,8 @@
                                     <tbody class="border-0">
                                         <!-- Cart Item-->
                                         @if (session('cart'))
-                                            @php
-                                                $cartTotal = collect(session('cart'))->sum(fn($item) => $item['price'] * $item['quantity']);
-                                            @endphp
-
                                             @foreach(session('cart') as $cartProductVariant)
-                                                @php
-                                                    $itemTotal = floor($cartProductVariant['price'] * $cartProductVariant['quantity']);
-                                                @endphp
-
-                                                <div class="row mx-0 py-4 g-0 border-bottom cart-item" data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
+                                                <div class="row mx-0 py-4 g-0 border-bottom cart-item" data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
                                                     <div class="col-2 position-relative">
                                                         <picture class="d-block border">
                                                             <img class="img-fluid" src="{{ $cartProductVariant['image'] }}" alt="HTML Bootstrap Template by Pixel Rocket">
@@ -105,26 +97,21 @@
                                                                     <h6>
                                                                         Quantity <input type="number"
                                                                                         class="quantity"
-                                                                                        data-product-variant-id="{{ $cartProductVariant['variant_id'] }}"
+                                                                                        data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}"
                                                                                         name="quantity" value="{{ $cartProductVariant['quantity'] }}"
                                                                                         min="1">
                                                                     </h6>
                                                             </div>
 
                                                             <button class="btn btn-danger btn-sm remove-item"
-                                                                    data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
+                                                                    data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
                                                                 Delete
                                                             </button>
                                                         </div>
 
-                                                        <div class="mt-auto">
-                                                            <p class="fw-bolder text-end text-muted m-0">${{ round($cartProductVariant['price']) }}</p>
-                                                        </div>
-
-                                                        <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartProductVariant['variant_id'] }}">
-                                                            ${{ $itemTotal }}
+                                                        <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
+                                                            ${{ number_format($cartProductVariant['price'] * $cartProductVariant['quantity'] / 100, 2) }}
                                                         </p>
-
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -142,10 +129,9 @@
                                 <div>
                                     <h5 class="m-0 fw-bold">Grand Total:</h5>
                                     <p class="m-0 fw-bold fs-5 cart-total">
-                                        @php
-                                            $item = $cartProductVariant['variant_id'];
-                                        @endphp
-                                            ${{ (int) $cartTotal = collect(session('cart'))->sum(fn ($item) => $item['price'] * $item['quantity']) ?? ''}}
+                                        ${{ $cartTotal = number_format(collect(session('cart'))->sum(
+                                            fn($item) => $item['price'] * $item['quantity']) / 100, 2
+                                            ) ?? '' }}
                                         @endif
                                     </p>
                                 </div>
