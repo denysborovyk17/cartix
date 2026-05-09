@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 #[Fillable([
     'name',
-    'slug',
-    'parent_id'
+    'slug'
 ])]
 class Category extends Model
 {
@@ -25,15 +24,5 @@ class Category extends Model
             'id',
             'id'
         );
-    }
-
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
-
-    public function children(): HasMany
-    {
-        return $this->hasMany(Category::class, 'parent_id');
     }
 }
