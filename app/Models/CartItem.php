@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable([
     'cart_id',
     'product_variant_id',
-    'quantity',
-    'price'
+    'quantity'
 ])]
 class CartItem extends Model
 {
@@ -19,7 +18,7 @@ class CartItem extends Model
         return $this->belongsTo(Cart::class);
     }
 
-    public function variant(): BelongsTo
+    public function productVariant(): BelongsTo
     {
         return $this->belongsTo(ProductVariant::class);
     }
