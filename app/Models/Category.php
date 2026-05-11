@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-#[Fillable([
-    'name',
-    'slug',
-    'parent_id'
-])]
 class Category extends Model
 {
+    protected $fillable = [
+        'name',
+        'slug',
+        'parent_id'
+    ];
+
     public function productVariants(): HasManyThrough
     {
         return $this->hasManyThrough(
