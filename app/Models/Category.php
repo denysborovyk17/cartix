@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 #[Fillable([
     'name',
-    'slug'
+    'slug',
+    'parent_id'
 ])]
 class Category extends Model
 {
