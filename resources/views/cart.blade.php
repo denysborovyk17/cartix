@@ -80,41 +80,40 @@
                                 <table class="table align-middle">
                                     <tbody class="border-0">
                                         <!-- Cart Item-->
-                                        @if (session('cart'))
-                                            @foreach(session('cart') as $cartProductVariant)
-                                                <div class="row mx-0 py-4 g-0 border-bottom cart-item" data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
-                                                    <div class="col-2 position-relative">
-                                                        <picture class="d-block border">
-                                                            <img class="img-fluid" src="{{ $cartProductVariant['image'] }}" alt="HTML Bootstrap Template by Pixel Rocket">
-                                                        </picture>
-                                                    </div>
+                                        @foreach($cart->items as $cartItem)
+                                            <div class="row mx-0 py-4 g-0 border-bottom cart-item" data-product-variant-id="{{ $cartItem->product_variant_id }}">
+                                                <div class="col-2 position-relative">
+                                                    <picture class="d-block border">
+                                                        <img class="img-fluid" src="{{ $cartItem->productVariant->product->image }}" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                    </picture>
+                                                </div>
 
-                                                    <div class="col-9 offset-1 d-flex flex-column justify-content-between">
+                                                <div class="col-9 offset-1 d-flex flex-column justify-content-between">
 
-                                                        <div class="d-flex justify-content-between align-items-start">
-                                                            <div>
-                                                                <h6 class="mb-2">{{ $cartProductVariant['name'] }}</h6>
-                                                                    <h6>
-                                                                        Quantity <input type="number"
-                                                                                        class="quantity"
-                                                                                        data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}"
-                                                                                        name="quantity" value="{{ $cartProductVariant['quantity'] }}"
-                                                                                        min="1">
-                                                                    </h6>
-                                                            </div>
-
-                                                            <button class="btn btn-danger btn-sm remove-item"
-                                                                    data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
-                                                                Delete
-                                                            </button>
+                                                    <div class="d-flex justify-content-between align-items-start">
+                                                        <div>
+                                                            <h6 class="mb-2">{{ $cartItem->productVariant->product->name }}</h6>
+                                                                <h6>
+                                                                    Quantity <input type="number"
+                                                                                    class="quantity"
+                                                                                    data-product-variant-id="{{ $cartItem->product_variant_id }}"
+                                                                                    name="quantity" value="{{ $cartItem->quantity }}"
+                                                                                    min="1">
+                                                                </h6>
                                                         </div>
 
-                                                        <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartProductVariant['product_variant_id'] }}">
-                                                            ${{ number_format($cartProductVariant['price'] * $cartProductVariant['quantity'] / 100, 2) }}
-                                                        </p>
+                                                        <button class="btn btn-danger btn-sm remove-item"
+                                                                data-product-variant-id="{{ $cartItem->product_variant_id }}">
+                                                            Delete
+                                                        </button>
                                                     </div>
+
+                                                    <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartItem->product_variant_id }}">
+                                                        ${{ number_format($cartItem->productVariant->price * $cartItem->quantity / 100, 2) }}
+                                                    </p>
                                                 </div>
-                                            @endforeach
+                                            </div>
+                                        @endforeach
                                         <!-- / Cart Item-->
                                     </tbody>
                                 </table>
@@ -129,10 +128,9 @@
                                 <div>
                                     <h5 class="m-0 fw-bold">Grand Total:</h5>
                                     <p class="m-0 fw-bold fs-5 cart-total">
-                                        ${{ $cartTotal = number_format(collect(session('cart'))->sum(
-                                            fn($item) => $item['price'] * $item['quantity']) / 100, 2
+                                        ${{ $cartTotal = number_format(collect($cart->items)->sum(
+                                            fn($cartItem) => $cartItem->productVariant->price * $cartItem->quantity) / 100, 2
                                             ) ?? '' }}
-                                        @endif
                                     </p>
                                 </div>
                             </div>
