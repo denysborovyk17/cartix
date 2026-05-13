@@ -3,100 +3,106 @@
 namespace App\Services;
 
 use App\Exceptions\ProductVariantNotFoundException;
-use App\Repositories\CartRepository;
+use App\Models\CartItem;
+use App\Repositories\ProductVariantRepository;
 use Money\{Currency, Money};
 
 class CartService
 {
     public function __construct(
-        private readonly CartRepository $cartRepository,
-        private readonly MoneyFormatterService $moneyService
+        private readonly CurrentCartService $currentCartService,
+        private readonly ProductVariantRepository $productVariantRepository,
+        private readonly MoneyFormatterService $moneyFormatterService
     ) {
     }
 
     public function addItem(int $productVariantId): array
     {
-        $productVariant = $this->cartRepository->getProductVariant($productVariantId);
+        $cart = $this->currentCartService->getCurrentCart();
 
-        $cart = session('cart', []);
+        $cartItem = $cart->findItem($productVariantId);
 
-        if (!isset($cart[$productVariantId])) {
-            $cart[$productVariantId] = [
-                'product_variant_id' => $productVariant->id,
-                'name' => $productVariant->product->name,
-                'image' => $productVariant->product->image,
-                'price' => $productVariant->price,
-                'quantity' => 1
-            ];
+        if ($cartItem) {
+            $cartItem->quantity++;
         } else {
-            $cart[$productVariantId]['quantity']++;
+            $cartItem = new CartItem();
+            $cartItem->cart_id = $cart->id;
+            $cartItem->fill([
+                'product_variant_id' => $productVariantId,
+                'quantity' => 1
+            ]);
         }
-
-        session()->put('cart', $cart);
+        $cartItem->save();
 
         return [
-            'cartItem' => $cart[$productVariantId],
-            'cartCounter' => count(session('cart', []))
+            'cartItem' => $cartItem->load('productVariant.product'),
+            'cartCounter' => $this->calculateCartItemTotal()
         ];
     }
 
-    /**
-     * @throws ProductVariantNotFoundException
-     */
     public function updateItemQuantity(int $productVariantId, int $quantity): array
     {
-        $productVariant = $this->cartRepository->getProductVariant($productVariantId);
+        $cart = $this->currentCartService->getCurrentCart();
 
-        $cart = session('cart', []);
+        $cartItem = $cart->findItem($productVariantId);
 
-        if (!isset($cart[$productVariantId])) {
-            // throw new ProductVariantNotFoundException($productVariantId);
+        if ($cartItem) {
+            $cartItem->quantity = $quantity;
+            $cartItem->save();
         }
 
-        $cart[$productVariantId]['quantity'] = $quantity;
-
-        session()->put('cart', $cart);
+        $productVariant = $this->productVariantRepository->getProductVariant($productVariantId);
 
         $itemTotal = (new Money($productVariant->price, new Currency('USD')))->multiply($quantity);
 
         return [
             'quantity' => $quantity,
-            'itemTotal' => $this->moneyService->format($itemTotal),
-            'cartTotal' => $this->moneyService->format($this->calculateCartTotal($cart))
+            'itemTotal' => $this->moneyFormatterService->format($itemTotal),
+            'cartTotal' => $this->moneyFormatterService->format($this->calculateCartTotal())
         ];
     }
 
-    /**
-     * @throws ProductVariantNotFoundException
-     */
     public function removeItem(int $productVariantId): array
     {
-        $cart = session('cart', []);
+        $cart = $this->currentCartService->getCurrentCart();
 
-        if (!isset($cart[$productVariantId])) {
-            // throw new ProductVariantNotFoundException($productVariantId);
+        $cartItem = $cart->findItem($productVariantId);
+
+        if ($cartItem) {
+            $cartItem?->delete();
         }
 
-        unset($cart[$productVariantId]);
-
-        session()->put('cart', $cart);
-
         return [
-            'cartTotal' => $this->moneyService->format($this->calculateCartTotal($cart))
+            'cartTotal' => $this->moneyFormatterService->format($this->calculateCartTotal())
         ];
     }
 
-    private function calculateCartTotal(array $cart): Money|null
+    private function calculateCartTotal(): Money
     {
-        $amounts = [];
-        foreach ($cart as $item) {
-            $amounts[] = (new Money($item['price'], new Currency('USD')))->multiply($item['quantity']);
-        }
+        $cart = $this->currentCartService->getCurrentCart();
 
-        if (empty($cart)) {
+        if ($cart->items->isEmpty()) {
             return new Money(0, new Currency('USD'));
         }
 
+        $amounts = [];
+        foreach ($cart->items as $cartItem) {
+            $amounts[] = (new Money($cartItem->productVariant->price, new Currency('USD')))
+                ->multiply($cartItem->quantity);
+        }
+
         return Money::sum(...$amounts);
+    }
+
+    private function calculateCartItemTotal(): int
+    {
+        $cart = $this->currentCartService->getCurrentCart();
+
+        $total = 0;
+        foreach ($cart->items as $cartItem) {
+            $total += $cartItem->quantity;
+        }
+
+        return $total;
     }
 }
