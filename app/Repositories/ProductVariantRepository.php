@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ProductVariant;
 
-class CartRepository
+class ProductVariantRepository
 {
     public function getProductVariant(int $productVariantId): ProductVariant
     {
