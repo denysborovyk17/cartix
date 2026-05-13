@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /** @property mixed $product */
+/** @property int $price */
 class ProductVariant extends Model
 {
     use HasFactory;
