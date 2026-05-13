@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ProductVariantNotFoundException;
+use App\Http\Resources\CartItemResource;
+use App\Repositories\CartRepository;
 use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
-use App\Models\ProductVariant;
 use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -12,14 +12,15 @@ use Illuminate\View\View;
 class CartController extends Controller
 {
     public function __construct(
+        private readonly CartRepository $cartRepository,
         private readonly CartService $cartService
     ) {}
 
     public function index(): View
     {
-        $productVariants = ProductVariant::with('product')->get();
+        $cart = $this->cartRepository->getOrCreate(auth()->id(), session()->getId());
 
-        return view('cart', compact('productVariants'));
+        return view('cart', compact('cart'));
     }
 
     public function store(StoreCartItemRequest $request): JsonResponse
@@ -29,14 +30,11 @@ class CartController extends Controller
         $service = $this->cartService->addItem($productVariantId);
 
         return response()->json([
-            'cartItem' => $service['cartItem'],
+            'cartItem' => new CartItemResource($service['cartItem']),
             'cartCounter' => $service['cartCounter']
         ]);
     }
 
-    /**
-     * @throws ProductVariantNotFoundException
-     */
     public function update(int $productVariantId, UpdateCartItemRequest $request): JsonResponse
     {
         $quantity = $request->input('quantity');
@@ -50,9 +48,6 @@ class CartController extends Controller
         ]);
     }
 
-    /**
-     * @throws ProductVariantNotFoundException
-     */
     public function destroy(int $productVariantId): JsonResponse
     {
         $service = $this->cartService->removeItem($productVariantId);
