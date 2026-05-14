@@ -52,7 +52,7 @@
 
                 const existingCartItem = document.querySelector(`.cart-item[data-product-variant-id="${productVariantId}"]`);
                 if (existingCartItem) {
-                    const quantitySpan = existingCartItem.querySelector('.fs-9');
+                    const quantitySpan = existingCartItem.querySelector('.cart-item-quantity');
                     quantitySpan.textContent = `Quantity (${data.cartItem.quantity})`;
                 } else {
                     const cartContainer = document.querySelector('#cart-container');
@@ -69,10 +69,10 @@
                                     ${data.cartItem.name}
                                     <i class="ri-close-line ms-3"></i>
                                 </h6>
-                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Quantity (${data.cartItem.quantity})</span>
+                                <span class="d-block text-muted fw-bolder text-uppercase fs-9 cart-item-quantity">Quantity (${data.cartItem.quantity})</span>
                             </div>
                             <p class="fw-bolder text-end text-muted m-0">
-                               $${data.cartItem.price}
+                               ${data.cartItem.price.formatted}
                             </p>
                         </div>
                     </div>`;
