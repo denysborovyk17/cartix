@@ -61,14 +61,33 @@
 - `CurrentCartService` який використовує `CartRepository` для знаходження поточного кошика користувача по `session_id` або `user_id`.
 - Метод `calculateCartItemTotal` для підрахунку кількості товарів у кошику.
 - Ресурс `CartItemResource` який повертає дані про товар в кошику.
-- Завантаження змінної про поточний кошик в загальний `blade` шаблон через `AppServiceProvider`.
+- Завантаження змінної про поточний кошик в загальний `Blade` шаблон через `AppServiceProvider`.
 
 ### Змінено
 - Назву міграції яка змінює тип ціни та знижки з `decimal` до `integer` в таблиці `product_variants`.
 - Тип колонки `status` з `enum` до `string` в таблицях `orders` та `payments`.
 - Назву класу `CartRepository` перейменовано на `ProductVariantRepository`.
 - `CartService` який більше не працює через глобальну сесію а використовує `Repositories`, `Services` та `relationships`.
-- Доступ до властивостей товару кошика в `blade` шаблонах.
+- Доступ до властивостей товару кошика в `Blade` шаблонах.
 
 ### Видалено
 - Колонку `price` з таблиці `cart_items`.
+
+## [0.5.0] - 2026-05-14
+
+### Додано
+- `Blade Template` - `form-errors` для показу помилок форм в `Blade` шаблонах.
+- Неймінг полів в `Blade` шаблонах для реєстрації та логіну.
+- `RegisterRequest` та `LoginRequest` для валідації полів форм реєстрації та логіну.
+- `RegisterController` та `LoginController` для автентифікації користувачів.
+- `RateLimiterServiceProvider` для обмеження кількості спроб логіну.
+- Кастомний `config` - `rate_limiter` щоб не прописувати значення в `RateLimiterServiceProvider` напряму.
+- Нові маршрути для реєстрації, логіну, виходу з акаунта.
+- `CategoryRepository` замість прямої роботи з моделлю в `CategoryController`.
+- `ViewServiceProvider` для передачі спільних даних у `Blade` шаблони.
+
+### Змінено
+- Стиль запису умови `with()` в `CartRepository`.
+- Назви методів в `CartService`: `calculateCartTotal` перейменовано на `calculateTotal` а `calculateCartItemTotal` перейменовано на `getItemsCount`.
+- Структуру поля `price` в `CartItemResource` з такими атрибутами як: `amount`, `formatted` та `currency`.
+- `AppServiceProvider` - логіку передачі даних у `Blade` шаблони перенесено до `ViewServiceProvider`.
