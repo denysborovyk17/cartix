@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Repositories\CategoryRepository;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
+    public function __construct(
+        private readonly CategoryRepository $categoryRepository
+    ) {
+    }
+
     public function show(string $slug): View
     {
-        $category = Category::with('productVariants')->where('slug', $slug)->firstOrFail();
+        $category = $this->categoryRepository->getBySlug($slug);
 
         return view('category', compact('category'));
     }
