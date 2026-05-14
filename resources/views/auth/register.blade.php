@@ -43,7 +43,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>OldSkool | Bootstrap 5 HTML Template</title>
+  <title>Sign up</title>
 
 </head>
 <body class=" bg-light">
@@ -56,7 +56,7 @@
         <!-- Login Form-->
         <div class="col col-md-8 col-lg-6 col-xxl-5">
             <!-- Logo-->
-            <a class="navbar-brand fw-bold fs-3 flex-shrink-0 order-0 align-self-center justify-content-center d-flex mx-0 px-0" href="index.blade.php">
+            <a class="navbar-brand fw-bold fs-3 flex-shrink-0 order-0 align-self-center justify-content-center d-flex mx-0 px-0" href="{{ route('index') }}">
                 <div class="d-flex align-items-center">
                     <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26"><path d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z" fill="currentColor" fill-rule="evenodd"/></svg>
                 </div>
@@ -69,26 +69,29 @@
                 <a href="#" class="btn btn-twitter d-block mb-2"><i class="ri-twitter-fill align-bottom"></i> Login with
                     Twitter</a>
                 <span class="text-muted text-center d-block fw-bolder my-4">OR</span>
-                <form>
+
+                @include('errors.form-errors')
+                <form method="POST" action="{{ route('auth.register.store') }}">
+                    @csrf
                     <div class="form-group">
-                      <label class="form-label" for="register-fname">First name</label>
-                      <input type="text" class="form-control" id="register-fname" placeholder="Enter your first name">
+                      <label class="form-label" for="register-fname">Name</label>
+                      <input type="text" class="form-control" name="name" id="register-name" placeholder="Enter your name">
                     </div>
+
                     <div class="form-group">
-                      <label class="form-label" for="register-lname">Last name</label>
-                      <input type="text" class="form-control" id="register-lname" placeholder="Enter your last name">
+                      <label class="form-label" for="register-email">Email</label>
+                      <input type="email" class="form-control" name="email" id="register-email" placeholder="example@email.com">
                     </div>
-                    <div class="form-group">
-                      <label class="form-label" for="register-email">Email address</label>
-                      <input type="email" class="form-control" id="register-email" placeholder="name@email.com">
-                    </div>
+
                     <div class="form-group">
                       <label class="form-label" for="register-password">Password</label>
-                      <input type="password" class="form-control" id="register-password" placeholder="Enter your password">
+                      <input type="password" class="form-control" name="password" id="register-password" placeholder="Enter your password">
                     </div>
+
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Sign Up</button>
                   </form>
-                  <p class="d-block text-center text-muted">Already registered? <a class="text-muted" href="login.blade.php">Login here.</a></p>
+
+                  <p class="d-block text-center text-muted">Already registered? <a class="text-muted" href="{{ route('auth.login') }}">Sign in</a></p>
             </div>
 
         </div>
