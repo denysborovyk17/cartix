@@ -1,7 +1,6 @@
-<?php
-
-use App\Providers\AppServiceProvider;
+<?php declare(strict_types=1);
 
 return [
-    AppServiceProvider::class,
+    App\Providers\AppServiceProvider::class,
+    App\Providers\RateLimiterServiceProvider::class,
 ];
