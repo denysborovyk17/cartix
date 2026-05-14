@@ -128,9 +128,7 @@
                                 <div>
                                     <h5 class="m-0 fw-bold">Grand Total:</h5>
                                     <p class="m-0 fw-bold fs-5 cart-total">
-                                        ${{ $cartTotal = number_format(collect($cart->items)->sum(
-                                            fn($cartItem) => $cartItem->productVariant->price * $cartItem->quantity) / 100, 2
-                                            ) ?? '' }}
+                                        ${{ number_format($cartTotal / 100, 2) }}
                                     </p>
                                 </div>
                             </div>

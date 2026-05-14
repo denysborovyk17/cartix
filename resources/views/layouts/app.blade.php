@@ -128,7 +128,7 @@
                     <li class="ms-1 d-inline-block position-relative dropdown-cart">
                         <button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body cart-counter"
                                 type="button">
-                            My Cart ({{ count(session('cart', [])) }})
+                            My Cart ({{ $cartCounter }})
                         </button>
                         <div class="cart-dropdown dropdown-menu">
 
@@ -154,7 +154,7 @@
                                                     {{ $cartItem->productVariant->product->name }}
                                                     <i class="ri-close-line ms-3"></i>
                                                 </h6>
-                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Quantity ({{ $cartItem->quantity }})</span>
+                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9 cart-item-quantity">Quantity ({{ $cartItem->quantity }})</span>
                                             </div>
                                             <p class="fw-bolder text-end text-muted m-0"
                                                data-product-variant-id="{{ $cartItem->product_variant_id }}">
