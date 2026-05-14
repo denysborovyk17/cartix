@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Exceptions\ProductVariantNotFoundException;
 use App\Models\CartItem;
 use App\Repositories\ProductVariantRepository;
 use Money\{Currency, Money};
@@ -36,7 +35,7 @@ class CartService
 
         return [
             'cartItem' => $cartItem->load('productVariant.product'),
-            'cartCounter' => $this->calculateCartItemTotal()
+            'cartCounter' => $this->getItemsCount()
         ];
     }
 
@@ -58,7 +57,7 @@ class CartService
         return [
             'quantity' => $quantity,
             'itemTotal' => $this->moneyFormatterService->format($itemTotal),
-            'cartTotal' => $this->moneyFormatterService->format($this->calculateCartTotal())
+            'cartTotal' => $this->moneyFormatterService->format($this->calculateTotal())
         ];
     }
 
@@ -73,11 +72,11 @@ class CartService
         }
 
         return [
-            'cartTotal' => $this->moneyFormatterService->format($this->calculateCartTotal())
+            'cartTotal' => $this->moneyFormatterService->format($this->calculateTotal())
         ];
     }
 
-    private function calculateCartTotal(): Money
+    public function calculateTotal(): Money
     {
         $cart = $this->currentCartService->getCurrentCart();
 
@@ -94,15 +93,15 @@ class CartService
         return Money::sum(...$amounts);
     }
 
-    private function calculateCartItemTotal(): int
+    public function getItemsCount(): int
     {
         $cart = $this->currentCartService->getCurrentCart();
 
-        $total = 0;
+        $counter = 0;
         foreach ($cart->items as $cartItem) {
-            $total += $cartItem->quantity;
+            $counter += $cartItem->quantity;
         }
 
-        return $total;
+        return $counter;
     }
 }
