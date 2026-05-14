@@ -63,6 +63,20 @@
                 </a>
                 <!-- / Logo-->
 
+                @auth
+                    <form method="POST" action="{{ route('auth.logout') }}">
+                        @csrf
+                        <li class="ms-1 d-none d-lg-inline-block">
+                            <a style="position: absolute; top: 1px; left: 1px;"  href="{{ route('auth.register') }}">
+                                <button type="submit">Logout</button>
+                            </a>
+                        </li>
+                    </form>
+                    <li class="ms-1 d-none d-lg-inline-block">
+                        <b style="position: absolute; top: 1px; left: 75px;">Hi, {{ Auth::user()->name }} to the shop.</b>
+                    </li>
+                @endauth
+
                 <!-- Navbar Icons-->
                 <ul class="list-unstyled mb-0 d-flex align-items-center order-1 order-lg-2 nav-sidelinks">
 
@@ -96,13 +110,19 @@
                     </li>
                     <!-- /Navbar Search-->
 
-                    <!-- Navbar Login-->
-                    <li class="ms-1 d-none d-lg-inline-block">
-                        <a class="nav-link text-body" href="./login.html">
-                            Account
-                        </a>
-                    </li>
-                    <!-- /Navbar Login-->
+                    @guest
+                        <li class="ms-1 d-none d-lg-inline-block">
+                            <a class="nav-link text-body" href="{{ route('auth.register') }}">
+                                Sign Up
+                            </a>
+                        </li>
+
+                        <li class="ms-1 d-none d-lg-inline-block">
+                            <a class="nav-link text-body" href="{{ route('auth.login') }}">
+                                Sign In
+                            </a>
+                        </li>
+                    @endguest
 
                     <!-- Navbar Cart Icon-->
                     <li class="ms-1 d-inline-block position-relative dropdown-cart">
