@@ -3,22 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CartItemResource;
-use App\Repositories\CartRepository;
+use App\Services\{CurrentCartService, CartService};
 use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
-use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 class CartController extends Controller
 {
     public function __construct(
-        private readonly CartRepository $cartRepository,
+        private readonly CurrentCartService $currentCartService,
         private readonly CartService $cartService
     ) {}
 
     public function index(): View
     {
-        $cart = $this->cartRepository->getOrCreate(auth()->id(), session()->getId());
+        $cart = $this->currentCartService->getCurrentCart();
 
         return view('cart', compact('cart'));
     }
