@@ -68,12 +68,12 @@
                         @csrf
                         <li class="ms-1 d-none d-lg-inline-block">
                             <a style="position: absolute; top: 1px; left: 1px;"  href="{{ route('auth.register') }}">
-                                <button type="submit">Logout</button>
+                                <button class="bg-white text-black" type="submit">Logout</button>
                             </a>
                         </li>
                     </form>
                     <li class="ms-1 d-none d-lg-inline-block">
-                        <b style="position: absolute; top: 1px; left: 75px;">Hi, {{ Auth::user()->name }} to the shop.</b>
+                        <b style="position: absolute; top: 5px; left: 80px;">Hi, {{ Auth::user()->name }}.</b>
                     </li>
                 @endauth
 
