@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => Category::query()->inRandomOrder()->value('id'),
+            'category_id' => Category::query()->whereNotNull('parent_id')->inRandomOrder()->value('id'),
             'brand_id' => Brand::query()->inRandomOrder()->value('id'),
             'name' => fake()->words(2, true),
             'slug' => fake()->unique()->slug(),
