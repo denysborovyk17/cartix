@@ -91,3 +91,25 @@
 - Назви методів в `CartService`: `calculateCartTotal` перейменовано на `calculateTotal` а `calculateCartItemTotal` перейменовано на `getItemsCount`.
 - Структуру поля `price` в `CartItemResource` з такими атрибутами як: `amount`, `formatted` та `currency`.
 - `AppServiceProvider` - логіку передачі даних у `Blade` шаблони перенесено до `ViewServiceProvider`.
+
+## [0.6.0] - 2026-05-17
+
+### Додано
+- Прив'язку слухача `MergeGuestCart` до події `Login` в `AppServiceProvider`.
+- Методи: `findCartByUserId` та `findCartBySessionId` в `CartRepository`.
+- `MergeGuestCartAction` для обробки сценаріїв об'єднання гостьового кошика та кошика користувача.
+- Слухач `MergeGuestCart`, який викликає `MergeGuestCartAction` під час автентифікації.
+- Кастомні повідомлення помилки валідації для `RegisterRequest` та `LoginRequest`.
+- Репозиторій `RegisterRepository` для логіки створення нового користувача в базі даних.
+
+### Змінено
+- У `CartController` замінено ін'єкцію `CartRepository` на `CurrentCartService`.
+- Місце використання завантаження зв'язків через `load()` у методі `addItem` сервісу `CartService`.
+- Логіку створення користувача перенесено з `RegisterController` до `RegisterRepository`.
+
+### Виправлено
+- Обмежено маршрути для `CartController` через `except()`, прибравши ті, що не використовуються.
+- `ProductFactory` тепер генерує товари лише для підкатегорій (де колонка `parent_id` не є `null`).
+
+### Видалено
+- Виклик `UserFactory` в `DatabaseSeeder`.
