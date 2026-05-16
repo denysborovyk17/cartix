@@ -4,23 +4,22 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
+use App\Repositories\RegisterRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    public function __construct(
+        private readonly RegisterRepository $registerRepository
+    ) {}
+
     public function __invoke(RegisterRequest $request): RedirectResponse
     {
         $userData = $request->validated();
 
-        $user = User::create([
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'password' => Hash::make($userData['password'])
-        ]);
+        $user = $this->registerRepository->register($userData);
 
         Auth::login($user);
 
