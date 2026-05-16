@@ -31,10 +31,10 @@ class CartService
                 'quantity' => 1
             ]);
         }
-        $cartItem->save();
+        $cartItem->load('productVariant.product')->save();
 
         return [
-            'cartItem' => $cartItem->load('productVariant.product'),
+            'cartItem' => $cartItem,
             'cartCounter' => $this->getItemsCount()
         ];
     }
@@ -65,11 +65,7 @@ class CartService
     {
         $cart = $this->currentCartService->getCurrentCart();
 
-        $cartItem = $cart->findItem($productVariantId);
-
-        if ($cartItem) {
-            $cartItem?->delete();
-        }
+        $cart->findItem($productVariantId)->delete();
 
         return [
             'cartTotal' => $this->moneyFormatterService->format($this->calculateTotal())
