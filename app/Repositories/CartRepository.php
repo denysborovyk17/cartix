@@ -16,4 +16,18 @@ class CartRepository
         return Cart::with('items.productVariant.product')
             ->firstOrCreate(['session_id' => $sessionId]);
     }
+
+    public function findCartByUserId(int $userId): Cart|null
+    {
+        return Cart::with('items')
+            ->where('user_id', $userId)
+            ->first();
+    }
+
+    public function findCartBySessionId(string $sessionId): Cart|null
+    {
+        return Cart::with('items')
+            ->where('session_id', $sessionId)
+            ->first();
+    }
 }
