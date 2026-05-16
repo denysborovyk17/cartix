@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\{Brand, Product, User};
+use App\Models\{Brand, Product};
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,12 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Denys',
-            'email' => 'denys@mail.com',
-            'password' => '12345678'
-        ]);
-
         $this->call([
             CategorySeeder::class,
             OptionSeeder::class
