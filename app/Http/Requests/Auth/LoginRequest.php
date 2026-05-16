@@ -23,8 +23,19 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email|exists:users,email',
+            'email' => 'bail|required|exists:users,email|string|email',
             'password' => 'required|string'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Email обов\'язковий',
+            'email.string' => 'Email має бути рядком',
+            'email.email' => 'Email має містити @',
+            'password.required' => 'Пароль обов\'язковий',
+            'password.string' => 'Пароль має бути рядком',
         ];
     }
 }
