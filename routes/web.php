@@ -10,7 +10,7 @@ Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::middleware('web')->group(function () {
-    Route::resource('/cart', CartController::class);
+    Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
 });
 
 Route::prefix('auth')->as('auth.')->group(function () {
