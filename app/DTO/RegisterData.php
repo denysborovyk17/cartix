@@ -11,7 +11,7 @@ class RegisterData
     ) {
     }
 
-    public static function fromArray(array $data): RegisterData
+    public static function fromArray(array $data): self
     {
         return new self(
             name: $data['name'],
