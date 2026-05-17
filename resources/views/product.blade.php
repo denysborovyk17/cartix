@@ -68,12 +68,12 @@
 
                             <h1 class="mb-1 fs-2 fw-bold">{{ $product->name }}</h1>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-4 m-0">${{ $product->variants->first()->price }}</p>
+                                <p class="fs-4 m-0">${{ number_format($product->variants->first()->price / 100, 2) }}</p>
                             </div>
                             <div class="border-top mt-4 mb-3 product-option">
                                 <small class="text-uppercase pt-4 d-block fw-bolder">
-                                    <span class="text-muted">Available Sizes (Mens)</span> : <span class="selected-option fw-bold"
-                                                                                                   data-pixr-product-option="size">M</span>
+                                    <span class="text-muted">Available Sizes (Mens)</span> :
+                                    <span class="selected-option fw-bold" data-pixr-product-option="size">M</span>
                                 </small>
                                 <div class="mt-4 d-flex justify-content-start flex-wrap align-items-start">
                                     <div class="form-check-option form-check-rounded">
@@ -83,59 +83,9 @@
                                             value="S"
                                             id="option-sizes-0">
                                         <label for="option-sizes-0">
-
-                                            <small>S</small>
-                                        </label>
-                                    </div>
-                                    <div class="form-check-option form-check-rounded">
-                                        <input
-                                            type="radio"
-                                            name="product-option-sizes"
-                                            value="SM"
-                                            id="option-sizes-1">
-                                        <label for="option-sizes-1">
-                                            <small>SM</small>
-                                        </label>
-                                    </div>
-                                    <div class="form-check-option form-check-rounded">
-                                        <input
-                                            type="radio"
-                                            name="product-option-sizes"
-                                            value="M"
-                                            checked
-                                            id="option-sizes-2">
-                                        <label for="option-sizes-2">
-                                            <small>M</small>
-                                        </label>
-                                    </div>
-                                    <div class="form-check-option form-check-rounded">
-                                        <input
-                                            type="radio"
-                                            name="product-option-sizes"
-                                            value="L"
-                                            id="option-sizes-3">
-                                        <label for="option-sizes-3">
-                                            <small>L</small>
-                                        </label>
-                                    </div>
-                                    <div class="form-check-option form-check-rounded">
-                                        <input
-                                            type="radio"
-                                            name="product-option-sizes"
-                                            value="Xl"
-                                            id="option-sizes-4">
-                                        <label for="option-sizes-4">
-                                            <small>XL</small>
-                                        </label>
-                                    </div>
-                                    <div class="form-check-option form-check-rounded">
-                                        <input
-                                            type="radio"
-                                            name="product-option-sizes"
-                                            value="XXL"
-                                            id="option-sizes-5">
-                                        <label for="option-sizes-5">
-                                            <small>XXL</small>
+                                            <small>
+                                                {{ 'In progress' }}
+                                            </small>
                                         </label>
                                     </div>
                                 </div>
