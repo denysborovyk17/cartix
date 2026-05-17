@@ -3,8 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
-use App\Services\CartService;
-use App\Services\CurrentCartService;
+use App\Services\{CurrentCartService, CartService};
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,7 +26,6 @@ class ViewServiceProvider extends ServiceProvider
             $view->with([
                 'categories' => Category::query()
                     ->whereNotNull('parent_id')
-                    ->select('id', 'name', 'slug')
                     ->get()
             ]);
         });
