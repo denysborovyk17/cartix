@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\DTO\RegisterData;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -43,5 +44,10 @@ class RegisterRequest extends FormRequest
             'password.string' => 'Пароль має бути рядком',
             'password.min' => 'Мінімальна довжина пароля 12 символів',
         ];
+    }
+
+    public function toDTO(): RegisterData
+    {
+        return RegisterData::fromArray($this->validated());
     }
 }
