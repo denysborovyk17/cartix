@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\DTO\RegisterData;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,12 +13,12 @@ class RegisterRepository
     ) {
     }
 
-    public function register($userData): User
+    public function register(RegisterData $data): User
     {
         return User::create([
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'password' => Hash::make($userData['password'])
+            'name' => $data->getName(),
+            'email' => $data->getEmail(),
+            'password' => Hash::make($data->getPassword())
         ]);
     }
 }
