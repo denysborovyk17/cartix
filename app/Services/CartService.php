@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\CartItem;
 use App\Repositories\ProductVariantRepository;
 use Money\{Currency, Money};
 
@@ -15,23 +14,22 @@ class CartService
     ) {
     }
 
-    public function addItem(int $productVariantId): array
+    public function addItem(int $productVariantId, int $quantity = 1): array
     {
-        $cart = $this->currentCartService->getCurrentCart();
+        $cart = $this->currentCartService->findById();
 
         $cartItem = $cart->findItem($productVariantId);
 
         if ($cartItem) {
             $cartItem->quantity++;
         } else {
-            $cartItem = new CartItem();
-            $cartItem->cart_id = $cart->id;
-            $cartItem->fill([
+            $cartItemData = [
                 'product_variant_id' => $productVariantId,
-                'quantity' => 1
-            ]);
+                'quantity' => $quantity
+            ];
+            $cartItem = $cart->items()->create($cartItemData);
         }
-        $cartItem->load('productVariant.product')->save();
+        $cartItem->save();
 
         return [
             'cartItem' => $cartItem,
@@ -41,7 +39,7 @@ class CartService
 
     public function updateItemQuantity(int $productVariantId, int $quantity): array
     {
-        $cart = $this->currentCartService->getCurrentCart();
+        $cart = $this->currentCartService->findById();
 
         $cartItem = $cart->findItem($productVariantId);
 
@@ -50,7 +48,7 @@ class CartService
             $cartItem->save();
         }
 
-        $productVariant = $this->productVariantRepository->getProductVariant($productVariantId);
+        $productVariant = $this->productVariantRepository->findById($productVariantId);
 
         $itemTotal = (new Money($productVariant->price, new Currency('USD')))->multiply($quantity);
 
@@ -63,7 +61,7 @@ class CartService
 
     public function removeItem(int $productVariantId): array
     {
-        $cart = $this->currentCartService->getCurrentCart();
+        $cart = $this->currentCartService->findById();
 
         $cart->findItem($productVariantId)->delete();
 
@@ -74,7 +72,7 @@ class CartService
 
     public function calculateTotal(): Money
     {
-        $cart = $this->currentCartService->getCurrentCart();
+        $cart = $this->currentCartService->findById();
 
         if ($cart->items->isEmpty()) {
             return new Money(0, new Currency('USD'));
@@ -91,7 +89,7 @@ class CartService
 
     public function getItemsCount(): int
     {
-        $cart = $this->currentCartService->getCurrentCart();
+        $cart = $this->currentCartService->findById();
 
         $counter = 0;
         foreach ($cart->items as $cartItem) {
