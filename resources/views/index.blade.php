@@ -302,7 +302,7 @@
                                     <img class="w-100" title="" src="/images/categories/category-7.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                 </picture>
                                 <p class="title-small mb-2 text-muted">Must Haves</p>
-                                <h4 class="lead fw-bold">Premium Essentials</h4>
+                                <h4 class="lead fw-bold">{{ $category->name }}</h4>
                                 <a href="{{ route('categories.show', $category->slug) }}" class="btn btn-psuedo align-self-start">Shop Now</a>
                             </div>
                         </div>
