@@ -68,7 +68,7 @@
 
                             <h1 class="mb-1 fs-2 fw-bold">{{ $product->name }}</h1>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-4 m-0">${{ number_format($product->variants->first()->price / 100, 2) }}</p>
+                                <p class="fs-4 m-0">${{ number_format($selectedVariant->price / 100, 2) }}</p>
                             </div>
                             <div class="border-top mt-4 mb-3 product-option">
                                 <small class="text-uppercase pt-4 d-block fw-bolder">
@@ -90,10 +90,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
-                                    data-product-variant-id="{{ $product->id }}">
-                                Add To Cart
-                            </button>
+                            @if ($product->variants->first()->stock > 0)
+                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
+                                        data-product-variant-id="{{ $product->id }}">
+                                    Add To Cart
+                                </button>
+                            @else
+                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
+                                        data-product-variant-id="{{ $product->id }}"
+                                        disabled>
+                                    Add To Cart
+                                </button>
+                            @endif
 
                             <!-- Product Highlights-->
                             <div class="my-5">
@@ -229,16 +237,18 @@
                                         <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ $relatedProduct->image }}" alt="">
                                     </picture>
                                     <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
+                                        <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i>
+                                            Quick Add
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="card-body px-0">
-                                    <a class="text-decoration-none link-cover" href="{{ route('products.show', $relatedProduct->slug) }}">
+                                    <a class="text-decoration-none link-cover" href="{{ route('products.show', [$relatedProduct->slug, 'productVariant' => $relatedProduct->variants->first()?->id]) }}">
                                         {{ $relatedProduct->name }}
                                     </a>
                                     <small class="text-muted d-block">4 colours, 10 sizes</small>
                                     <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s>
-                                        <span class="text-danger">${{ $relatedProduct->variants->first()->price }}</span>
+                                        <span class="text-danger">${{ number_format($relatedProduct->variants->first()->price / 100, 2) }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -576,8 +586,5 @@
 
 <!-- Theme JS -->
 <script src="{{ asset('/js/theme.bundle.js') }}"></script>
-
-<!-- AJAX Cart JS -->
-<script src="{{ asset('/js/cart.js') }}"></script>
 
 @endsection

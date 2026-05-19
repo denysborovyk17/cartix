@@ -77,17 +77,29 @@
 
                         </div>
 
-                        <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
-                            <button class="btn btn-quick-add w-100 add-item"
-                                    style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
-                                    name="product_variant_id"
-                                    data-product-variant-id="{{ $productVariant->id }}">
-                                Add to Cart
-                            </button>
-                        </div>
+                        @if ($productVariant->stock > 0)
+                            <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
+                                <button class="btn btn-quick-add w-100 add-item"
+                                        style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
+                                        name="product_variant_id"
+                                        data-product-variant-id="{{ $productVariant->id }}">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        @else
+                            <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
+                                <button class="btn btn-quick-add w-100 add-item"
+                                        style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
+                                        name="product_variant_id"
+                                        data-product-variant-id="{{ $productVariant->id }}"
+                                        disabled>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        @endif
 
                         <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="{{ route('products.show', $productVariant->product->slug) }}">
+                            <a class="text-decoration-none link-cover" href="{{ route('products.show', [$productVariant->product->slug, 'variant' => $productVariant->id]) }}">
                                 {{ $productVariant->product->name }}
                             </a>
                             <small class="text-muted d-block">4 colours, 10 sizes</small>
