@@ -6,7 +6,7 @@ use App\Models\ProductVariant;
 
 class ProductVariantRepository
 {
-    public function getProductVariant(int $productVariantId): ProductVariant
+    public function findById(int $productVariantId): ProductVariant
     {
         return ProductVariant::with('product:id,name,image')->findOrFail($productVariantId);
     }

@@ -6,7 +6,7 @@ use App\Models\Cart;
 
 class CartRepository
 {
-    public function getOrCreate(?int $userId, string $sessionId): Cart
+    public function findOrCreate(?int $userId, string $sessionId): Cart
     {
         if ($userId) {
             return Cart::with('items.productVariant.product')
@@ -17,14 +17,14 @@ class CartRepository
             ->firstOrCreate(['session_id' => $sessionId]);
     }
 
-    public function findCartByUserId(int $userId): Cart|null
+    public function findByUserId(int $userId): Cart|null
     {
         return Cart::with('items')
             ->where('user_id', $userId)
             ->first();
     }
 
-    public function findCartBySessionId(string $sessionId): Cart|null
+    public function findBySessionId(string $sessionId): Cart|null
     {
         return Cart::with('items')
             ->where('session_id', $sessionId)

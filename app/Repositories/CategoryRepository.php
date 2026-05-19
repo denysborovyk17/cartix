@@ -6,7 +6,7 @@ use App\Models\Category;
 
 class CategoryRepository
 {
-    public function getBySlug($slug): Category
+    public function findBySlug($slug): Category
     {
         return Category::with('productVariants.product')->where('slug', $slug)->firstOrFail();
     }
