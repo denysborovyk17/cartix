@@ -7,20 +7,17 @@ use Illuminate\Support\Collection;
 
 class ProductRepository
 {
-    public function findProductBySlug(string $slug): Product
+    public function findBySlug(string $slug): Product
     {
-        $product = Product::with('variants')->where('slug', $slug)->firstOrFail();
-
         return Product::query()
             ->with('variants')
             ->where('slug', $slug)
-            ->where('category_id', $product->category_id)
             ->firstOrFail();
     }
 
-    public function findRelatedProductBySlug(string $slug): Collection
+    public function findRelatedBySlug(string $slug): Collection
     {
-        $product = Product::with('variants')->where('slug', $slug)->firstOrFail();
+        $product = $this->findBySlug($slug);
 
         return Product::query()
             ->with('variants')
