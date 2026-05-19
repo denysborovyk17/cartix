@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
     public function show(string $slug): View
     {
-        $category = $this->categoryRepository->getBySlug($slug);
+        $category = $this->categoryRepository->findBySlug($slug);
 
         return view('category', compact('category'));
     }

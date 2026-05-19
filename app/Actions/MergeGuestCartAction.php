@@ -13,8 +13,8 @@ class MergeGuestCartAction
 
     public function execute(int $userId, string $sessionId): void
     {
-        $guestCart = $this->cartRepository->findCartBySessionId($sessionId);
-        $userCart = $this->cartRepository->findCartByUserId($userId);
+        $guestCart = $this->cartRepository->findBySessionId($sessionId);
+        $userCart = $this->cartRepository->findByUserId($userId);
 
         if (!$guestCart) {
             return;

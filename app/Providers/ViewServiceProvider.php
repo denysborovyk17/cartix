@@ -31,7 +31,7 @@ class ViewServiceProvider extends ServiceProvider
         });
 
         View::composer('layouts.app', function ($view) use ($currentCartService, $cartService) {
-            $cart = $currentCartService->getCurrentCart();
+            $cart = $currentCartService->findById();
 
             $view->with([
                 'cart' => $cart->load('items.productVariant.product')

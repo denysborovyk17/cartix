@@ -12,8 +12,8 @@ class CurrentCartService
     ) {
     }
 
-    public function getCurrentCart(): Cart
+    public function findById(): Cart
     {
-        return $this->cartRepository->getOrCreate(auth()->id(), session()->getId());
+        return $this->cartRepository->findOrCreate(auth()->id(), session()->getId());
     }
 }

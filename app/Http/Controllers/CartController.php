@@ -17,7 +17,7 @@ class CartController extends Controller
 
     public function index(): View
     {
-        $cart = $this->currentCartService->getCurrentCart();
+        $cart = $this->currentCartService->findById();
 
         return view('cart', compact('cart'));
     }
@@ -34,7 +34,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function update(int $productVariantId, UpdateCartItemRequest $request): JsonResponse
+    public function update(UpdateCartItemRequest $request, int $productVariantId): JsonResponse
     {
         $quantity = $request->input('quantity');
 

@@ -13,11 +13,18 @@ class ProductController extends Controller
     ) {
     }
 
-    public function show(string $slug): View
+    public function show(Request $request, string $slug): View
     {
-        $product = $this->productRepository->findProductBySlug($slug);
-        $relatedProducts = $this->productRepository->findRelatedProductBySlug($slug);
+        $product = $this->productRepository->findBySlug($slug);
+        $relatedProducts = $this->productRepository->findRelatedBySlug($slug);
+        $productVariantId = $request->query('variant');
 
-        return view('product', compact('product', 'relatedProducts'));
+        if ($productVariantId) {
+            $selectedVariant = $product->variants()->findOrFail($productVariantId);
+        } else {
+            $selectedVariant = $product->variants()->first();
+        }
+
+        return view('product', compact('product', 'relatedProducts', 'selectedVariant'));
     }
 }
