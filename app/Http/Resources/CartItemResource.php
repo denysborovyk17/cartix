@@ -16,7 +16,7 @@ class CartItemResource extends JsonResource
             'image' => $this->productVariant->product->image,
             'price' => [
                 'amount' => $this->productVariant->price,
-                'formatted' => '$' . number_format($this->productVariant->price /100, 2),
+                'formatted' => '$' . number_format($this->productVariant->price / 100, 2),
                 'currency' => 'USD'
             ],
             'quantity' => $this->quantity
