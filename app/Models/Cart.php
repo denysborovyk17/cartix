@@ -23,7 +23,7 @@ class Cart extends Model
         return $this->hasMany(CartItem::class);
     }
 
-    public function findItem(int $productVariantId): CartItem|null
+    public function findItemByProductVariantId(int $productVariantId): CartItem|null
     {
         return $this->items()
             ->where('product_variant_id', $productVariantId)
