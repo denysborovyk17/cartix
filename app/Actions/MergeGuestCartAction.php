@@ -22,7 +22,7 @@ class MergeGuestCartAction
 
         if ($userCart) {
             foreach ($guestCart->items as $cartItem) {
-                $existingItem = $userCart->findItem($cartItem->product_variant_id);
+                $existingItem = $userCart->findItemByProductVariantId($cartItem->product_variant_id);
 
                 if ($existingItem) {
                     $existingItem->quantity += $cartItem->quantity;

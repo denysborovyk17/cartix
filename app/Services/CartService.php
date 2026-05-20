@@ -18,7 +18,7 @@ class CartService
     {
         $cart = $this->currentCartService->findById();
 
-        $cartItem = $cart->findItem($productVariantId);
+        $cartItem = $cart->findItemByProductVariantId($productVariantId);
 
         if ($cartItem) {
             $cartItem->quantity++;
@@ -41,7 +41,7 @@ class CartService
     {
         $cart = $this->currentCartService->findById();
 
-        $cartItem = $cart->findItem($productVariantId);
+        $cartItem = $cart->findItemByProductVariantId($productVariantId);
 
         if ($cartItem) {
             $cartItem->quantity = $quantity;
@@ -63,7 +63,11 @@ class CartService
     {
         $cart = $this->currentCartService->findById();
 
-        $cart->findItem($productVariantId)->delete();
+        $cartItem = $cart->findItemByProductVariantId($productVariantId);
+
+        if ($cartItem) {
+            $cartItem->delete();
+        }
 
         return [
             'cartTotal' => $this->moneyFormatterService->format($this->calculateTotal())
