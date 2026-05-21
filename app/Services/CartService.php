@@ -9,8 +9,7 @@ class CartService
 {
     public function __construct(
         private readonly CurrentCartService $currentCartService,
-        private readonly ProductVariantRepository $productVariantRepository,
-        private readonly MoneyFormatterService $moneyFormatterService
+        private readonly ProductVariantRepository $productVariantRepository
     ) {
     }
 
@@ -29,7 +28,7 @@ class CartService
             ];
             $cartItem = $cart->items()->create($cartItemData);
         }
-        $cartItem->save();
+        $cartItem->load('productVariant.optionValues.option')->save();
 
         return [
             'cartItem' => $cartItem,
@@ -54,8 +53,8 @@ class CartService
 
         return [
             'quantity' => $quantity,
-            'itemTotal' => $this->moneyFormatterService->format($itemTotal),
-            'cartTotal' => $this->moneyFormatterService->format($this->calculateTotal())
+            'itemTotal' => $itemTotal,
+            'cartTotal' => $this->calculateTotal()
         ];
     }
 
@@ -70,7 +69,7 @@ class CartService
         }
 
         return [
-            'cartTotal' => $this->moneyFormatterService->format($this->calculateTotal())
+            'cartTotal' => $this->calculateTotal()
         ];
     }
 
@@ -95,11 +94,6 @@ class CartService
     {
         $cart = $this->currentCartService->findById();
 
-        $counter = 0;
-        foreach ($cart->items as $cartItem) {
-            $counter += $cartItem->quantity;
-        }
-
-        return $counter;
+        return $cart->items->sum('quantity');
     }
 }
