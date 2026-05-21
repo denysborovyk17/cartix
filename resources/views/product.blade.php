@@ -72,32 +72,34 @@
                             </div>
                             <div class="border-top mt-4 mb-3 product-option">
                                 <small class="text-uppercase pt-4 d-block fw-bolder">
-                                    <span class="text-muted">Available Sizes (Mens)</span> :
-                                    <span class="selected-option fw-bold" data-pixr-product-option="size">M</span>
+                                    <span class="text-muted">Available Options</span>
                                 </small>
                                 <div class="mt-4 d-flex justify-content-start flex-wrap align-items-start">
-                                    <div class="form-check-option form-check-rounded">
-                                        <input
-                                            type="radio"
-                                            name="product-option-sizes"
-                                            value="S"
-                                            id="option-sizes-0">
-                                        <label for="option-sizes-0">
-                                            <small>
-                                                {{ 'In progress' }}
-                                            </small>
-                                        </label>
-                                    </div>
+                                    @foreach ($product->variants as $productVariant)
+                                        @if ($productVariant->optionValues->isNotEmpty())
+                                            <div class="form-check-option form-check-rounded">
+                                                <a href="{{ route('products.show', [$product->slug, 'variant' => $productVariant->id]) }}">
+                                                    <label>
+                                                        <small>
+                                                            {{ $productVariant->optionValues->pluck('value')->implode(' + ')}}
+                                                        </small>
+                                                    </label>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
-                            @if ($product->variants->first()->stock > 0)
+                            @if ($selectedVariant->stock > 0)
                                 <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
-                                        data-product-variant-id="{{ $product->id }}">
+                                        name="product_variant_id"
+                                        data-product-variant-id="{{ $selectedVariant->id }}">
                                     Add To Cart
                                 </button>
                             @else
                                 <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
-                                        data-product-variant-id="{{ $product->id }}"
+                                        name="product_variant_id"
+                                        data-product-variant-id="{{ $selectedVariant->id }}"
                                         disabled>
                                     Add To Cart
                                 </button>
