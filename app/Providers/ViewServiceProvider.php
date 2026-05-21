@@ -34,7 +34,7 @@ class ViewServiceProvider extends ServiceProvider
             $cart = $currentCartService->findById();
 
             $view->with([
-                'cart' => $cart->load('items.productVariant.product')
+                'cart' => $cart->load(['items.productVariant.product', 'items.productVariant.optionValues'])
             ]);
 
             $view->with([
