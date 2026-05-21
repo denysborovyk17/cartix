@@ -10,7 +10,7 @@ class ProductRepository
     public function findBySlug(string $slug): Product
     {
         return Product::query()
-            ->with('variants')
+            ->with('variants.optionValues')
             ->where('slug', $slug)
             ->firstOrFail();
     }
@@ -20,9 +20,9 @@ class ProductRepository
         $product = $this->findBySlug($slug);
 
         return Product::query()
-            ->with('variants')
+            ->with('variants.optionValues')
             ->where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
+            ->whereNot('id', $product->id)
             ->latest()
             ->take(4)
             ->get();
