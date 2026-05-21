@@ -102,7 +102,6 @@
                             <a class="text-decoration-none link-cover" href="{{ route('products.show', [$productVariant->product->slug, 'variant' => $productVariant->id]) }}">
                                 {{ $productVariant->product->name }}
                             </a>
-                            <small class="text-muted d-block">4 colours, 10 sizes</small>
                             <p class="mt-2 mb-0 small"><s class="text-muted">${{ $productVariant->discount_price }}</s>
                                 <span>${{ number_format($productVariant->price / 100, 2) }}</span>
                             </p>
