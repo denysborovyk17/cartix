@@ -108,6 +108,9 @@
                                                         </button>
                                                     </div>
 
+                                                    <small class="text-muted d-block">
+                                                        {{ $cartItem->productVariant->optionValues->pluck('value')->implode(' + ') }}
+                                                    </small>
                                                     <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartItem->product_variant_id }}">
                                                         ${{ number_format($cartItem->productVariant->price * $cartItem->quantity / 100, 2) }}
                                                     </p>
