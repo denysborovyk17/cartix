@@ -25,8 +25,6 @@ class Cart extends Model
 
     public function findItemByProductVariantId(int $productVariantId): CartItem|null
     {
-        return $this->items()
-            ->where('product_variant_id', $productVariantId)
-            ->first();
+        return $this->items->where('product_variant_id', $productVariantId)->first();
     }
 }
