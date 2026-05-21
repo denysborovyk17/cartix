@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CartItemResource;
-use App\Services\{CurrentCartService, CartService};
+use App\Services\{CurrentCartService, CartService, MoneyFormatterService};
 use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -12,7 +12,8 @@ class CartController extends Controller
 {
     public function __construct(
         private readonly CurrentCartService $currentCartService,
-        private readonly CartService $cartService
+        private readonly CartService $cartService,
+        private readonly MoneyFormatterService $moneyFormatterService
     ) {}
 
     public function index(): View
@@ -29,7 +30,8 @@ class CartController extends Controller
         $service = $this->cartService->addItem($productVariantId);
 
         return response()->json([
-            'cartItem' => new CartItemResource($service['cartItem']),
+            'cartItem' => new CartItemResource($service['cartItem']), // #1 через API (JSON)
+            // 'cartItem' => view('components.cart-item', ['cartItem' => $service['cartItem']])->render() #2 через view (blade)
             'cartCounter' => $service['cartCounter']
         ]);
     }
@@ -42,8 +44,8 @@ class CartController extends Controller
 
         return response()->json([
             'quantity' => $service['quantity'],
-            'itemTotal' => $service['itemTotal'],
-            'cartTotal' => $service['cartTotal']
+            'itemTotal' => $this->moneyFormatterService->format($service['itemTotal']),
+            'cartTotal' => $this->moneyFormatterService->format($service['cartTotal'])
         ]);
     }
 
@@ -52,7 +54,7 @@ class CartController extends Controller
         $service = $this->cartService->removeItem($productVariantId);
 
         return response()->json([
-            'cartTotal' => $service['cartTotal']
+            'cartTotal' => $this->moneyFormatterService->format($service['cartTotal'])
         ]);
     }
 }
