@@ -19,6 +19,10 @@ class CartItemResource extends JsonResource
                 'formatted' => '$' . number_format($this->productVariant->price / 100, 2),
                 'currency' => 'USD'
             ],
+            'options' => $this->productVariant->optionValues->map(fn($optionValue) => [
+                'name' => $optionValue->option->name,
+                'value' => $optionValue->value
+            ]),
             'quantity' => $this->quantity
         ];
     }
