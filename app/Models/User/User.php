@@ -1,14 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
+use App\Enums\UserRole;
+use App\Models\Cart\CartItem;
+use App\Models\Order\Order;
+use App\Models\Product\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property UserRole $role
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -31,6 +40,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => UserRole::class
         ];
     }
 

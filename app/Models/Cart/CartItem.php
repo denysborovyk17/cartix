@@ -1,11 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Cart;
 
+use App\Models\Product\ProductVariant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/** @property int $quantity */
+/**
+ * @property int $cart_id
+ * @property int $product_variant_id
+ * @property int $quantity
+ */
 class CartItem extends Model
 {
     protected $fillable = [

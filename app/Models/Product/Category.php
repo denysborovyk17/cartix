@@ -1,10 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
+/**
+ * @property string $name
+ * @property string $slug
+ * @property int|null $parent_id
+ */
 class Category extends Model
 {
     protected $fillable = [

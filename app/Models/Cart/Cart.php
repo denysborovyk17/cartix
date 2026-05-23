@@ -1,11 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Cart;
 
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\{Model};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
-/** @property string $session_id */
+/**
+ * @property int|null $user_id
+ * @property string|null $session_id
+ */
 class Cart extends Model
 {
     protected $fillable = [

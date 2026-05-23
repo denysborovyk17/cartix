@@ -1,12 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Order;
 
+use App\Enums\OrderStatus;
+use App\Models\Payment\Payment;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @property int|null $user_id
+ * @property OrderStatus $status
+ * @property int $total
+ * @property string $name
+ * @property string $email
+ * @property int $phone
+ * @property string $city
+ * @property string $address
+ * @property string|null $notes
+ */
 class Order extends Model
 {
     protected $fillable = [
@@ -24,6 +38,13 @@ class Order extends Model
     protected $attributes = [
         'status' => 'pending'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'status' => OrderStatus::class
+        ];
+    }
 
     public function user(): BelongsTo
     {

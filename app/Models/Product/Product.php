@@ -1,7 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Product;
 
+use App\Models\Option\Option;
+use App\Models\User\WishlistItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,8 +14,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int|null $category_id
  * @property int|null $brand_id
  * @property string $name
+ * @property string $slug
  * @property string|null $description
  * @property string|null $image
+ * @property bool is_active
  */
 class Product extends Model
 {

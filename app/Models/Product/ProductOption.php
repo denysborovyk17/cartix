@@ -1,10 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Product;
 
+use App\Models\Option\Option;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $product_id
+ * @property int $option_id
+ */
 class ProductOption extends Model
 {
     protected $fillable = [

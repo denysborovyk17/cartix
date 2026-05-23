@@ -1,14 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Product;
 
+use App\Models\Option\OptionValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-/** @property mixed $product */
-/** @property int $price */
+/**
+ * @property int $product_id
+ * @property int $price
+ * @property int|null $discount_price
+ * @property int $stock
+ */
 class ProductVariant extends Model
 {
     use HasFactory;
