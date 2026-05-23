@@ -1,9 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Product;
 
-use App\Models\Product;
-use App\Models\ProductVariant;
+use App\Models\Product\{Product, ProductVariant};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

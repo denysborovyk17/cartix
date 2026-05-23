@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Category;
-use App\Services\{CurrentCartService, CartService};
+use App\Models\Product\Category;
+use App\Services\{CartService, CurrentCartService};
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Option;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Option\Option;
 use Illuminate\Database\Seeder;
 
 class OptionSeeder extends Seeder

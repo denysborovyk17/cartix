@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Product;
 
-use App\Models\Brand;
+use App\Models\Product\Brand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

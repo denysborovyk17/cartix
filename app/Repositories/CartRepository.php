@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Cart;
+use App\Models\Cart\Cart;
 
-class   CartRepository
+class CartRepository
 {
     public function findOrCreate(?int $userId, string $sessionId): Cart
     {

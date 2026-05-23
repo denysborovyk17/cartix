@@ -3,16 +3,11 @@
 namespace App\Repositories;
 
 use App\DTO\RegisterData;
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterRepository
 {
-    public function __construct(
-        //
-    ) {
-    }
-
     public function register(RegisterData $data): User
     {
         return User::create([

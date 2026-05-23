@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\ProductVariant;
+use App\Models\Product\ProductVariant;
 
 class ProductVariantRepository
 {
