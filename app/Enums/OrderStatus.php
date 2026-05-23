@@ -8,4 +8,24 @@ enum OrderStatus: string
     case PAID = 'paid';
     case COMPLETED = 'completed';
     case CANCELLED = 'cancelled';
+
+    public function isPending(): bool
+    {
+        return $this === self::PENDING;
+    }
+
+    public function isPaid(): bool
+    {
+        return $this === self::PAID;
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this === self::COMPLETED;
+    }
+
+    public function isCancelled(): bool
+    {
+        return $this === self::CANCELLED;
+    }
 }

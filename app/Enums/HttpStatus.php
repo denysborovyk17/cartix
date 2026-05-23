@@ -76,16 +76,16 @@ enum HttpStatus: int
 
     public function isSuccess(): bool
     {
-        return $this->value >= 200 && $this->value < 300;
+        return $this >= self::OK && $this < self::MULTIPLE_CHOICES;
     }
 
     public function isClientError(): bool
     {
-        return $this->value >= 400 && $this->value < 500;
+        return $this >= self::BAD_REQUEST && $this < self::INTERNAL_SERVER_ERROR;
     }
 
     public function isServerError(): bool
     {
-        return $this->value >= 500;
+        return $this >= self::INTERNAL_SERVER_ERROR;
     }
 }
