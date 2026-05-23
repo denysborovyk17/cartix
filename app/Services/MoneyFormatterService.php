@@ -6,9 +6,9 @@ use Money\Currencies\ISOCurrencies;
 use Money\Formatter\{AggregateMoneyFormatter, IntlMoneyFormatter};
 use Money\Money;
 
-class MoneyFormatterService
+readonly class MoneyFormatterService
 {
-    private readonly AggregateMoneyFormatter $aggregateMoneyFormatter;
+    private AggregateMoneyFormatter $aggregateMoneyFormatter;
 
     public function __construct()
     {

@@ -2,17 +2,21 @@
 
 namespace App\DTO;
 
-class RegisterData
+readonly class RegisterData
 {
     public function __construct(
-        private readonly string $name,
-        private readonly string $email,
-        private readonly string $password
+        private string $name,
+        private string $email,
+        private string $password
     ) {
     }
 
     public static function fromArray(array $data): self
     {
+        if (empty($data)) {
+            // Exception
+        }
+
         return new self(
             name: $data['name'],
             email: $data['email'],

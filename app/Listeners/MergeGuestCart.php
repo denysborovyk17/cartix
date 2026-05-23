@@ -7,13 +7,13 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class MergeGuestCart
+readonly class MergeGuestCart
 {
     /**
      * Create the event listener.
      */
     public function __construct(
-        private readonly MergeGuestCartAction $mergeGuestCartAction
+        private MergeGuestCartAction $mergeGuestCartAction
     ) {
     }
 

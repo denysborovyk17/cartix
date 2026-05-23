@@ -4,10 +4,10 @@ namespace App\Actions;
 
 use App\Repositories\CartRepository;
 
-class MergeGuestCartAction
+readonly class MergeGuestCartAction
 {
     public function __construct(
-        private readonly CartRepository $cartRepository
+        private CartRepository $cartRepository
     ) {
     }
 

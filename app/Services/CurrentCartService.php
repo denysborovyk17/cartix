@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Cart;
+use App\Models\Cart\Cart;
 use App\Repositories\CartRepository;
 
-class CurrentCartService
+readonly class CurrentCartService
 {
     public function __construct(
-        private readonly CartRepository $cartRepository
+        private CartRepository $cartRepository
     ) {
     }
 

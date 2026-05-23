@@ -5,11 +5,11 @@ namespace App\Services;
 use App\Repositories\ProductVariantRepository;
 use Money\{Currency, Money};
 
-class CartService
+readonly class CartService
 {
     public function __construct(
-        private readonly CurrentCartService $currentCartService,
-        private readonly ProductVariantRepository $productVariantRepository
+        private CurrentCartService $currentCartService,
+        private ProductVariantRepository $productVariantRepository
     ) {
     }
 
@@ -42,9 +42,11 @@ class CartService
 
         $cartItem = $cart->findItemByProductVariantId($productVariantId);
 
-        if ($cartItem) {
+        if ($cartItem && $cartItem->productVariant->stock >= $quantity) {
             $cartItem->quantity = $quantity;
             $cartItem->save();
+        } else {
+            throw new \Exception('Quantity out of stock');
         }
 
         $productVariant = $this->productVariantRepository->findById($productVariantId);
