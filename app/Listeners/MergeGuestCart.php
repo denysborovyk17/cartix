@@ -2,10 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Actions\MergeGuestCartAction;
+use App\Actions\Cart\MergeGuestCartAction;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 readonly class MergeGuestCart
 {
@@ -13,7 +11,7 @@ readonly class MergeGuestCart
      * Create the event listener.
      */
     public function __construct(
-        private MergeGuestCartAction $mergeGuestCartAction
+        private MergeGuestCartAction $action
     ) {
     }
 
@@ -22,7 +20,7 @@ readonly class MergeGuestCart
      */
     public function handle(Login $event): void
     {
-        $this->mergeGuestCartAction->execute(
+        $this->action->handle(
             $event->user->getAuthIdentifier(),
             request()->cookie(config('session.cookie')) // Old Session ID
         );
