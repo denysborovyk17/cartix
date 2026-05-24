@@ -1,19 +1,24 @@
 <?php declare(strict_types=1);
 
-namespace App\Repositories;
+namespace App\Actions;
 
 use App\DTO\RegisterData;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterRepository
+class CreateUserAction
 {
-    public function register(RegisterData $data): User
+    public function __construct(
+        //
+    ) {
+    }
+
+    public function handle(RegisterData $data): User
     {
         return User::create([
             'name' => $data->getName(),
             'email' => $data->getEmail(),
-            'password' => Hash::make($data->getPassword())
+            'password' => Hash::make($data->getPassword()),
         ]);
     }
 }
