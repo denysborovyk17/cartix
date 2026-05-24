@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Cart\{AddCartItemAction, UpdateCartItemAction, RemoveCartItemAction};
 use App\Http\Resources\CartItemResource;
-use App\Services\{CurrentCartService, CartService, MoneyFormatterService};
+use App\Services\{CurrentCartService, MoneyFormatterService};
 use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -12,7 +13,6 @@ class CartController extends Controller
 {
     public function __construct(
         private readonly CurrentCartService $currentCartService,
-        private readonly CartService $cartService,
         private readonly MoneyFormatterService $moneyFormatterService
     ) {}
 
@@ -23,38 +23,41 @@ class CartController extends Controller
         return view('cart', compact('cart'));
     }
 
-    public function store(StoreCartItemRequest $request): JsonResponse
+    public function store(StoreCartItemRequest $request, AddCartItemAction $action): JsonResponse
     {
         $productVariantId = (int) $request->input('product_variant_id');
 
-        $service = $this->cartService->addItem($productVariantId);
+        $action = $action->handle($productVariantId);
 
         return response()->json([
-            'cartItem' => new CartItemResource($service['cartItem']), // #1 через API (JSON)
-            // 'cartItem' => view('components.cart-item', ['cartItem' => $service['cartItem']])->render() #2 через view (blade)
-            'cartCounter' => $service['cartCounter']
+            // 'cartItem' => view('components.cart-item', ['cartItem' => $cartItem['cartItem']])->render() #1 через view (blade)
+            'cartItem' => new CartItemResource($action['cartItem']), // #2 через API (JSON)
+            'cartCounter' => $action['cartCounter']
         ]);
     }
 
-    public function update(UpdateCartItemRequest $request, int $productVariantId): JsonResponse
+    /**
+     * @throws \Exception
+     */
+    public function update(UpdateCartItemRequest $request, UpdateCartItemAction $action, int $productVariantId): JsonResponse
     {
         $quantity = $request->input('quantity');
 
-        $service = $this->cartService->updateItemQuantity($productVariantId, $quantity);
+        $action = $action->handle($productVariantId, $quantity);
 
         return response()->json([
-            'quantity' => $service['quantity'],
-            'itemTotal' => $this->moneyFormatterService->format($service['itemTotal']),
-            'cartTotal' => $this->moneyFormatterService->format($service['cartTotal'])
+            'quantity' => $action['quantity'],
+            'itemTotal' => $this->moneyFormatterService->format($action['itemTotal']),
+            'cartTotal' => $this->moneyFormatterService->format($action['cartTotal'])
         ]);
     }
 
-    public function destroy(int $productVariantId): JsonResponse
+    public function destroy(RemoveCartItemAction $action, int $productVariantId): JsonResponse
     {
-        $service = $this->cartService->removeItem($productVariantId);
+        $action = $action->handle($productVariantId);
 
         return response()->json([
-            'cartTotal' => $this->moneyFormatterService->format($service['cartTotal'])
+            'cartTotal' => $this->moneyFormatterService->format($action['cartTotal'])
         ]);
     }
 }
