@@ -2,77 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\ProductVariantRepository;
 use Money\{Currency, Money};
 
 readonly class CartService
 {
     public function __construct(
-        private CurrentCartService $currentCartService,
-        private ProductVariantRepository $productVariantRepository
+        private CurrentCartService $currentCartService
     ) {
-    }
-
-    public function addItem(int $productVariantId, int $quantity = 1): array
-    {
-        $cart = $this->currentCartService->findById();
-
-        $cartItem = $cart->findItemByProductVariantId($productVariantId);
-
-        if ($cartItem) {
-            $cartItem->quantity++;
-        } else {
-            $cartItemData = [
-                'product_variant_id' => $productVariantId,
-                'quantity' => $quantity
-            ];
-            $cartItem = $cart->items()->create($cartItemData);
-        }
-        $cartItem->load('productVariant.optionValues.option')->save();
-
-        return [
-            'cartItem' => $cartItem,
-            'cartCounter' => $this->getItemsCount()
-        ];
-    }
-
-    public function updateItemQuantity(int $productVariantId, int $quantity): array
-    {
-        $cart = $this->currentCartService->findById();
-
-        $cartItem = $cart->findItemByProductVariantId($productVariantId);
-
-        if ($cartItem && $cartItem->productVariant->stock >= $quantity) {
-            $cartItem->quantity = $quantity;
-            $cartItem->save();
-        } else {
-            throw new \Exception('Quantity out of stock');
-        }
-
-        $productVariant = $this->productVariantRepository->findById($productVariantId);
-
-        $itemTotal = (new Money($productVariant->price, new Currency('USD')))->multiply($quantity);
-
-        return [
-            'quantity' => $quantity,
-            'itemTotal' => $itemTotal,
-            'cartTotal' => $this->calculateTotal()
-        ];
-    }
-
-    public function removeItem(int $productVariantId): array
-    {
-        $cart = $this->currentCartService->findById();
-
-        $cartItem = $cart->findItemByProductVariantId($productVariantId);
-
-        if ($cartItem) {
-            $cartItem->delete();
-        }
-
-        return [
-            'cartTotal' => $this->calculateTotal()
-        ];
     }
 
     public function calculateTotal(): Money
