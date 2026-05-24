@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Actions;
+namespace App\Actions\Cart;
 
 use App\Repositories\CartRepository;
 
@@ -11,10 +11,10 @@ readonly class MergeGuestCartAction
     ) {
     }
 
-    public function execute(int $userId, string $sessionId): void
+    public function handle(int $userId, string $sessionId): void
     {
-        $guestCart = $this->cartRepository->findBySessionId($sessionId);
         $userCart = $this->cartRepository->findByUserId($userId);
+        $guestCart = $this->cartRepository->findBySessionId($sessionId);
 
         if (!$guestCart) {
             return;
