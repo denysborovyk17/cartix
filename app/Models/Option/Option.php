@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property string $name
+ * @property string $name Назва опції товару
  */
 class Option extends Model
 {

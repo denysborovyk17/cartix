@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $order_id
- * @property int $product_variant_id
- * @property int $quantity
- * @property int $price
+ * @property int $order_id Унікальний ідентифікатор замовлення
+ * @property int $product_variant_id Унікальний ідентифікатор варіанта товару
+ * @property int $quantity Кількість товару в кошику
+ * @property int $price Ціна товару на момент оформлення замовлення
  */
 class OrderItem extends Model
 {

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $user_id
- * @property int $product_id
- * @property int $rating
- * @property string|null $comment
+ * @property int $user_id Унікальний ідентифікатор користувача
+ * @property int $product_id Унікальний ідентифікатор товару
+ * @property int $rating Оцінка товару
+ * @property string|null $comment Коментар користувача до товару
  */
 class Review extends Model
 {

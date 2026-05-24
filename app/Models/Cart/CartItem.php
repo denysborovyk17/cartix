@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $cart_id
- * @property int $product_variant_id
- * @property int $quantity
+ * @property int $cart_id Унікальний ідентифікатор кошика
+ * @property int $product_variant_id Унікальний ідентифікатор варіанта товару
+ * @property int $quantity Кількість товару в кошику
  */
 class CartItem extends Model
 {

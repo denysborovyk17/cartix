@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int $option_id
- * @property string $value
+ * @property int $option_id Унікальний ідентифікатор опції товару
+ * @property string $value Значення опції товару
  */
 class OptionValue extends Model
 {

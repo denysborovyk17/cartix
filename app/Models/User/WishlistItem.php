@@ -2,13 +2,13 @@
 
 namespace App\Models\User;
 
-use App\Models\Product\Product;
+use App\Models\Product\ProductVariant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $user_id
- * @property int $product_variant_id
+ * @property int $user_id Унікальний ідентифікатор користувача
+ * @property int $product_variant_id Унікальний ідентифікатор варіанта товару
  */
 class WishlistItem extends Model
 {
@@ -17,9 +17,9 @@ class WishlistItem extends Model
         'product_variant_id'
     ];
 
-    public function product(): BelongsTo
+    public function productVariant(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductVariant::class);
     }
 
     public function user(): BelongsTo

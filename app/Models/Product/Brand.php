@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property string $name
- * @property string $slug
- * @property string|null $image
+ * @property string $name Назва бренду
+ * @property string $slug Унікальний слаг бренду
+ * @property string|null $image Картинка бренду
  */
 class Brand extends Model
 {

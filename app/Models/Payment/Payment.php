@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $order_id
- * @property int $amount
- * @property PaymentStatus $status
- * @property string $card_last4
- * @property string $gateway
- * @property string $gateway_transaction_id
- * @property array $payload
+ * @property int $order_id Унікальний ідентифікатор замовлення
+ * @property int $amount Фінальна сума замовлення до оплати
+ * @property PaymentStatus $status Статус на якому перебуває оплата
+ * @property string $card_last4 Останні 4 цифри платіжної карти покупця
+ * @property string $gateway Спосіб оплати
+ * @property string $gateway_transaction_id Унікальний ідентифікатор оплати
+ * @property array $payload Інформація про замовлення та оплату
  */
 class Payment extends Model
 {
@@ -30,13 +30,14 @@ class Payment extends Model
 
     protected $attributes = [
         'status' => 'pending',
-        'payload' => 'array'
+        'payload' => '[]'
     ];
 
     protected function casts(): array
     {
         return [
-            'status' => PaymentStatus::class
+            'status' => PaymentStatus::class,
+            'payload' => 'array'
         ];
     }
 

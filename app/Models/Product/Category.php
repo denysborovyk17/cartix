@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
- * @property string $name
- * @property string $slug
- * @property int|null $parent_id
+ * @property string $name Назва категорії
+ * @property string $slug Унікальний слаг категорії
+ * @property int|null $parent_id Унікальний ідентифікатор батьківської категорії
  */
 class Category extends Model
 {

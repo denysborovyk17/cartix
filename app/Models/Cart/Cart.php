@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\{Model};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 /**
- * @property int|null $user_id
- * @property string|null $session_id
+ * @property int|null $user_id Унікальний ідентифікатор користувача
+ * @property string|null $session_id Унікальний ідентифікатор гостьової сесії
  */
 class Cart extends Model
 {

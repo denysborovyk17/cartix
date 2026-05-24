@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $product_id
- * @property int $option_id
+ * @property int $product_id Унікальний ідентифікатор товару
+ * @property int $option_id Унікальний ідентифікатор опції товару
  */
 class ProductOption extends Model
 {

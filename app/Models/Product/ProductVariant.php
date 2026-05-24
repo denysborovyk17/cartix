@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int $product_id
- * @property int $price
- * @property int|null $discount_price
- * @property int $stock
+ * @property int $product_id Унікальний ідентифікатор товару
+ * @property int $price Ціна товару
+ * @property int|null $discount_price Знижка на товар
+ * @property int $stock Кількість товару на складі
  */
 class ProductVariant extends Model
 {

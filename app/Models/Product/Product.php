@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property int|null $category_id
- * @property int|null $brand_id
- * @property string $name
- * @property string $slug
- * @property string|null $description
- * @property string|null $image
- * @property bool is_active
+ * @property int|null $category_id Унікальний ідентифікатор категорії
+ * @property int|null $brand_id Унікальний ідентифікатор бренду
+ * @property string $name Назва товару
+ * @property string $slug Унікальний слаг товару
+ * @property string|null $description Опис товару
+ * @property string|null $image Картинка товару
+ * @property bool is_active Статус, чи товар активний
  */
 class Product extends Model
 {

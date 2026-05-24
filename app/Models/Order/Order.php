@@ -11,15 +11,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property int|null $user_id
- * @property OrderStatus $status
- * @property int $total
- * @property string $name
- * @property string $email
- * @property int $phone
- * @property string $city
- * @property string $address
- * @property string|null $notes
+ * @property int|null $user_id Унікальний ідентифікатор користувача
+ * @property OrderStatus $status Статус на якому перебуває замовлення
+ * @property int $total Загальна сума замовлення
+ * @property string $name Ім'я покупця
+ * @property string $email Електонна адреса покупця
+ * @property string $phone Номер телефону покупця
+ * @property string $city Місто прибуття товару
+ * @property string $address Адреса прибуття товару
+ * @property string|null $notes Коментарі до замовлення
  */
 class Order extends Model
 {
