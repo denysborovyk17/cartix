@@ -2,8 +2,8 @@
 
 namespace App\Actions\Cart;
 
-use App\Services\CartService;
-use App\Services\CurrentCartService;
+use App\Exceptions\ProductVariantOutOfStockException;
+use App\Services\{CurrentCartService, CartService};
 use Money\{Money, Currency};
 
 readonly class UpdateCartItemAction
@@ -15,7 +15,7 @@ readonly class UpdateCartItemAction
     }
 
     /**
-     * @throws \Exception
+     * @throws ProductVariantOutOfStockException
      */
     public function handle(int $productVariantId, int $quantity): array
     {
@@ -23,12 +23,16 @@ readonly class UpdateCartItemAction
 
         $cartItem = $cart->findItemByProductVariantId($productVariantId);
 
-        if ($cartItem && $cartItem->productVariant->stock >= $quantity) {
-            $cartItem->quantity = $quantity;
-            $cartItem->save();
-        } else {
-            throw new \Exception('Quantity out of stock');
+        if (!$cartItem) {
+            abort(404, 'Item not found in cart.');
         }
+
+        if ($cartItem->productVariant->stock < $quantity) {
+            throw new ProductVariantOutOfStockException($productVariantId);
+        }
+
+        $cartItem->quantity = $quantity;
+        $cartItem->save();
 
         $itemTotal = (new Money($cartItem->productVariant->price, new Currency('USD')))->multiply($quantity);
 
