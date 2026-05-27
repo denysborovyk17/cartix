@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\DTO\RegisterData;
+use App\DTO\CreateUserData;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +13,7 @@ class CreateUserAction
     ) {
     }
 
-    public function handle(RegisterData $data): User
+    public function handle(CreateUserData $data): User
     {
         return User::create([
             'name' => $data->getName(),

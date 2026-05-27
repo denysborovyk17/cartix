@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\DTO\RegisterData;
+use App\DTO\CreateUserData;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -46,8 +46,8 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    public function toDTO(): RegisterData
+    public function toDTO(): CreateUserData
     {
-        return RegisterData::fromArray($this->validated());
+        return CreateUserData::fromArray($this->validated());
     }
 }
