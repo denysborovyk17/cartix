@@ -64,26 +64,21 @@
             <!-- / Logo-->
             <div class="shadow-xl p-4 p-lg-5 bg-white">
                 <h1 class="text-center fw-bold mb-5 fs-2">Login</h1>
-                <a href="#" class="btn btn-facebook d-block mb-2"><i class="ri-facebook-circle-fill align-bottom"></i> Login
-                    with Facebook</a>
-                <a href="#" class="btn btn-twitter d-block mb-2"><i class="ri-twitter-fill align-bottom"></i> Login with
-                    Twitter</a>
-                <span class="text-muted text-center d-block fw-bolder my-4">OR</span>
 
                 @include('errors.form-errors')
                 <form method="POST" action="{{ route('auth.login.attempt') }}">
                     @csrf
                     <div class="form-group">
                       <label class="form-label" for="login-email">Email</label>
-                      <input type="email" class="form-control" name="email" id="login-email" placeholder="example@email.com">
+                      <input type="email" class="form-control" name="email" id="login-email" value="{{ old('email') }}" placeholder="example@email.com">
                     </div>
 
                     <div class="form-group">
-                      <label for="login-password" class="form-label d-flex justify-content-between align-items-center">
-                        Password
-                        <a href="forgotten-password.blade.php" class="text-muted small">Forgot your password?</a>
-                      </label>
-                      <input type="password" class="form-control" name="password" id="login-password" placeholder="Enter your password">
+                        <label for="login-password" class="form-label d-flex justify-content-between align-items-center">
+                            Password
+                            <a class="text-muted small" href="{{ route('password.request') }}">Forgot your password?</a>
+                        </label>
+                        <input type="password" class="form-control" name="password" id="login-password" placeholder="Enter your password">
                     </div>
 
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Sign in</button>
