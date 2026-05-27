@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Cart\{AddCartItemAction, UpdateCartItemAction, RemoveCartItemAction};
+use App\Exceptions\ProductVariantOutOfStockException;
 use App\Http\Resources\CartItemResource;
 use App\Services\{CurrentCartService, MoneyFormatterService};
 use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
@@ -37,7 +38,7 @@ class CartController extends Controller
     }
 
     /**
-     * @throws \Exception
+     * @throws ProductVariantOutOfStockException
      */
     public function update(UpdateCartItemRequest $request, UpdateCartItemAction $action, int $productVariantId): JsonResponse
     {
