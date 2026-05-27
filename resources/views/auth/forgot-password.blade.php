@@ -43,7 +43,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>OldSkool | Bootstrap 5 HTML Template</title>
+  <title>Forgot Password Page</title>
 
 </head>
 <body class=" bg-light">
@@ -56,20 +56,25 @@
         <!-- Login Form-->
         <div class="col col-md-8 col-lg-6 col-xxl-5">
             <!-- Logo-->
-            <a class="navbar-brand fw-bold fs-3 flex-shrink-0 order-0 align-self-center justify-content-center d-flex mx-0 px-0" href="index.blade.php">
+            <a class="navbar-brand fw-bold fs-3 flex-shrink-0 order-0 align-self-center justify-content-center d-flex mx-0 px-0" href="{{ route('index') }}">
                 <div class="d-flex align-items-center">
                     <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26"><path d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z" fill="currentColor" fill-rule="evenodd"/></svg>
                 </div>
             </a>
             <!-- / Logo-->
             <div class="shadow-xl p-4 p-lg-5 bg-white">
-                <h1 class="text-center fs-2 mb-5 fw-bold">Forgotten Password</h1>
+                <h1 class="text-center fs-2 mb-5 fw-bold">Forgot Password</h1>
                 <p class="text-muted">Please enter your email below and we will send you a secure link to reset your password.</p>
-                <form>
+                <form method="POST" action="{{ route('password.email') }}">
+                    @csrf
                     <div class="form-group">
-                      <label for="forgot-password" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="forgot-password" placeholder="name@email.com">
+                        <label for="forgot-password" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="forgot-password" value="{{ old('email') }}" placeholder="example@mail.com">
+                        @error('email')
+                            {{ $message }}
+                        @enderror
                     </div>
+
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Send Reset Link</button>
                 </form>
             </div>

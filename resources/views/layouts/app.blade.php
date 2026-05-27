@@ -64,7 +64,7 @@
                 <!-- / Logo-->
 
                 @auth
-                    <form method="POST" action="{{ route('auth.logout') }}">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <li class="ms-1 d-none d-lg-inline-block">
                             <a style="position: absolute; top: 1px; left: 1px;"  href="{{ route('auth.register') }}">
