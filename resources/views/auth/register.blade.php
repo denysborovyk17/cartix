@@ -63,12 +63,7 @@
             </a>
             <!-- / Logo-->
             <div class="shadow-xl p-4 p-lg-5 bg-white">
-                <h1 class="text-center mb-5 fs-2 fw-bold">Open Account</h1>
-                <a href="#" class="btn btn-facebook d-block mb-2"><i class="ri-facebook-circle-fill align-bottom"></i> Login
-                    with Facebook</a>
-                <a href="#" class="btn btn-twitter d-block mb-2"><i class="ri-twitter-fill align-bottom"></i> Login with
-                    Twitter</a>
-                <span class="text-muted text-center d-block fw-bolder my-4">OR</span>
+                <h1 class="text-center mb-5 fs-2 fw-bold">Register</h1>
 
                 @include('errors.form-errors')
                 <form method="POST" action="{{ route('auth.register.store') }}">
@@ -86,6 +81,11 @@
                     <div class="form-group">
                       <label class="form-label" for="register-password">Password</label>
                       <input type="password" class="form-control" name="password" id="register-password" placeholder="Enter your password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="register-password">Confirm Password</label>
+                        <input type="password" class="form-control" name="password_confirmation" id="register-password" placeholder="Confirm your password">
                     </div>
 
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Sign Up</button>
