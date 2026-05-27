@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-readonly class RegisterData
+readonly class CreateUserData
 {
     public function __construct(
         private string $name,
@@ -13,10 +13,6 @@ readonly class RegisterData
 
     public static function fromArray(array $data): self
     {
-        if (empty($data)) {
-            // Exception
-        }
-
         return new self(
             name: $data['name'],
             email: $data['email'],
