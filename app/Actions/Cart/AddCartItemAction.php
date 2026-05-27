@@ -20,6 +20,7 @@ readonly class AddCartItemAction
 
         if ($cartItem) {
             $cartItem->quantity++;
+            $cartItem->save();
         } else {
             $cartItemData = [
                 'product_variant_id' => $productVariantId,
@@ -27,7 +28,6 @@ readonly class AddCartItemAction
             ];
             $cartItem = $cart->items()->create($cartItemData);
         }
-        $cartItem->save();
         $cartItem->load('productVariant.optionValues.option');
 
         return [
