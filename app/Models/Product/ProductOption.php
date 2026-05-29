@@ -2,7 +2,6 @@
 
 namespace App\Models\Product;
 
-use App\Models\Option\Option;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

@@ -2,7 +2,6 @@
 
 namespace App\Models\Product;
 
-use App\Models\Option\Option;
 use App\Models\User\WishlistItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
