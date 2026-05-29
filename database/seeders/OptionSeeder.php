@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Option\Option;
+use App\Models\Product\Option;
 use Illuminate\Database\Seeder;
 
 class OptionSeeder extends Seeder
