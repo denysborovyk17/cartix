@@ -23,6 +23,19 @@
 
 -
 
+## [0.13.0] - 2026-06-01
+
+### Додано
+
+- Файл `docs/database/carts.md` з детальним описом сутностей та логіки домену кошика.
+- Колонку `product_name` у таблиці `order_items` для збереження історичної назви товару на момент оформлення замовлення - [Migration](database/migrations/2026_06_01_173603_add_product_name_to_order_items_table.php).
+- Колонку `last_name` (прізвище) в таблиці `orders` - [Migration](database/migrations/2026_06_01_181246_add_last_name_to_orders_table.php).  
+
+### Змінено
+
+- Згруповано директорію сервісів: класи для роботи з кошиком згруповано в `app/Services/Cart` та оновлено всі залежні класи.
+- Назву колонки `name` на `first_name` (ім'я) у таблиці `orders` для роздільного збереження імені та прізвища користувача - [Migration](database/migrations/2026_06_01_181225_rename_name_to_first_name_in_orders_table.php).
+
 ## [0.12.3] - 2026-05-31
 
 ### Додано
