@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Services\Cart;
 
 use App\Models\Cart\Cart;
 use App\Repositories\CartRepository;

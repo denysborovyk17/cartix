@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Cart\{AddCartItemAction, UpdateCartItemAction, RemoveCartItemAction};
+use App\Actions\Cart\{AddCartItemAction, RemoveCartItemAction, UpdateCartItemAction};
 use App\Exceptions\ProductVariantOutOfStockException;
-use App\Http\Resources\CartItemResource;
-use App\Services\{CurrentCartService, MoneyFormatterService};
 use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
+use App\Http\Resources\CartItemResource;
+use App\Services\{Cart\CurrentCartService, MoneyFormatterService};
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 

@@ -2,8 +2,8 @@
 
 namespace App\Actions\Cart;
 
-use App\Services\CartService;
-use App\Services\CurrentCartService;
+use App\Services\Cart\CartService;
+use App\Services\Cart\CurrentCartService;
 
 readonly class AddCartItemAction
 {

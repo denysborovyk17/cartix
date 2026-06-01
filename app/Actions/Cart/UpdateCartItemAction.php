@@ -3,8 +3,8 @@
 namespace App\Actions\Cart;
 
 use App\Exceptions\ProductVariantOutOfStockException;
-use App\Services\{CurrentCartService, CartService};
-use Money\{Money, Currency};
+use App\Services\{Cart\CartService, Cart\CurrentCartService};
+use Money\{Currency, Money};
 
 readonly class UpdateCartItemAction
 {
