@@ -154,11 +154,13 @@
                                             <div>
                                                 <p class="m-0 fw-bold fs-5">Grand Total</p>
                                             </div>
-                                            <p class="m-0 fs-5 fw-bold">$</p>
+                                            <p class="m-0 fs-5 fw-bold cart-total">
+                                                ${{ number_format($cartTotal / 100, 2) }}
+                                            </p>
                                         </div>
                                     </div>
                                     <a href="{{ route('cart.index') }}" class="btn btn-outline-dark w-100 text-center mt-4" role="button">View Cart</a>
-                                    <a href="./checkout.html" class="btn btn-dark w-100 text-center mt-2" role="button">Proceed To Checkout</a>
+                                    <a href="{{ route('checkout') }}" class="btn btn-dark w-100 text-center mt-2" role="button">Proceed To Checkout</a>
                                 </div>
                                 <!-- / Cart Summary-->
                         </div>
@@ -295,23 +297,8 @@
                             </div>
                             <!-- / Menswear dropdown menu-->
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Pages
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./index.html">Homepage</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Category</a></li>
-                                <li><a class="dropdown-item" href="./product.html">Product</a></li>
-                                <li><a class="dropdown-item" href="./cart.html">Cart</a></li>
-                                <li><a class="dropdown-item" href="./checkout.html">Checkout</a></li>
-                                <li><a class="dropdown-item" href="./login.html">Login</a></li>
-                                <li><a class="dropdown-item" href="./register.html">Register</a></li>
-                                <li><a class="dropdown-item" href="./forgotten-password.html">Forgotten Password</a></li>
-                            </ul>
-                        </li>
-                    </ul>                    <!-- / Menu-->
-
+                    </ul>
+                    <!-- / Menu-->
                 </div>
                 <!-- / Main Navigation-->
             </div>
