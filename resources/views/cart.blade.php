@@ -63,18 +63,7 @@
                                 </div>
                             </a>
                         <!-- / Logo-->
-                        <nav class="d-none d-md-block">
-                            <ul class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
-                                <li class="me-4"><a class="nav-link-checkout active"
-                                        href="./cart.html">Your Cart</a></li>
-                                <li class="me-4"><a class="nav-link-checkout "
-                                        href="checkout/checkout.blade.php">Information</a></li>
-                                <li class="me-4"><a class="nav-link-checkout "
-                                        href="checkout/checkout-shipping.blade.php">Shipping</a></li>
-                                <li><a class="nav-link-checkout nav-link-last "
-                                        href="checkout/checkout-payment.blade.php">Payment</a></li>
-                            </ul>
-                        </nav>                        <div class="mt-5">
+                        <div class="mt-5">
                             <h3 class="fs-5 fw-bolder mb-0 border-bottom pb-4">Your Cart</h3>
                             <div class="table-responsive">
                                 <table class="table align-middle">
@@ -111,9 +100,20 @@
                                                     <small class="text-muted d-block">
                                                         {{ $cartItem->productVariant->optionValues->pluck('value')->implode(' + ') }}
                                                     </small>
-                                                    <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartItem->product_variant_id }}">
-                                                        ${{ number_format($cartItem->productVariant->price * $cartItem->quantity / 100, 2) }}
-                                                    </p>
+                                                    @if ($cartItem->productVariant->discount_price)
+                                                        <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartItem->product_variant_id }}">
+                                                            <s class="text-muted">
+                                                                ${{ number_format($cartItem->productVariant->price / 100, 2) }}
+                                                            </s>
+                                                            <span style="color: red;">
+                                                                ${{ number_format($cartItem->productVariant->discount_price * $cartItem->quantity / 100, 2) }}
+                                                            </span>
+                                                        </p>
+                                                    @else
+                                                        <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartItem->product_variant_id }}">
+                                                            ${{ number_format($cartItem->productVariant->price * $cartItem->quantity / 100, 2) }}
+                                                        </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         @endforeach
@@ -142,7 +142,7 @@
                                 <button class="btn btn-secondary btn-sm px-4">Apply</button>
                             </div>
                         </div>
-                        <a href="checkout/checkout.blade.php" class="btn btn-dark w-100 text-center" role="button">Proceed to checkout</a>
+                        <a href="{{ route('checkout') }}" class="btn btn-dark w-100 text-center" role="button">Proceed to checkout</a>
                     </div>
                 </div>
             </div>
