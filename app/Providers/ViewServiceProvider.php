@@ -42,7 +42,7 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         });
 
-        View::composer('cart', function ($view) use ($cartService) {
+        View::composer(['layouts.app', 'cart', 'checkout.checkout'], function ($view) use ($cartService) {
             $view->with([
                 'cartTotal' => $cartService->calculateTotal()->getAmount()
             ]);
