@@ -32,6 +32,8 @@ readonly class AddCartItemAction
 
         return [
             'cartItem' => $cartItem,
+            'itemTotal' => $this->cartService->calculateItemTotal($productVariantId),
+            'cartTotal' => $this->cartService->calculateTotal(),
             'cartCounter' => $this->cartService->getItemsCount()
         ];
     }
