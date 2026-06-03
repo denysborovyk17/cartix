@@ -50,6 +50,16 @@
                     cartCounter.textContent = `My Cart (${data.cartCounter})`;
                 }
 
+                const itemTotal = document.querySelector(`.item-total[data-product-variant-id="${productVariantId}"]`);
+                if (itemTotal) {
+                    itemTotal.textContent = `${data.itemTotal}`;
+                }
+
+                const cartTotal = document.querySelector(`.cart-total`);
+                if (cartTotal) {
+                    cartTotal.textContent = `${data.cartTotal}`;
+                }
+
                 const existingCartItem = document.querySelector(`.cart-item[data-product-variant-id="${productVariantId}"]`);
                 if (existingCartItem) {
                     // existingCartItem.outerHTML = data.cartItem; (View)
