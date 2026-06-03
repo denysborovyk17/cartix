@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
+ * @property int $id Унікальний ідентифікатор користувача
  * @property string $name Ім'я користувача
  * @property string $email Електронна адреса користувача
  * @property string $password Пароль користувача

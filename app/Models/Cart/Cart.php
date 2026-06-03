@@ -3,12 +3,16 @@
 namespace App\Models\Cart;
 
 use App\Models\User\User;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\{Model};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 /**
+ * @property int $id Унікальний ідентифікатор кошика
  * @property int|null $user_id Унікальний ідентифікатор користувача
  * @property string|null $session_id Унікальний ідентифікатор гостьової сесії
+ * @property CarbonInterface|null $created_at Дата створення запису
+ * @property CarbonInterface|null $updated_at Дата оновлення запису
  */
 class Cart extends Model
 {

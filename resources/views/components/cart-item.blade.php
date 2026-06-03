@@ -17,8 +17,19 @@
         <small class="text-muted d-block">
             {{ $cartItem->productVariant->optionValues->pluck('value')->implode(' + ') }}
         </small>
-        <p class="fw-bolder text-end text-muted m-0" data-product-variant-id="{{ $cartItem->product_variant_id }}">
-            ${{ number_format($cartItem->productVariant->price / 100, 2) }}
-        </p>
+        @if ($cartItem->productVariant->discount_price)
+            <p class="fw-bolder text-end text-muted m-0" data-product-variant-id="{{ $cartItem->product_variant_id }}">
+                <s class="text-muted">
+                    ${{ number_format($cartItem->productVariant->price / 100, 2) }}
+                </s>
+                <span style="color: red">
+                    ${{ number_format($cartItem->productVariant->discount_price * $cartItem->quantity / 100, 2) }}
+                </span>
+            </p>
+        @else
+            <p class="fw-bolder text-end text-muted m-0" data-product-variant-id="{{ $cartItem->product_variant_id }}">
+                ${{ number_format($cartItem->productVariant->price * $cartItem->quantity / 100, 2) }}
+            </p>
+        @endif
     </div>
 </div>

@@ -3,14 +3,18 @@
 namespace App\Models\Product;
 
 use App\Models\User\User;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property int $id Унікальний ідентифікатор відгуку
  * @property int $user_id Унікальний ідентифікатор користувача
  * @property int $product_id Унікальний ідентифікатор товару
  * @property int $rating Оцінка товару
  * @property string|null $comment Коментар користувача до товару
+ * @property CarbonInterface|null $created_at Дата створення запису
+ * @property CarbonInterface|null $updated_at Дата оновлення запису
  */
 class Review extends Model
 {
