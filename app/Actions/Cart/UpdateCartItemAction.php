@@ -4,7 +4,6 @@ namespace App\Actions\Cart;
 
 use App\Exceptions\ProductVariantOutOfStockException;
 use App\Services\{Cart\CartService, Cart\CurrentCartService};
-use Money\{Currency, Money};
 
 readonly class UpdateCartItemAction
 {
@@ -34,7 +33,7 @@ readonly class UpdateCartItemAction
         $cartItem->quantity = $quantity;
         $cartItem->save();
 
-        $itemTotal = (new Money($cartItem->productVariant->price, new Currency('USD')))->multiply($quantity);
+        $itemTotal = $this->cartService->calculateItemTotal($productVariantId);
 
         return [
             'quantity' => $quantity,
