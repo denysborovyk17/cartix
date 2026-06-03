@@ -102,9 +102,15 @@
                             <a class="text-decoration-none link-cover" href="{{ route('products.show', [$productVariant->product->slug, 'variant' => $productVariant->id]) }}">
                                 {{ $productVariant->product->name }}
                             </a>
-                            <p class="mt-2 mb-0 small"><s class="text-muted">${{ $productVariant->discount_price }}</s>
-                                <span>${{ number_format($productVariant->price / 100, 2) }}</span>
-                            </p>
+                            @if ($productVariant->discount_price)
+                                <p class="mt-2 mb-0 small"><s class="text-muted">${{ number_format($productVariant->price / 100, 2) }}</s>
+                                    <span style="color: red">${{ number_format($productVariant->discount_price / 100, 2) }}</span>
+                                </p>
+                            @else
+                                <p class="mt-2 mb-0 small">
+                                    <span>${{ number_format($productVariant->price / 100, 2) }}</span>
+                                </p>
+                            @endif
                         </div>
                     </div>
                     <!--/ Card Product-->
