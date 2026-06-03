@@ -11,6 +11,23 @@ readonly class CartService
     ) {
     }
 
+    public function calculateItemTotal(int $productVariantId): Money
+    {
+        $cart = $this->currentCartService->findById();
+
+        $cartItem = $cart->findItemByProductVariantId($productVariantId);
+
+        if ($cartItem->productVariant->discount_price) {
+            $itemTotal = (new Money($cartItem->productVariant->discount_price, new Currency('USD')))
+                ->multiply($cartItem->quantity);
+        } else {
+            $itemTotal = (new Money($cartItem->productVariant->price, new Currency('USD')))
+                ->multiply($cartItem->quantity);
+        }
+
+        return $itemTotal;
+    }
+
     public function calculateTotal(): Money
     {
         $cart = $this->currentCartService->findById();
@@ -21,8 +38,13 @@ readonly class CartService
 
         $amounts = [];
         foreach ($cart->items as $cartItem) {
-            $amounts[] = (new Money($cartItem->productVariant->price, new Currency('USD')))
-                ->multiply($cartItem->quantity);
+            if ($cartItem->productVariant->discount_price) {
+                $amounts[] = (new Money($cartItem->productVariant->discount_price, new Currency('USD')))
+                    ->multiply($cartItem->quantity);
+            } else {
+                $amounts[] = (new Money($cartItem->productVariant->price, new Currency('USD')))
+                    ->multiply($cartItem->quantity);
+            }
         }
 
         return Money::sum(...$amounts);
