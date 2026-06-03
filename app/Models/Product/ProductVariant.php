@@ -2,15 +2,19 @@
 
 namespace App\Models\Product;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
 
 /**
+ * @property int $id Унікальний ідентифікатор варіанта товару
  * @property int $product_id Унікальний ідентифікатор товару
  * @property int $price Ціна товару
  * @property int|null $discount_price Знижка на товар
  * @property int $stock Кількість товару на складі
+ * @property CarbonInterface|null $created_at Дата створення запису
+ * @property CarbonInterface|null $updated_at Дата оновлення запису
  */
 class ProductVariant extends Model
 {

@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property int $id Унікальний ідентифікатор товару
  * @property int|null $category_id Унікальний ідентифікатор категорії
  * @property int|null $brand_id Унікальний ідентифікатор бренду
  * @property string $name Назва товару
@@ -16,6 +18,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $description Опис товару
  * @property string|null $image Картинка товару
  * @property bool is_active Статус, чи товар активний
+ * @property CarbonInterface|null $created_at Дата створення запису
+ * @property CarbonInterface|null $updated_at Дата оновлення запису
  */
 class Product extends Model
 {
