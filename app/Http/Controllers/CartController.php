@@ -33,6 +33,8 @@ class CartController extends Controller
         return response()->json([
             // 'cartItem' => view('components.cart-item', ['cartItem' => $cartItem['cartItem']])->render() #1 через view (blade)
             'cartItem' => new CartItemResource($action['cartItem']), // #2 через API (JSON)
+            'itemTotal' => $this->moneyFormatterService->format($action['itemTotal']),
+            'cartTotal' => $this->moneyFormatterService->format($action['cartTotal']),
             'cartCounter' => $action['cartCounter']
         ]);
     }
