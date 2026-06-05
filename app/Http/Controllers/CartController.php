@@ -31,8 +31,7 @@ class CartController extends Controller
         $action = $action->handle($productVariantId);
 
         return response()->json([
-            // 'cartItem' => view('components.cart-item', ['cartItem' => $cartItem['cartItem']])->render() #1 через view (blade)
-            'cartItem' => new CartItemResource($action['cartItem']), // #2 через API (JSON)
+            'cartItem' => new CartItemResource($action['cartItem']),
             'itemTotal' => $this->moneyFormatterService->format($action['itemTotal']),
             'cartTotal' => $this->moneyFormatterService->format($action['cartTotal']),
             'cartCounter' => $action['cartCounter']
