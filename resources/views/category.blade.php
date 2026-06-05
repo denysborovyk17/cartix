@@ -12,12 +12,7 @@
     <div class="py-10 bg-img-cover bg-overlay-dark position-relative overflow-hidden bg-pos-center-center rounded-0"
          style="background-image: url(/images/banners/banner-category-top.jpg);">
         <div class="container-fluid position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
-            <h1 class="fw-bold display-6 mb-4 text-white">Latest Arrivals</h1>
-            <div class="col-12 col-md-6">
-                <p class="text-white mb-0 fs-5">
-                    When it's time to head out and get your Kicks on, have a look at our latest arrivals. Whether you're into Nike, Adidas, Dunks or New Balance, we really have something for everyone!
-                </p>
-            </div>
+            <h1 class="fw-bold display-6 mb-4 text-white">{{ $category->name }}</h1>
         </div>
     </div>
     <!-- Category Top Banner -->
@@ -118,9 +113,6 @@
 
         <!-- Pagination-->
         <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
-            <div class="progress f-h-1 mt-3">
-                <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
             <div class="mt-5 d-flex justify-content-around">
                 {{ $products->links() }}
             </div>
