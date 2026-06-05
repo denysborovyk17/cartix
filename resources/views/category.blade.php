@@ -60,29 +60,26 @@
         @endsession
 
         <div class="row g-4">
-            @foreach($category->productVariants as $productVariant)
+            @foreach($products as $product)
                 <div class="col-12 col-sm-6 col-lg-4">
                     <!-- Card Product-->
                     <div class="card border border-transparent h-100 transparent">
 
                         <div class="card-img position-relative" style="height: 500px; overflow: hidden;">
-                            <div class="card-badges">
-                                <span class="badge badge-card"><span class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
-                            </div>
                             <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
 
                             <picture class="d-block bg-light h-100">
-                                <img class="w-100 h-100 object-fit-cover" src="{{ $productVariant->product->image }}" alt="">
+                                <img class="w-100 h-100 object-fit-cover" src="{{ $product->image }}" alt="">
                             </picture>
 
                         </div>
 
-                        @if ($productVariant->stock > 0)
+                        @if ($product->variants->first()->stock > 0)
                             <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
                                 <button class="btn btn-quick-add w-100 add-item"
                                         style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
                                         name="product_variant_id"
-                                        data-product-variant-id="{{ $productVariant->id }}">
+                                        data-product-variant-id="{{ $product->variants->first()->id }}">
                                     Add to Cart
                                 </button>
                             </div>
@@ -91,7 +88,7 @@
                                 <button class="btn btn-quick-add w-100 add-item"
                                         style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
                                         name="product_variant_id"
-                                        data-product-variant-id="{{ $productVariant->id }}"
+                                        data-product-variant-id="{{ $product->variants->first()->id }}"
                                         disabled>
                                     Add to Cart
                                 </button>
@@ -99,16 +96,16 @@
                         @endif
 
                         <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="{{ route('products.show', [$productVariant->product->slug, 'variant' => $productVariant->id]) }}">
-                                {{ $productVariant->product->name }}
+                            <a class="text-decoration-none link-cover" href="{{ route('products.show', [$product->slug, 'variant' => $product->variants->first()->id]) }}">
+                                {{ $product->name }}
                             </a>
-                            @if ($productVariant->discount_price)
-                                <p class="mt-2 mb-0 small"><s class="text-muted">${{ number_format($productVariant->price / 100, 2) }}</s>
-                                    <span style="color: red">${{ number_format($productVariant->discount_price / 100, 2) }}</span>
+                            @if ($product->variants->first()->discount_price)
+                                <p class="mt-2 mb-0 small"><s class="text-muted">${{ number_format($product->variants->first()->price / 100, 2) }}</s>
+                                    <span style="color: red">${{ number_format($product->variants->first()->discount_price / 100, 2) }}</span>
                                 </p>
                             @else
                                 <p class="mt-2 mb-0 small">
-                                    <span>${{ number_format($productVariant->price / 100, 2) }}</span>
+                                    <span>${{ number_format($product->variants->first()->price / 100, 2) }}</span>
                                 </p>
                             @endif
                         </div>
@@ -121,12 +118,14 @@
 
         <!-- Pagination-->
         <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
-            <small class="text-muted">Showing 9 of 121 products</small>
             <div class="progress f-h-1 mt-3">
                 <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Load More</a>
-        </div>            <!-- / Pagination-->
+            <div class="mt-5 d-flex justify-content-around">
+                {{ $products->links() }}
+            </div>
+        </div>
+        <!-- / Pagination-->
     </div>
 
     <!-- /Page Content -->
