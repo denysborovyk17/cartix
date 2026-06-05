@@ -95,12 +95,19 @@
                                 {{ $product->name }}
                             </a>
                             @if ($product->variants->first()->discount_price)
-                                <p class="mt-2 mb-0 small"><s class="text-muted">${{ number_format($product->variants->first()->price / 100, 2) }}</s>
-                                    <span style="color: red">${{ number_format($product->variants->first()->discount_price / 100, 2) }}</span>
+                                <p class="mt-2 mb-0 small">
+                                    <s class="text-muted">
+                                        ${{ number_format($product->variants->first()->price / 100, 2) }}
+                                    </s>
+                                    <span style="color: red">
+                                        ${{ number_format($product->variants->first()->discount_price / 100, 2) }}
+                                    </span>
                                 </p>
                             @else
                                 <p class="mt-2 mb-0 small">
-                                    <span>${{ number_format($product->variants->first()->price / 100, 2) }}</span>
+                                    <span>
+                                        ${{ number_format($product->variants->first()->price / 100, 2) }}
+                                    </span>
                                 </p>
                             @endif
                         </div>
