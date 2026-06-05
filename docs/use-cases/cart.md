@@ -54,12 +54,12 @@
 2. Бекенд видаляє товар з кошика та перераховує загальну суму кошика.
 3. Бекенд повертає JSON-відповідь з новою загальною сумою кошика (`cartTotal`).
 
-### Сценарій 4: Об'єднання кошиків - гість не мав кошика в БД до автентифікації
+### Сценарій 4: Об'єднання кошиків - якщо у користувача не було кошика в БД до авторизації
 
 1. Гість реєструється та авторизується, викликається слухач `MergeGuestCart` після події `Login`.
 2. Починається пошук гостьового кошика за session_id, записує в поле user_id ідентифікатор нового користувача, а поле session_id очищає.
 
-### Сценарій 5: Об'єднання кошиків - гість має кошик та має акаунт з кошиком
+### Сценарій 5: Об'єднання кошиків - якщо у користувача вже був кошик в БД до авторизації
 
 1. Гість авторизується, викликається слухач `MergeGuestCart` після події `Login`.
 2. Бекенд перевіряє наявність однакових товарів в кошиках гостя та користувача.
@@ -74,6 +74,8 @@
 
 ## Де реалізовано
 
-- `app/Services/{CartService, CurrentCartService, MoneyFormatterService}`.
+- `app/Http/Controllers/CartController`.
+- `app/Http/Requests/Cart{StoreCartItemRequest, UpdateCartItemRequest}`.
 - `app/Actions/Cart/{AddCartItemAction, MergeGuestCartAction, RemoveCartItemAction, UpdateCartItemAction}`.
+- `app/Services/{CartService, CurrentCartService, MoneyFormatterService}`.
 - `app/Listeners/MergeGuestCart`.
