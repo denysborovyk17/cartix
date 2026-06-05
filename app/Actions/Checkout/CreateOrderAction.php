@@ -55,8 +55,6 @@ readonly class CreateOrderAction
                 ]);
             }
 
-            $cart->items()->delete();
-
             return $order;
         });
     }
