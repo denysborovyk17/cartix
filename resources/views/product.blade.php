@@ -140,7 +140,9 @@
                                     </h2>
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionProduct">
                                         <div class="accordion-body">
-                                            <p class="m-0">Made from 100% organic cotton, The Kiikii Osaka Japan T-Shirt was created with everyday use in mind. It features printed graphics and heavyweight fabric for maximum comfort and lifespan.</p>
+                                            <p class="m-0">
+                                                {{ $product->description }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -236,22 +238,50 @@
                                     </div>
                                     <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                     <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ $relatedProduct->image }}" alt="">
+                                        <img class="w-100 h-100 img-fluid position-relative z-index-10" title="" src="{{ $relatedProduct->image }}" alt="">
                                     </picture>
-                                    <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i>
-                                            Quick Add
+                                </div>
+                                @if ($relatedProduct->variants->first()->stock > 0)
+                                    <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
+                                        <button class="btn btn-quick-add w-100 add-item"
+                                                name="product_variant_id"
+                                                data-product-variant-id="{{ $relatedProduct->variants->first()->id }}">
+                                            Add To Cart
                                         </button>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
+                                        <button class="btn btn-quick-add w-100 add-item"
+                                                name="product_variant_id"
+                                                data-product-variant-id="{{ $relatedProduct->variants->first()->id }}"
+                                                disabled>
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                @endif
                                 <div class="card-body px-0">
                                     <a class="text-decoration-none link-cover" href="{{ route('products.show', [$relatedProduct->slug, 'productVariant' => $relatedProduct->variants->first()?->id]) }}">
                                         {{ $relatedProduct->name }}
                                     </a>
-                                    <small class="text-muted d-block">4 colours, 10 sizes</small>
-                                    <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s>
-                                        <span class="text-danger">${{ number_format($relatedProduct->variants->first()->price / 100, 2) }}</span>
-                                    </p>
+                                    <small class="text-muted d-block">
+                                        {{ $relatedProduct->variants->first()->optionValues->pluck('value')->implode(' + ') }}
+                                    </small>
+                                    @if ($relatedProduct->variants->first()->discount_price)
+                                        <p class="mt-2 mb-0 small">
+                                            <s class="text-muted">
+                                                ${{ number_format($relatedProduct->variants->first()->price / 100, 2) }}
+                                            </s>
+                                            <span style="color: red">
+                                                ${{ number_format($relatedProduct->variants->first()->discount_price / 100, 2) }}
+                                            </span>
+                                        </p>
+                                    @else
+                                        <p class="mt-2 mb-0 small">
+                                            <span>
+                                                ${{ number_format($relatedProduct->variants->first()->price / 100, 2) }}
+                                            </span>
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                             <!--/ Card Product-->
