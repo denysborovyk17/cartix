@@ -142,7 +142,7 @@
                                 <button class="btn btn-secondary btn-sm px-4">Apply</button>
                             </div>
                         </div>
-                        <a href="{{ route('checkout') }}" class="btn btn-dark w-100 text-center" role="button">Proceed to checkout</a>
+                        <a href="{{ route('checkout') }}" class="btn btn-dark w-100 text-center" role="button">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>

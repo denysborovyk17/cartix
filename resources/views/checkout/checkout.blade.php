@@ -129,7 +129,7 @@
                                     </div>
 
                                     <div class="pt-5 mt-5 pb-5 border-top d-flex justify-content-md-end align-items-center">
-                                        <button type="submit" class="btn btn-dark w-100 w-md-auto">Proceed to shipping</button>
+                                        <button type="submit" class="btn btn-dark w-100 w-md-auto">Proceed to Shipping</button>
                                     </div>
                                 </div>
                             </form>
