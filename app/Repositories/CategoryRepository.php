@@ -8,6 +8,6 @@ class CategoryRepository
 {
     public function findBySlug(string $slug): Category
     {
-        return Category::with('productVariants.product')->where('slug', $slug)->firstOrFail();
+        return Category::query()->where('slug', $slug)->firstOrFail();
     }
 }

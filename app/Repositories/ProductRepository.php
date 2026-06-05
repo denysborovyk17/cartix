@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Product\Product;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class ProductRepository
@@ -26,5 +27,15 @@ class ProductRepository
             ->latest()
             ->take(4)
             ->get();
+    }
+
+    public function findBySearch(string $search, int $categoryId): LengthAwarePaginator
+    {
+        return Product::search($search)->query(function ($query) {
+            $query->with('variants');
+        })
+            ->where('category_id', $categoryId)
+            ->paginate(12)
+            ->withQueryString();
     }
 }

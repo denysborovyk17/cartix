@@ -89,25 +89,29 @@
                     <!-- /Mobile Nav Toggler-->
 
                     <!-- Navbar Search-->
-                    <li class="d-none d-sm-block">
-                        <span class="nav-link text-body search-trigger cursor-pointer">Search</span>
+                    <form method="GET" action="">
+                        <li class="d-none d-sm-block">
+                            <span class="nav-link text-body search-trigger cursor-pointer">Search</span>
 
-                        <!-- Search navbar overlay-->
-                        <div class="navbar-search d-none">
-                            <div class="input-group mb-3 h-100">
-                                    <span class="input-group-text px-4 bg-transparent border-0"><i
-                                            class="ri-search-line ri-lg"></i></span>
-                                <input type="text" class="form-control text-body bg-transparent border-0"
-                                       placeholder="Enter your search terms...">
-                                <span
-                                    class="input-group-text px-4 cursor-pointer disable-child-pointer close-search bg-transparent border-0"><i
-                                        class="ri-close-circle-line ri-lg"></i></span>
+                            <!-- Search navbar overlay-->
+                            <div class="navbar-search d-none">
+                                <div class="input-group mb-3 h-100">
+                                        <span class="input-group-text px-4 bg-transparent border-0"><i
+                                                class="ri-search-line ri-lg"></i></span>
+                                    <input type="text" class="form-control text-body bg-transparent border-0"
+                                           name="search"
+                                           value="{{ request('search') }}"
+                                           placeholder="Enter your search terms...">
+                                    <span
+                                        class="input-group-text px-4 cursor-pointer disable-child-pointer close-search bg-transparent border-0"><i
+                                            class="ri-close-circle-line ri-lg"></i></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="search-overlay"></div>
-                        <!-- / Search navbar overlay-->
+                            <div class="search-overlay"></div>
+                            <!-- / Search navbar overlay-->
 
-                    </li>
+                        </li>
+                    </form>
                     <!-- /Navbar Search-->
 
                     @guest
