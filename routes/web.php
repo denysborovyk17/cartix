@@ -33,7 +33,7 @@ Route::post('/logout', LogoutController::class)->middleware('auth')->name('logou
 Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('ensureCartIsNotEmpty')->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
-Route::prefix('orders/{orderId}')->as('orders.')->group(function () {
+Route::prefix('orders/{orderId}')->as('orders.')->middleware('ensureOwnsOrder')->group(function () {
     Route::get('/payment', [OrderController::class, 'show'])->name('payment');
     Route::post('/payment/complete', [OrderController::class, 'complete'])->name('payment.complete');
     Route::get('/success', [OrderController::class, 'success'])->name('success');
