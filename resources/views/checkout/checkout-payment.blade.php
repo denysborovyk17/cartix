@@ -109,7 +109,7 @@
                               <a href="{{ route('index') }}" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0">
                                   Back to shop
                               </a>
-                              <form method="POST" action="{{ route('checkout.payment.store', $order->id) }}">
+                              <form method="POST" action="{{ route('orders.payment.complete', $order->id) }}">
                                 <button class="btn btn-dark w-100 w-md-auto" role="button">Complete Order</button>
                               </form>
                             </div>
