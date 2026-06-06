@@ -30,7 +30,7 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', LogoutController::class)->middleware('auth')->name('logout');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('ensureCartIsNotEmpty')->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::prefix('orders/{orderId}')->as('orders.')->group(function () {
