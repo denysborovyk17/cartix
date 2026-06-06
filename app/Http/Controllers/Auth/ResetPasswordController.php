@@ -10,12 +10,12 @@ use Illuminate\View\View;
 
 class ResetPasswordController extends Controller
 {
-    public function showResetForm(string $token): View
+    public function edit(string $token): View
     {
         return view('auth.reset-password', compact('token'));
     }
 
-    public function resetPassword(ResetPasswordRequest $request): RedirectResponse
+    public function update(ResetPasswordRequest $request): RedirectResponse
     {
         $status = Password::reset(
             $request->validated(), function ($user, $password) {

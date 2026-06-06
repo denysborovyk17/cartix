@@ -10,12 +10,12 @@ use Illuminate\View\View;
 
 class ForgotPasswordController extends Controller
 {
-    public function showForgotForm(): View
+    public function create(): View
     {
         return view('auth.forgot-password');
     }
 
-    public function sendResetLink(ForgotPasswordRequest $request): RedirectResponse
+    public function store(ForgotPasswordRequest $request): RedirectResponse
     {
         $status = Password::sendResetLink($request->validated());
 
