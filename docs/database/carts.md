@@ -71,8 +71,8 @@
 
 ### Обмеження цілісності (Constraints)
 
-* * **Foreign Key: `cart_id` REFERENCES `carts(id)` ON DELETE CASCADE (якщо видалити кошик, його предмети видаляються).**
-* * **Foreign Key: `product_variant_id` REFERENCES `product_variants(id)` ON DELETE CASCADE (якщо видалити варіант товару, його запис видаляється).**
+* **Foreign Key: `cart_id` REFERENCES `carts(id)` ON DELETE CASCADE (якщо видалити кошик, його предмети видаляються).**
+* **Foreign Key: `product_variant_id` REFERENCES `product_variants(id)` ON DELETE CASCADE (якщо видалити варіант товару, його запис видаляється).**
 
 ### Де реалізовано
 
