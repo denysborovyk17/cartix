@@ -30,6 +30,8 @@ class CheckoutController extends Controller
     {
         $order = $action->handle($request->toDTO());
 
+        session(['order_id' => $order->id]);
+
         return redirect()->route('orders.payment', $order->id);
     }
 }
