@@ -67,6 +67,12 @@
                             <ul class="list-group mb-5 d-none d-lg-block rounded-0">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-start align-items-center">
+                                        <span class="text-muted small me-2 f-w-36 fw-bolder">Phone</span>
+                                        <span class="small">{{ $order->phone }}</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-start align-items-center">
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Contact</span>
                                         <span class="small">{{ $order->email }}</span>
                                     </div>
@@ -80,10 +86,11 @@
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-start align-items-center">
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Method</span>
-                                        <span class="small">UPS Priority Delivery</span>
+                                        <span class="small">In process...</span>
                                     </div>
                                 </li>
-                            </ul><!-- / Checkout Information Summary-->
+                            </ul>
+                            <!-- / Checkout Information Summary-->
 
                             <!-- Checkout Panel Information-->
                             <h3 class="fs-5 fw-bolder mb-4 border-bottom pb-4">Payment Information</h3>

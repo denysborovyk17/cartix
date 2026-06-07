@@ -3,7 +3,6 @@
 namespace App\Models\Order;
 
 use App\Enums\OrderStatus;
-use App\Models\Cart\CartItem;
 use App\Models\Payment\Payment;
 use App\Models\User\User;
 use Carbon\CarbonInterface;
@@ -11,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
 
 /**
  * @property int $id Унікальний ідентифікатор замовлення
@@ -49,7 +49,8 @@ class Order extends Model
     protected function casts(): array
     {
         return [
-            'status' => OrderStatus::class
+            'status' => OrderStatus::class,
+            'phone' => RawPhoneNumberCast::class . ':UA'
         ];
     }
 

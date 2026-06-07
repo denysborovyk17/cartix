@@ -2,13 +2,15 @@
 
 namespace App\DTO;
 
+use Propaganistas\LaravelPhone\PhoneNumber;
+
 readonly class CreateOrderData
 {
     public function __construct(
         private string $firstName,
         private string $lastName,
         private string $email,
-        private string $phone,
+        private PhoneNumber $phone,
         private string $city,
         private string $address,
         private string $notes
@@ -21,7 +23,7 @@ readonly class CreateOrderData
             firstName: $data['first_name'],
             lastName: $data['last_name'],
             email: $data['email'],
-            phone: $data['phone'],
+            phone: new PhoneNumber($data['phone'], 'UA'),
             city: $data['city'],
             address: $data['address'],
             notes: $data['notes']
@@ -43,7 +45,7 @@ readonly class CreateOrderData
         return $this->email;
     }
 
-    public function getPhone(): string
+    public function getPhone(): PhoneNumber
     {
         return $this->phone;
     }
