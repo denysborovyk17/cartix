@@ -3,6 +3,7 @@
 namespace App\Actions\Checkout;
 
 use App\DTO\CreateOrderData;
+use App\Enums\OrderStatus;
 use App\Exceptions\ProductVariantOutOfStockException;
 use App\Models\Order\Order;
 use App\Services\Cart\CurrentCartService;
@@ -26,6 +27,7 @@ readonly class CreateOrderAction
         return DB::transaction(function () use ($data): Order {
             $order = Order::create([
                 'user_id' => auth()->id() ?? null,
+                'status' => OrderStatus::PENDING,
                 'total' => $this->orderService->calculateTotal(),
                 'first_name' => $data->getFirstName(),
                 'last_name' => $data->getLastName(),
