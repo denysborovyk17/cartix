@@ -23,7 +23,7 @@ readonly class CreateOrderData
             firstName: $data['first_name'],
             lastName: $data['last_name'],
             email: $data['email'],
-            phone: new PhoneNumber($data['phone']),
+            phone: new PhoneNumber($data['phone'], 'UA'),
             city: $data['city'],
             address: $data['address'],
             notes: $data['notes']
