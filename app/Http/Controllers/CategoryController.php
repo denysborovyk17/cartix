@@ -22,8 +22,8 @@ class CategoryController extends Controller
 
         $products = $this->productRepository->findBySearchAndFilter(new ProductSearchFilterData(
             search: $request->input('search'),
-            minPrice: (int) $request->input('min_price'),
-            maxPrice: (int) $request->input('max_price'),
+            minPrice: (int) $request->input('min_price') * 100,
+            maxPrice: (int) $request->input('max_price') * 100,
             brands: $request->input('brands'),
             colors: $request->input('colors'),
             sizes: $request->input('sizes'),
