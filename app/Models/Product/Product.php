@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Laravel\Scout\Searchable;
 
 /**
  * @property int $id Унікальний ідентифікатор товару
@@ -24,7 +23,7 @@ use Laravel\Scout\Searchable;
  */
 class Product extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     protected $fillable = [
         'category_id',
@@ -59,17 +58,5 @@ class Product extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
-    }
-
-    public function toSearchableArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'category_id' => $this->category_id,
-            'brand_id' => $this->brand_id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'is_active' => $this->is_active,
-        ];
     }
 }

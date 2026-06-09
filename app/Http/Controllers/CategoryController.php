@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\ProductSearchFilterData;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
@@ -19,8 +20,20 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->findBySlug($slug);
 
-        $products = $this->productRepository->findBySearch(trim((string) $request->input('search')), $category->id);
+        $products = $this->productRepository->findBySearchAndFilter(new ProductSearchFilterData(
+            search: $request->input('search'),
+            minPrice: (int) $request->input('min_price'),
+            maxPrice: (int) $request->input('max_price'),
+            brands: $request->input('brands'),
+            colors: $request->input('colors'),
+            sizes: $request->input('sizes'),
+            perPage: config('custom.pagination.per_page')
+        ), $category->id);
 
-        return view('category', compact('category', 'products'));
+        $brands = $this->productRepository->getBrands();
+        $colors = $this->productRepository->getColors();
+        $sizes = $this->productRepository->getSizes();
+
+        return view('category', compact('category', 'products', 'brands', 'colors', 'sizes'));
     }
 }
