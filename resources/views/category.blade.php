@@ -39,20 +39,22 @@
                 <!-- / Filter Trigger-->
 
                 <!-- Sort Options-->
-                <select class="form-select form-select-sm border-0 bg-light p-3 pe-5 lh-1 fs-7">
-                    <option selected>Sort By</option>
-                    <option value="1">Hi Low</option>
-                    <option value="2">Low Hi</option>
-                    <option value="3">Name</option>
-                </select>
+                <form method="GET" action="{{ url()->current() }}">
+                    <select class="form-select form-select-sm border-0 bg-light p-3 pe-5 lh-1 fs-7" name="sort" onchange="this.form.submit()">
+                        <option value="">Sort By</option>
+                        <option value="asc" {{ request('sort') === 'asc' ? 'selected' : '' }}>
+                            Low To High
+                        </option>
+                        <option value="desc" {{ request('sort') === 'desc' ? 'selected' : '' }}>
+                            High to Low
+                        </option>
+                    </select>
+                </form>
                 <!-- / Sort Options-->
             </div>
         </div>            <!-- /Category Toolbar-->
 
         <!-- Products-->
-        @session('success')
-            <h3 style="color: limegreen">{{ $value }}</h3>
-        @endsession
 
         <div class="row g-4">
             @foreach($products as $product)
@@ -97,7 +99,7 @@
                             @if ($product->variants->first()->discount_price)
                                 <p class="mt-2 mb-0 small">
                                     <s class="text-muted">
-                                        ${{ number_format($product->variants->first()->price / 100, 2) }}
+                                        ${{ number_format($product->variants->min('price') / 100, 2) }}
                                     </s>
                                     <span style="color: red">
                                         ${{ number_format($product->variants->first()->discount_price / 100, 2) }}
@@ -106,7 +108,7 @@
                             @else
                                 <p class="mt-2 mb-0 small">
                                     <span>
-                                        ${{ number_format($product->variants->first()->price / 100, 2) }}
+                                        ${{ number_format($product->variants->min('price') / 100, 2) }}
                                     </span>
                                 </p>
                             @endif
@@ -142,33 +144,29 @@
         <div class="d-flex flex-column justify-content-between w-100 h-100">
 
             <!-- Filters-->
-            <form method="GET" action="{{ url()->current() }}">
+            <form method="GET" action="{{ url()->current() }}" id="catalog-search-filter-form">
                 <div>
                     <!-- Price Filter -->
-                        <div class="py-4 widget-filter widget-filter-price border-top">
-                            <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
-                               data-bs-toggle="collapse" href="#filter-modal-price" role="button" aria-expanded="true"
-                               aria-controls="filter-modal-price">
-                                Price
-                            </a>
-                            <div id="filter-modal-price" class="collapse show">
-                                <div class="d-flex justify-content-between align-items-center mt-7">
-                                    <div class="input-group mb-0 me-2 border">
-                                        <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
-                                        <input type="number" name="min_price" value="{{ request('min_price') }}" step="1">
-                                    </div>
-                                    <div class="input-group mb-0 ms-2 border">
-                                        <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
-                                        <input type="number" name="max_price" value="{{ request('max_price') }}" step="1">
-                                    </div>
+                    <div class="py-4 widget-filter widget-filter-price border-top">
+                        <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
+                           data-bs-toggle="collapse" href="#filter-modal-price" role="button" aria-expanded="true"
+                           aria-controls="filter-modal-price">
+                            Price
+                        </a>
+                        <div id="filter-modal-price" class="collapse show">
+                            <div class="d-flex justify-content-between align-items-center mt-7">
+                                <div class="input-group mb-0 me-2 border">
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
+                                    <input type="number" name="min_price" value="{{ request('min_price') }}" step="1">
+                                </div>
+                                <div class="input-group mb-0 ms-2 border">
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
+                                    <input type="number" name="max_price" value="{{ request('max_price') }}" step="1">
                                 </div>
                             </div>
                         </div>
+                    </div>
                     <!-- / Price Filter -->
-
-                    @if (request()->filled('search'))
-                        <input type="hidden" name="search" value="{{ request('search') }}">
-                    @endif
 
                     <div class="py-4 widget-filter border-top">
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"

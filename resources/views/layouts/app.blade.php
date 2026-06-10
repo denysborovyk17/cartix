@@ -89,53 +89,26 @@
                     <!-- /Mobile Nav Toggler-->
 
                     <!-- Navbar Search-->
-                    <form method="GET" action="{{ url()->current() }}">
-                        <li class="d-none d-sm-block">
-                            <span class="nav-link text-body search-trigger cursor-pointer">Search</span>
+                    <li class="d-none d-sm-block">
+                        <span class="nav-link text-body search-trigger cursor-pointer">Search</span>
 
-                            <!-- Search navbar overlay-->
-                            <div class="navbar-search d-none">
-                                <div class="input-group mb-3 h-100">
-                                        <span class="input-group-text px-4 bg-transparent border-0"><i
-                                                class="ri-search-line ri-lg"></i></span>
-                                    <input type="text" class="form-control text-body bg-transparent border-0"
-                                           name="search"
-                                           value="{{ request('search') }}"
-                                           placeholder="Search">
-                                    <span
-                                        class="input-group-text px-4 cursor-pointer disable-child-pointer close-search bg-transparent border-0"><i
-                                            class="ri-close-circle-line ri-lg"></i></span>
-                                </div>
+                        <!-- Search navbar overlay-->
+                        <div class="navbar-search d-none">
+                            <div class="input-group mb-3 h-100">
+                                    <span class="input-group-text px-4 bg-transparent border-0"><i
+                                            class="ri-search-line ri-lg"></i></span>
+                                <input type="text" class="form-control text-body bg-transparent border-0"
+                                       name="search"
+                                       value="{{ request('search') }}"
+                                       form="catalog-search-filter-form"
+                                       placeholder="Search">
+                                <span
+                                    class="input-group-text px-4 cursor-pointer disable-child-pointer close-search bg-transparent border-0"><i
+                                        class="ri-close-circle-line ri-lg"></i></span>
                             </div>
-                            <div class="search-overlay"></div>
-                            <!-- / Search navbar overlay-->
-                            @if (request()->filled('min_price'))
-                                <input type="hidden" name="min_price" value="{{ request('min_price') }}">
-                            @endif
-
-                            @if (request()->filled('max_price'))
-                                <input type="hidden" name="max_price" value="{{ request('max_price') }}">
-                            @endif
-
-                            @if (is_array(request('brands')))
-                                @foreach (request('brands') as $brand)
-                                    <input type="hidden" name="brands[]" value="{{ $brand }}">
-                                @endforeach
-                            @endif
-
-                            @if (is_array(request('colors')))
-                                @foreach (request('colors') as $color)
-                                    <input type="hidden" name="colors[]" value="{{ $color }}">
-                                @endforeach
-                            @endif
-
-                            @if (is_array(request('sizes')))
-                                @foreach (request('sizes') as $size)
-                                    <input type="hidden" name="sizes[]" value="{{ $size }}">
-                                @endforeach
-                            @endif
-                        </li>
-                    </form>
+                        </div>
+                        <div class="search-overlay"></div>
+                    </li>
                     <!-- /Navbar Search-->
 
                     @guest
