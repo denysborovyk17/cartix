@@ -80,12 +80,12 @@
                             </div>
                         @else
                             <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
-                                <button class="btn btn-quick-add w-100 add-item"
+                                <button class="btn btn-quick-add w-100 text-muted add-item"
                                         style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
                                         name="product_variant_id"
                                         data-product-variant-id="{{ $product->variants->first()->id }}"
                                         disabled>
-                                    Add to Cart
+                                    Product is out of stock
                                 </button>
                             </div>
                         @endif

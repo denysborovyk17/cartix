@@ -101,7 +101,7 @@
                                         name="product_variant_id"
                                         data-product-variant-id="{{ $selectedVariant->id }}"
                                         disabled>
-                                    Add To Cart
+                                    Product is out of stock
                                 </button>
                             @endif
 
