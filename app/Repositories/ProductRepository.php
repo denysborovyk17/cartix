@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DTO\ProductSearchFilterData;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product\{Product, Brand, OptionValue};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -75,11 +76,15 @@ class ProductRepository
                 )
             )
 
-            ->when($data->getColors(),
-                fn($q) => $q->whereHas('variants.optionValues',
-                    fn($q) => $q->whereIn('value', $data->getColors())
-                )
-            )
+            ->when($data->getSortByPrice(), function ($query, $sortByPrice) {
+                $subQuery = DB::table('product_variants')
+                    ->select(DB::raw('COALESCE(discount_price, price)'))
+                    ->whereColumn('product_id', 'products.id')
+                    ->orderBy(DB::raw('COALESCE(price, discount_price)'), $sortByPrice)
+                    ->limit(1);
+
+                return $query->orderBy($subQuery, $sortByPrice);
+            })
 
             ->when($data->getSizes(),
                 fn($q) => $q->whereHas('variants.optionValues',
