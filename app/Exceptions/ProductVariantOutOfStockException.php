@@ -8,7 +8,7 @@ class ProductVariantOutOfStockException extends Exception
 {
     public function __construct(protected int $productVariantId)
     {
-        $message = "Product Variant with ID {$productVariantId} is out of stock.";
+        $message = "Product Variant with ID $productVariantId is out of stock.";
 
         parent::__construct($message);
     }
