@@ -6,6 +6,7 @@ readonly class ProductSearchFilterData
 {
     public function __construct(
         private ?string $search,
+        private ?string $sortByPrice,
         private ?int $minPrice,
         private ?int $maxPrice,
         private ?array $brands,
@@ -18,6 +19,11 @@ readonly class ProductSearchFilterData
     public function getSearch(): string|null
     {
         return $this->search;
+    }
+
+    public function getSortByPrice(): ?string
+    {
+        return $this->sortByPrice;
     }
 
     public function getMinPrice(): int|null
