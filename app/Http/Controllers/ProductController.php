@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ProductRepository;
+use App\Repositories\{ProductRepository, ReviewRepository};
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     public function __construct(
-        private readonly ProductRepository $productRepository
+        private readonly ProductRepository $productRepository,
+        private readonly ReviewRepository $reviewRepository
     ) {
     }
 
@@ -25,6 +26,8 @@ class ProductController extends Controller
             $selectedVariant = $product->variants()->first();
         }
 
-        return view('product', compact('product', 'relatedProducts', 'selectedVariant'));
+        $reviews = $this->reviewRepository->getForProduct($product->id);
+
+        return view('product', compact('product', 'relatedProducts', 'selectedVariant', 'reviews'));
     }
 }
