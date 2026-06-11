@@ -6,7 +6,7 @@ use App\Repositories\{ProductRepository, ReviewRepository};
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class ProductController extends Controller
+readonly class ProductController
 {
     public function __construct(
         private readonly ProductRepository $productRepository,

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\{Password, Hash, Auth};
 use Illuminate\View\View;
 
-class ResetPasswordController extends Controller
+readonly class ResetPasswordController
 {
     public function edit(string $token): View
     {

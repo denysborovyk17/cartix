@@ -8,7 +8,7 @@ use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class CategoryController extends Controller
+readonly class CategoryController
 {
     public function __construct(
         private readonly CategoryRepository $categoryRepository,

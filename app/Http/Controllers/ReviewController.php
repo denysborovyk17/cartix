@@ -8,10 +8,10 @@ use App\Repositories\ProductRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class ReviewController extends Controller
+readonly class ReviewController
 {
     public function __construct(
-        private readonly ProductRepository $productRepository,
+        private ProductRepository $productRepository,
     ) {}
 
     public function show(string $slug): View

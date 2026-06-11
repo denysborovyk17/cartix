@@ -10,11 +10,11 @@ use App\Services\{Cart\CurrentCartService, MoneyFormatterService};
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
-class CartController extends Controller
+readonly class CartController
 {
     public function __construct(
-        private readonly CurrentCartService $currentCartService,
-        private readonly MoneyFormatterService $moneyFormatterService
+        private CurrentCartService $currentCartService,
+        private MoneyFormatterService $moneyFormatterService
     ) {}
 
     public function index(): View
