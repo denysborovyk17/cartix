@@ -13,8 +13,11 @@ class ProductRepository
     public function findBySlug(string $slug): Product
     {
         return Product::query()
+            ->active()
             ->with('variants.optionValues')
             ->where('slug', $slug)
+            ->withCount(array_merge(['reviews as total_reviews'], $this->getRatings()))
+            ->withAvg('reviews as avg_rating', 'rating')
             ->firstOrFail();
     }
 
@@ -93,5 +96,17 @@ class ProductRepository
             )
             ->paginate($data->getPerPage())
             ->withQueryString();
+    }
+
+    private function getRatings(): array
+    {
+        $numbers = range(1, 5);
+
+        $counts = [];
+        foreach ($numbers as $number) {
+            $counts["reviews as stars_$number"] = fn($q) => $q->where('rating', $number);
+        }
+
+        return $counts;
     }
 }
