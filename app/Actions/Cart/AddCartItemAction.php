@@ -2,6 +2,7 @@
 
 namespace App\Actions\Cart;
 
+use App\Models\Cart\CartItem;
 use App\Services\Cart\CartService;
 use App\Services\Cart\CurrentCartService;
 
@@ -22,11 +23,11 @@ readonly class AddCartItemAction
             $cartItem->quantity++;
             $cartItem->save();
         } else {
-            $cartItemData = [
+            $cartItem = CartItem::create([
+                'cart_id' => $cart->id,
                 'product_variant_id' => $productVariantId,
                 'quantity' => $quantity
-            ];
-            $cartItem = $cart->items()->create($cartItemData);
+            ]);
         }
         $cartItem->load('productVariant.optionValues.option');
 
