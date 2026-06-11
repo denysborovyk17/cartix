@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use App\Http\Controllers\{CartController, CategoryController, ProductController, CheckoutController, OrderController};
+use App\Http\Controllers\{CartController, CategoryController, ProductController, CheckoutController, OrderController, ReviewController};
 use App\Http\Controllers\Auth\{RegisterController, LoginController, LogoutController, ForgotPasswordController, ResetPasswordController};
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +37,9 @@ Route::prefix('orders/{orderId}')->as('orders.')->middleware('ensureOwnsOrder')-
     Route::get('/payment', [OrderController::class, 'show'])->name('payment');
     Route::post('/payment/complete', [OrderController::class, 'complete'])->name('payment.complete');
     Route::get('/success', [OrderController::class, 'success'])->name('success');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/reviews/products/{product:slug}', [ReviewController::class, 'show'])->name('reviews.show');
+    Route::post('/reviews/products/{product:slug}', [ReviewController::class, 'store'])->name('reviews.store');
 });
