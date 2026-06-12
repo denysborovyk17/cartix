@@ -23,7 +23,11 @@ class ProductRepository
 
     public function findRelatedBySlug(string $slug): Collection
     {
-        $product = $this->findBySlug($slug);
+        $product = Product::query()
+            ->active()
+            ->with('variants.optionValues')
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         return Product::query()
             ->with('variants.optionValues')
