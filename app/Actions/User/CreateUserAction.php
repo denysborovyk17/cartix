@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Actions;
+namespace App\Actions\User;
 
-use App\DTO\CreateUserData;
+use App\Data\CreateUserData;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Hash;
 

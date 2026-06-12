@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Actions;
+namespace App\Actions\Product;
 
-use App\DTO\CreateReviewData;
+use App\Data\CreateReviewData;
 use App\Models\Product\Review;
 use App\Repositories\ProductRepository;
 

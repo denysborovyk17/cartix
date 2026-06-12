@@ -2,7 +2,7 @@
 
 namespace App\Actions\Checkout;
 
-use App\DTO\CreateOrderData;
+use App\Data\CreateOrderData;
 use App\Enums\OrderStatus;
 use App\Exceptions\ProductVariantOutOfStockException;
 use App\Models\Order\Order;
