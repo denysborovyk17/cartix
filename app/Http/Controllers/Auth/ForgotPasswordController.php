@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
-readonly class ForgotPasswordController
+final readonly class ForgotPasswordController
 {
     public function create(): View
     {

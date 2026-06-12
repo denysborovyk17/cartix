@@ -7,7 +7,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
-readonly class RegisterController
+final readonly class RegisterController
 {
     public function __construct(
         //

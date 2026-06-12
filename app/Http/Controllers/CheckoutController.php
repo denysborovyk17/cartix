@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Throwable;
 
-readonly class CheckoutController
+final readonly class CheckoutController
 {
     public function __construct(
         private CurrentCartService $currentCartService

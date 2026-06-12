@@ -7,7 +7,7 @@ use App\Repositories\OrderRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-readonly class OrderController
+final readonly class OrderController
 {
     public function __construct(
         private readonly OrderRepository $orderRepository

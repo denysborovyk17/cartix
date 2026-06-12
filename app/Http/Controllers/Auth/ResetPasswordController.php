@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\{Password, Hash, Auth};
 use Illuminate\View\View;
 
-readonly class ResetPasswordController
+final readonly class ResetPasswordController
 {
     public function edit(string $token): View
     {

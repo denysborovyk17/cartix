@@ -6,7 +6,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
-readonly class LoginController
+final readonly class LoginController
 {
     public function __invoke(LoginRequest $request): RedirectResponse
     {

@@ -10,7 +10,7 @@ use App\Services\{Cart\CurrentCartService, MoneyFormatterService};
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
-readonly class CartController
+final readonly class CartController
 {
     public function __construct(
         private CurrentCartService $currentCartService,

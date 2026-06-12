@@ -8,7 +8,7 @@ use App\Repositories\ProductRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-readonly class ReviewController
+final readonly class ReviewController
 {
     public function __construct(
         private ProductRepository $productRepository,
