@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\DTO\CreateOrderData;
+use App\Data\CreateOrderData;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -34,7 +34,7 @@ class StoreCheckoutRequest extends FormRequest
         ];
     }
 
-    public function toDTO(): CreateOrderData
+    public function getData(): CreateOrderData
     {
         return CreateOrderData::fromArray($this->validated());
     }

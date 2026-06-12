@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\DTO\CreateReviewData;
+use App\Data\CreateReviewData;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,7 +29,7 @@ class StoreReviewRequest extends FormRequest
         ];
     }
 
-    public function toDTO(): CreateReviewData
+    public function getData(): CreateReviewData
     {
         return CreateReviewData::fromArray($this->validated());
     }
