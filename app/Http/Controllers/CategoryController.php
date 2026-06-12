@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\ProductSearchFilterData;
+use App\Data\ProductSearchFilterData;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
@@ -11,8 +11,8 @@ use Illuminate\View\View;
 readonly class CategoryController
 {
     public function __construct(
-        private readonly CategoryRepository $categoryRepository,
-        private readonly ProductRepository $productRepository
+        private CategoryRepository $categoryRepository,
+        private ProductRepository $productRepository
     ) {
     }
 

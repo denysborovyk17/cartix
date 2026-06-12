@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateReviewAction;
+use App\Actions\Product\CreateReviewAction;
 use App\Http\Requests\StoreReviewRequest;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\RedirectResponse;
@@ -23,7 +23,7 @@ readonly class ReviewController
 
     public function store(StoreReviewRequest $request, CreateReviewAction $action, string $productSlug): RedirectResponse
     {
-        $action->handle($request->toDTO(), $productSlug);
+        $action->handle($request->getData(), $productSlug);
 
         return redirect()->route('products.show', $productSlug);
     }

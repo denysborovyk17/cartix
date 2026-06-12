@@ -28,7 +28,7 @@ readonly class CheckoutController
      */
     public function store(StoreCheckoutRequest $request, CreateOrderAction $action): RedirectResponse
     {
-        $order = $action->handle($request->toDTO());
+        $order = $action->handle($request->getData());
 
         session(['order_id' => $order->id]);
 
