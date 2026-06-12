@@ -312,23 +312,6 @@
                         <div class="bg-dark text-white f-w-24 f-h-24 d-flex rounded-circle align-items-center justify-content-center fs-2 fw-bold mb-3">
                             {{ number_format($product->avg_rating, 2) }}
                         </div>
-                        <!-- Review Stars Medium-->
-                        <div class="rating position-relative d-table">
-                            <div class="position-absolute stars" style="width: 88%">
-                                <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                                <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                                <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                                <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                                <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                            </div>
-                            <div class="stars">
-                                <i class="ri-star-fill ri-2x mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill ri-2x mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill ri-2x mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill ri-2x mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill ri-2x mr-1 text-muted opacity-25"></i>
-                            </div>
-                        </div>
 
                         @auth
                             <a href="{{ route('reviews.show', $product->slug) }}" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">
