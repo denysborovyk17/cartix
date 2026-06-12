@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DTO\ProductSearchFilterData;
+use App\Data\ProductSearchFilterData;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product\{Product, Brand, OptionValue};
 use Illuminate\Pagination\LengthAwarePaginator;
