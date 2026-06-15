@@ -17,8 +17,7 @@ final readonly class WishlistController
     {
         $user = auth()->user();
 
-        $wishlistItems = $user->wishlistItems()->paginate(12);
-        $wishlistItems->load('product.variants');
+        $wishlistItems = $user->wishlistItems()->with('product.variants')->paginate(12);
 
         return view('wishlist', compact('wishlistItems'));
     }
