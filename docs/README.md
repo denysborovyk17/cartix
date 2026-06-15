@@ -4,6 +4,7 @@
 
 ## Структура директорії
 
+```
 [docs/](../docs)
 ├── [ADR/](adr)
 │   ├── [0001](adr/0001-cart-system-architecture.md)
@@ -24,3 +25,4 @@
 │   ├── [Order](use-cases/order.md)
 │   ├── [Reset Password](use-cases/reset-password.md)
 └── [README](README.md)
+```
