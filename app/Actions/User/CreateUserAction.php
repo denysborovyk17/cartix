@@ -6,7 +6,7 @@ use App\Data\CreateUserData;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Hash;
 
-class CreateUserAction
+readonly class CreateUserAction
 {
     public function __construct(
         //
