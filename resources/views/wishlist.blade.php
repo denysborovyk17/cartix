@@ -60,6 +60,12 @@
                                     style="z-index: 999; border: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"
                                     name="product_variant_id"
                                     data-product-variant-id="{{ $wishlistItem->id }}">
+                            @if (auth()->user()->wishlistItems->contains($wishlistItem->id))
+                                <i class="ri-heart-fill" style="pointer-events: none"></i>
+                            @else
+                                <i class="ri-heart-line" style="pointer-events: none"></i>
+                            @endif
+
                             </button>
 
                             <picture class="d-block bg-light h-100">
