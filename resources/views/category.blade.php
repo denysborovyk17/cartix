@@ -61,19 +61,32 @@
                 <div class="col-12 col-sm-6 col-lg-4">
                     <!-- Card Product-->
                     <div class="card border border-transparent h-100 transparent">
-
                         <div class="card-img position-relative" style="height: 500px; overflow: hidden;">
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
+                            <button class="position-absolute top-0 end-0 m-2 p-2 text-muted rounded-circle toggle-wishlist-item"
+                                    style="z-index: 999; border: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"
+                                    name="product_variant_id"
+                                    data-product-variant-id="{{ $product->variants->first()->id }}">
+                                @guest
+                                    <a class="ri-heart-line" style="text-decoration: none" href="{{ route('auth.login') }}"></a>
+                                @endguest
+
+                                @auth
+                                    @if (auth()->user()->wishlistItems->contains($product->variants->first()->id))
+                                        <i class="ri-heart-fill" style="pointer-events: none"></i>
+                                    @else
+                                        <i class="ri-heart-line" style="pointer-events: none"></i>
+                                    @endif
+                                @endauth
+                            </button>
 
                             <picture class="d-block bg-light h-100">
                                 <img class="w-100 h-100 object-fit-cover" src="{{ $product->image }}" alt="">
                             </picture>
-
                         </div>
 
                         @if ($product->variants->first()->stock > 0)
                             <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
-                                <button class="btn btn-quick-add w-100 add-item"
+                                <button class="btn btn-quick-add w-100 add-cart-item"
                                         style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
                                         name="product_variant_id"
                                         data-product-variant-id="{{ $product->variants->first()->id }}">
@@ -82,7 +95,7 @@
                             </div>
                         @else
                             <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
-                                <button class="btn btn-quick-add w-100 text-muted add-item"
+                                <button class="btn btn-quick-add w-100 text-muted add-cart-item"
                                         style="position: relative; z-index: 52; transform: translateY(0) !important; opacity: 1 !important;"
                                         name="product_variant_id"
                                         data-product-variant-id="{{ $product->variants->first()->id }}"
