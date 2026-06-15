@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Actions\User\ToogleWishlistItemAction;
 use App\Models\Product\Category;
-use App\Services\{Cart\CartService, Cart\CurrentCartService};
+use App\Services\{Cart\CartService, Cart\CurrentCartService, WishlistService};
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +21,7 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Bootstrap services.
      */
-    public function boot(CurrentCartService $currentCartService, CartService $cartService): void
+    public function boot(CurrentCartService $currentCartService, CartService $cartService, WishlistService $wishlistService): void
     {
         View::composer(['layouts.app', 'index'], function ($view) {
             $view->with([
@@ -30,7 +31,7 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         });
 
-        View::composer('layouts.app', function ($view) use ($currentCartService, $cartService) {
+        View::composer('layouts.app', function ($view) use ($currentCartService, $cartService, $wishlistService) {
             $cart = $currentCartService->findById();
 
             $view->with([
@@ -39,6 +40,10 @@ class ViewServiceProvider extends ServiceProvider
 
             $view->with([
                 'cartCounter' => $cartService->getItemsCount()
+            ]);
+
+            $view->with([
+                'wishlistCounter' => $wishlistService->getItemsCount()
             ]);
         });
 
