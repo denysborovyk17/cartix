@@ -6,9 +6,11 @@ namespace App\Models\User;
 use App\Enums\UserRole;
 use App\Models\Cart\Cart;
 use App\Models\Order\Order;
+use App\Models\Product\Product;
+use App\Models\Product\ProductVariant;
 use App\Models\Product\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
+use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany, HasOne};
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -58,5 +60,10 @@ class User extends Authenticatable
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function wishlistItems(): BelongsToMany
+    {
+        return $this->belongsToMany(ProductVariant::class, 'wishlist_items');
     }
 }

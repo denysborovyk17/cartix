@@ -125,11 +125,27 @@
                         </li>
                     @endguest
 
+                    @auth
+                        <li class="ms-1 d-none d-lg-inline-block">
+                            <a class="nav-link text-body wishlist-counter" href="{{ route('wishlist') }}">
+                                Wishlist ({{ $wishlistCounter }})
+                            </a>
+                        </li>
+                    @endauth
+
+                    @guest
+                        <li class="ms-1 d-none d-lg-inline-block">
+                            <a class="nav-link text-body" href="{{ route('auth.login') }}">
+                                Wishlist
+                            </a>
+                        </li>
+                    @endguest
+
                     <!-- Navbar Cart Icon-->
                     <li class="ms-1 d-inline-block position-relative dropdown-cart">
                         <button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body cart-counter"
                                 type="button">
-                            My Cart ({{ $cartCounter }})
+                            Cart ({{ $cartCounter }})
                         </button>
                         <div class="cart-dropdown dropdown-menu">
 
@@ -351,5 +367,8 @@
 
     <!-- AJAX Cart JS -->
     <script src="{{ asset('/js/cart.js') }}"></script>
+
+    <!-- AJAX Wishlist JS -->
+    <script src="{{ asset('/js/wishlist.js') }}"></script>
 </body>
 </html>

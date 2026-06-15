@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\User\User;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,5 +41,10 @@ class ProductVariant extends Model
             'product_variant_id',
             'option_value_id'
         );
+    }
+
+    public function userWishlistItems(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'wishlist_items');
     }
 }

@@ -84,14 +84,14 @@
                                                             <h6 class="mb-2">{{ $cartItem->productVariant->product->name }}</h6>
                                                                 <h6>
                                                                     Quantity <input type="number"
-                                                                                    class="quantity"
+                                                                                    class="cart-item-quantity"
                                                                                     data-product-variant-id="{{ $cartItem->product_variant_id }}"
                                                                                     name="quantity" value="{{ $cartItem->quantity }}"
                                                                                     min="1">
                                                                 </h6>
                                                         </div>
 
-                                                        <button class="btn btn-danger btn-sm remove-item"
+                                                        <button class="btn btn-danger btn-sm remove-cart-item"
                                                                 data-product-variant-id="{{ $cartItem->product_variant_id }}">
                                                             Delete
                                                         </button>

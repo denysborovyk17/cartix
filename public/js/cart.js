@@ -8,13 +8,14 @@
     });
 
     function addCartItem() {
-        document.body.addEventListener('click', async (e) => {
-            const button = e.target.closest('.add-item');
+        document.addEventListener('click', async (event) => {
+            const button = event.target.closest('.add-cart-item');
             if (!button) {
                 return;
             }
 
-            const productVariantId = button.dataset.productVariantId;
+            const productVariantId = button.getAttribute('data-product-variant-id');
+            const productVariantQuantity = 1;
 
             try {
                 const response = await fetch(`/cart`, {
@@ -25,7 +26,7 @@
                     },
                     body: JSON.stringify({
                         product_variant_id: productVariantId,
-                        quantity: 1
+                        quantity: productVariantQuantity
                     })
                 });
 
@@ -47,7 +48,7 @@
 
                 const cartCounter = document.querySelector('.cart-counter')
                 if (cartCounter) {
-                    cartCounter.textContent = `My Cart (${data.cartCounter})`;
+                    cartCounter.textContent = `Cart (${data.cartCounter})`;
                 }
 
                 const itemTotal = document.querySelector(`.item-total[data-product-variant-id="${productVariantId}"]`);
@@ -73,14 +74,14 @@
     }
 
     function updateCartItem() {
-        document.body.addEventListener('input', (e) => {
-            if (!e.target.classList.contains('quantity')) {
+        document.addEventListener('input', (event) => {
+            if (!event.target.classList.contains('cart-item-quantity')) {
                 return;
             }
 
-            const input = e.target;
+            const input = event.target;
             const quantity = Number(input.value);
-            const productVariantId = input.dataset.productVariantId;
+            const productVariantId = input.getAttribute('data-product-variant-id');
 
             if (!quantity || quantity < 1) {
                 return;
@@ -96,7 +97,9 @@
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': csrf
                         },
-                        body: JSON.stringify({quantity})
+                        body: JSON.stringify({
+                            quantity: quantity
+                        })
                     });
 
                     const data = await response.json();
@@ -112,20 +115,20 @@
                     }
 
                 } catch (error) {
-                    console.error(error);
+                    console.log(error);
                 }
             }, 400);
         })
     }
 
     function deleteCartItem() {
-        document.body.addEventListener('click', async (e) => {
-            const button = e.target.closest('.remove-item');
+        document.addEventListener('click', async (event) => {
+            const button = event.target.closest('.remove-cart-item');
             if (!button) {
                 return;
             }
 
-            const productVariantId = button.dataset.productVariantId;
+            const productVariantId = button.getAttribute('data-product-variant-id');
 
             try {
                 const response = await fetch(`/cart/${productVariantId}`, {
