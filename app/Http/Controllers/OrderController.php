@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Checkout\ConfirmPaymentAction;
 use App\Http\Requests\ConfirmPaymentRequest;
 use App\Models\Payment\Payment;
-use App\Repositories\OrderRepository;
+use App\Repositories\{OrderRepository, PaymentRepository};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Throwable;
@@ -13,7 +13,8 @@ use Throwable;
 final readonly class OrderController
 {
     public function __construct(
-        private OrderRepository $orderRepository
+        private OrderRepository $orderRepository,
+        private PaymentRepository $paymentRepository
     ) {
     }
 
@@ -47,7 +48,7 @@ final readonly class OrderController
 
     public function fail(int $paymentId): View
     {
-        $payment = Payment::query()->findOrFail($paymentId);
+        $payment = $this->paymentRepository->findById($paymentId);
 
         return view('checkout.checkout-fail', compact('payment'));
     }
