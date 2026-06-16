@@ -8,7 +8,7 @@ use App\Models\Product\{Product, Brand, OptionValue};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
-class ProductRepository
+readonly class ProductRepository
 {
     public function findBySlug(string $slug): Product
     {

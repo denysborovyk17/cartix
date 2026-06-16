@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Product\Review;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class ReviewRepository
+readonly class ReviewRepository
 {
     public function getForProduct(int $productId): LengthAwarePaginator
     {

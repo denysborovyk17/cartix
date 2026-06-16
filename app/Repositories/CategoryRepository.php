@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Product\Category;
 
-class CategoryRepository
+readonly class CategoryRepository
 {
     public function findBySlug(string $slug): Category
     {

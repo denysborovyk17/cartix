@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Cart\Cart;
 
-class CartRepository
+readonly class CartRepository
 {
     public function findOrCreate(?int $userId, string $sessionId): Cart
     {

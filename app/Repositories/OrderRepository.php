@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Order\Order;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class OrderRepository
+readonly class OrderRepository
 {
     public function __construct(
         //
