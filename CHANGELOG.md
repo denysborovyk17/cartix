@@ -23,6 +23,39 @@
 
 -
 
+## [0.21.0] - 2026-06-16
+
+### Додано
+
+- Поля `avatar_path`, `phone` та `birthday` в таблиці `users` - [Migration](database/migrations/2026_06_15_162416_add_columns_to_users_table.php).
+- Директорію `public/storage/avatars` для локального збереження аватарів користувачів.
+- Контролер `OrderHistoryController` та метод `getHistory` репозиторію `OrderRepository` для передачі даних про історію замовлень авторизованих користувачів до Blade-шаблону.
+- `UpdateProfileData` (DTO) та `UpdateProfileRequest` для типізації та валідації даних при оновленні профілю.
+- Екшен `UpdateProfileAction` для того, щоб користувач міг оновлювати свій профіль.
+- Реквест `UpdateProfileRequest` для валідації даних при оновленні профілю користувача.
+- Контролер `ProfileController`, нові маршрути, CSS стилі та Blade-шаблони `profile/*` для профілю користувача.
+- `UpdatePasswordData` (DTO) та `UpdatePasswordRequest` для типізації та валідації даних при оновленні пароля.
+- Екшен `UpdateProfileAction` для того, щоб користувач міг оновлювати свій пароль.
+- Контролер `PasswordController` та нові маршрути.
+- Blade-шаблон `checkout/checkout-fail.blade.php` який містить інформацію про невдалу оплату замовлення.
+- Сервіс `FakePaymentGateWayService` який емулює оплату замовлення та генерує шанс на успіх або невдачу.
+- `ConfirmPaymentData` (DTO) та `ConfirmPaymentRequest` для типізації та валідації даних при заповненні даних для оплати.
+- Перевірку в методі `complete` у контролері `OrderController` з результатом, куди перенаправити користувача залежно від результату платежу.
+- Обмеження кількості спроб оплати замовлення в `RateLimiterServiceProvider` та підключено до маршруту оплати замовлення.
+- Сервіс `AvatarService` з бізнес-логікою створення, оновлення та видалення аватару користувача.
+- Репозиторій `UserRepository` для пошуку користувача за його ID.
+- Репозиторій `PaymentRepository` для пошуку платежу за його ID.
+
+### Змінено
+
+- Назву зв'язку в моделі `OrderItem`, перейменовано з `variant` на `productVariant`.
+- Розташування списання кількості товару зі складу, переміщено з `CreateOrderAction` до `ConfirmPaymentAction` та обгорнуто логіку створення платежу в транзакцію.
+- Поля `card_last4`, `gateway_transaction_id` та `payload`, тепер вони можуть бути `nullable` - [Migration](database/migrations/2026_06_16_102322_change_columns_in_payments_table.php).
+
+### Видалено
+
+- Префікс `auth` для маршрутів реєстрації та логіну.
+
 ## [0.20.0] - 2026-06-15
 
 ### Додано
