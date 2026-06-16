@@ -13,7 +13,7 @@ readonly class CreateOrderData
         private PhoneNumber $phone,
         private string $city,
         private string $address,
-        private string $notes
+        private ?string $notes
     ) {
     }
 
@@ -60,7 +60,7 @@ readonly class CreateOrderData
         return $this->address;
     }
 
-    public function getNotes(): string
+    public function getNotes(): string|null
     {
         return $this->notes;
     }
