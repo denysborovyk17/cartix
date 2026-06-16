@@ -30,7 +30,7 @@ class StoreCheckoutRequest extends FormRequest
             'phone' => ['required', 'phone:UA'],
             'city' => ['required', 'string', 'max:50'],
             'address' => ['required', 'string', 'max:100'],
-            'notes' => ['string', 'max:500']
+            'notes' => ['nullable', 'string', 'max:500']
         ];
     }
 
