@@ -36,6 +36,7 @@ Route::prefix('orders/{orderId}')->as('orders.')->middleware('ensureOwnsOrder')-
     Route::get('/payment', [OrderController::class, 'show'])->name('payment');
     Route::post('/payment/complete', [OrderController::class, 'complete'])->name('payment.complete');
     Route::get('/success', [OrderController::class, 'success'])->name('success');
+    Route::get('/fail', [OrderController::class, 'fail'])->name('fail');
 });
 
 Route::middleware('auth')->group(function () {
