@@ -34,7 +34,7 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 
 Route::prefix('orders/{orderId}')->as('orders.')->middleware('ensureOwnsOrder')->group(function () {
     Route::get('/payment', [OrderController::class, 'show'])->name('payment');
-    Route::post('/payment/complete', [OrderController::class, 'complete'])->name('payment.complete');
+    Route::post('/payment/complete', [OrderController::class, 'complete'])->middleware('throttle:payment.complete')->name('payment.complete');
     Route::get('/success', [OrderController::class, 'success'])->name('success');
     Route::get('/fail', [OrderController::class, 'fail'])->name('fail');
 });
