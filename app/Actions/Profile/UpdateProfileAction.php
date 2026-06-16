@@ -4,34 +4,26 @@ namespace App\Actions\Profile;
 
 use App\Data\UpdateProfileData;
 use App\Models\User\User;
-use Illuminate\Support\Facades\Storage;
+use App\Repositories\UserRepository;
+use App\Services\AvatarService;
 
 readonly class UpdateProfileAction
 {
     public function __construct(
-        //
+        private UserRepository $userRepository,
+        private AvatarService $avatarService
     ) {
     }
 
-    public function handle(UpdateProfileData $data): User
+    public function handle(UpdateProfileData $data, int $userId): User
     {
-        $user = auth()->user();
+        $user = $this->userRepository->findById($userId);
 
-        if ($data->getRemoveAvatarPath() && $user->avatar_path) {
-            Storage::disk('public')->delete($user->avatar_path);
-            $user->avatar_path = null;
-        }
-
-        if ($data->getAvatarPath()) {
-            if ($user->avatar_path) {
-                Storage::disk('public')->delete($user->avatar_path);
-            }
-            $user->avatar_path = $data->getAvatarPath()->store('avatars', 'public');
-        }
+        $avatarPath = $this->avatarService->updateForUser($data, $user->avatar_path);
 
         $user->update([
             'name' => $data->getName(),
-            'avatar_path' => $user->avatar_path,
+            'avatar_path' => $avatarPath,
             'phone' => $data->getPhone(),
             'birthday' => $data->getBirthday()
         ]);
