@@ -2,26 +2,31 @@
 
 namespace App\Models\User;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRole;
 use App\Models\Cart\Cart;
 use App\Models\Order\Order;
-use App\Models\Product\Product;
 use App\Models\Product\ProductVariant;
 use App\Models\Product\Review;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany, HasOne};
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
 
 /**
  * @property int $id Унікальний ідентифікатор користувача
  * @property string $name Ім'я користувача
  * @property string $email Електронна адреса користувача
  * @property string $password Пароль користувача
+ * @property string|null $avatar_path Аватар користувача
+ * @property string|null $avatar_path_url Аватар користувача (URL)
+ * @property string|null $phone Номер телефону користувача
+ * @property CarbonInterface|null $birthday День народження користувача
  * @property UserRole $role Роль користувача
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -29,6 +34,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar_path',
+        'phone',
+        'birthday',
         'role'
     ];
 
@@ -43,6 +51,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'phone' => E164PhoneNumberCast::class . ':UA',
+            'birthday' => 'date',
             'role' => UserRole::class
         ];
     }
@@ -65,5 +75,10 @@ class User extends Authenticatable
     public function wishlistItems(): BelongsToMany
     {
         return $this->belongsToMany(ProductVariant::class, 'wishlist_items');
+    }
+
+    public function getAvatarPathUrlAttribute(): string|null
+    {
+        return $this->avatar_path ? asset('storage/' . $this->avatar_path) : null;
     }
 }

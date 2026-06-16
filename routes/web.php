@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{CartController, CategoryController, ProductController, CheckoutController, OrderController, ReviewController, WishlistController};
 use App\Http\Controllers\Auth\{RegisterController, LoginController, LogoutController, ForgotPasswordController, ResetPasswordController};
+use App\Http\Controllers\User\{ProfileController, OrderHistoryController, PasswordController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn() => view('index'))->name('index');
@@ -40,9 +41,17 @@ Route::prefix('orders/{orderId}')->as('orders.')->middleware('ensureOwnsOrder')-
 Route::middleware('auth')->group(function () {
     Route::get('/reviews/products/{product:slug}', [ReviewController::class, 'show'])->name('reviews.show');
     Route::post('/reviews/products/{product:slug}', [ReviewController::class, 'store'])->name('reviews.store');
-});
 
-Route::middleware('auth')->group(function () {
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
     Route::post('/wishlist/{productVariantId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::prefix('profile')->as('profile.')->group(function () {
+        Route::get('/orders', [OrderHistoryController::class, 'index'])->name('orders');
+
+        Route::get('/security', [PasswordController::class, 'index'])->name('security');
+        Route::put('/security', [PasswordController::class, 'update'])->name('security.update');
+    });
 });
