@@ -95,31 +95,48 @@
                             <!-- Checkout Panel Information-->
                             <h3 class="fs-5 fw-bolder mb-4 border-bottom pb-4">Payment Information</h3>
 
-                            <div class="row">
-                                <!-- Payment Option-->
-                                <div class="col-12">
-                                    <div class="form-check form-group form-check-custom form-radio-custom mb-3">
-                                    <input class="form-check-input" type="radio" name="checkoutPaymentMethod" id="checoutPaymentStripe" checked>
-                                    <label class="form-check-label" for="checoutPaymentStripe">
-                                        <span class="d-flex justify-content-between align-items-start">
-                                            <span>
-                                                <span class="mb-0 fw-bolder d-block">Credit Card (Stripe)</span>
-                                            </span>
-                                            <i class="ri-bank-card-line"></i>
-                                        </span>
-                                    </label>
-                                    </div>
+                            <!-- Payment Details-->
+                            <div class="card-details">
+                                <div class="row pt-3">
+                                    <form method="POST" action="{{ route('orders.payment.complete', $order->id) }}">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="cc-number" class="form-label">Credit card number</label>
+                                                <input type="text" class="form-control" name="card_last4" id="cc-number" placeholder="4242 4242 4242 4242">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="cc-expiration" class="form-label">Expiration</label>
+                                                <input type="text" class="form-control" id="cc-expiration" placeholder="MM / YY">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="cc-cvv" class="form-label">Security Code</label>
+                                                    <input type="text" class="form-control" id="cc-cvv" placeholder="CVC">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
+                                            <a href="{{ route('index') }}" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0">
+                                                Back to shop
+                                            </a>
+                                            <button class="btn btn-dark w-100 w-md-auto" role="button">Complete Payment</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                            <!-- / Payment Details-->
 
-                            <div class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
-                              <a href="{{ route('index') }}" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0">
-                                  Back to shop
-                              </a>
-                              <form method="POST" action="{{ route('orders.payment.complete', $order->id) }}">
-                                <button class="btn btn-dark w-100 w-md-auto" role="button">Complete Order</button>
-                              </form>
+                            <!-- Paypal Info-->
+                            <div class="paypal-details bg-light p-4 d-none my-3 fw-bolder">
+                                Please click on complete payment.
                             </div>
+                            <!-- /Paypal Info-->
                         </div>
                     </div>
                 </div>

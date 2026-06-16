@@ -41,19 +41,15 @@ readonly class CreateOrderAction
             $cart = $this->currentCartService->findById();
 
             foreach ($cart->items as $cartItem) {
-                $productVariant = $cartItem->productVariant()->lockForUpdate()->first();
-
-                if ($productVariant->stock < $cartItem->quantity) {
-                    throw new ProductVariantOutOfStockException($productVariant->id);
+                if ($cartItem->productVariant->stock < $cartItem->quantity) {
+                    throw new ProductVariantOutOfStockException($cartItem->productVariant->id);
                 }
 
-                $productVariant->decrement('stock', $cartItem->quantity);
-
                 $order->items()->create([
-                    'product_variant_id' => $productVariant->id,
-                    'product_name' => $productVariant->product->name,
+                    'product_variant_id' => $cartItem->productVariant->id,
+                    'product_name' => $cartItem->productVariant->product->name,
                     'quantity' => $cartItem->quantity,
-                    'price' => $productVariant->price
+                    'price' => $cartItem->productVariant->price
                 ]);
             }
 

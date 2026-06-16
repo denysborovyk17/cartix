@@ -19,5 +19,9 @@ class RateLimiterServiceProvider extends ServiceProvider
         RateLimiter::for('login', function (Request $request) {
             return Limit::perMinute(config('custom.rate_limiter.login'))->by($request->ip());
         });
+
+        RateLimiter::for('payment.complete', function (Request $request) {
+            return Limit::perSecond(config('custom.rate_limiter.per_second'), config('custom.rate_limiter.payment_complete'))->by($request->ip());
+        });
     }
 }

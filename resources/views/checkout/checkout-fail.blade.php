@@ -63,11 +63,10 @@
         </a>
         <!-- / Logo-->
         <div class="shadow-xl p-4 p-lg-5 bg-white">
-            <h1 class="text-center fs-2 mb-5 fw-bold">Payment Completed!</h1>
+            <h1 class="text-center fs-2 mb-5 fw-bold">Payment Failed:(</h1>
             <p class="fs-2 mb-5 fw-bold">
-                Order ID: {{ $order->id }} |
-                Total: ${{ number_format($order->total / 100, 2) }} |
-                Status: {{ $order->status }}
+                Payment ID: {{ $payment->id }} |
+                Status: {{ $payment->status }}
             </p>
             <a class="btn btn-dark d-block w-100 my-4" href="{{ route('index') }}">Back to Home Page</a>
         </div>
@@ -89,4 +88,5 @@
 </body>
 
 </html>
+
 
