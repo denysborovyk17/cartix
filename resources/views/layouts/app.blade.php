@@ -127,6 +127,12 @@
 
                     @auth
                         <li class="ms-1 d-none d-lg-inline-block">
+                            <a class="nav-link text-body" href="{{ route('profile') }}">
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="ms-1 d-none d-lg-inline-block">
                             <a class="nav-link text-body wishlist-counter" href="{{ route('wishlist') }}">
                                 Wishlist ({{ $wishlistCounter }})
                             </a>
