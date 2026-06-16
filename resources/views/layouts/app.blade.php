@@ -67,7 +67,7 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <li class="ms-1 d-none d-lg-inline-block">
-                            <a style="position: absolute; top: 1px; left: 1px;"  href="{{ route('auth.register') }}">
+                            <a style="position: absolute; top: 1px; left: 1px;"  href="{{ route('register') }}">
                                 <button class="bg-white text-black" type="submit">Logout</button>
                             </a>
                         </li>
@@ -113,13 +113,13 @@
 
                     @guest
                         <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="nav-link text-body" href="{{ route('auth.register') }}">
+                            <a class="nav-link text-body" href="{{ route('register') }}">
                                 Sign Up
                             </a>
                         </li>
 
                         <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="nav-link text-body" href="{{ route('auth.login') }}">
+                            <a class="nav-link text-body" href="{{ route('login') }}">
                                 Sign In
                             </a>
                         </li>
@@ -141,7 +141,7 @@
 
                     @guest
                         <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="nav-link text-body" href="{{ route('auth.login') }}">
+                            <a class="nav-link text-body" href="{{ route('login') }}">
                                 Wishlist
                             </a>
                         </li>

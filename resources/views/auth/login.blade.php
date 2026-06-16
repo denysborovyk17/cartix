@@ -66,7 +66,7 @@
                 <h1 class="text-center fw-bold mb-5 fs-2">Login</h1>
 
                 @include('errors.form-errors')
-                <form method="POST" action="{{ route('auth.login.attempt') }}">
+                <form method="POST" action="{{ route('login.attempt') }}">
                     @csrf
                     <div class="form-group">
                       <label class="form-label" for="login-email">Email</label>
@@ -84,7 +84,7 @@
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Sign in</button>
                 </form>
 
-                <p class="d-block text-center text-muted">New customer? <a class="text-muted" href="{{ route('auth.register') }}">Sign up</a></p>
+                <p class="d-block text-center text-muted">New customer? <a class="text-muted" href="{{ route('register') }}">Sign up</a></p>
             </div>
 
         </div>

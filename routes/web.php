@@ -13,13 +13,11 @@ Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name
 Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
 
 Route::middleware('guest')->group(function () {
-    Route::prefix('auth')->as('auth.')->group(function () {
-        Route::view('/register', 'auth.register')->name('register');
-        Route::post('/register', RegisterController::class)->name('register.store');
+    Route::view('/register', 'auth.register')->name('register');
+    Route::post('/register', RegisterController::class)->name('register.store');
 
-        Route::view('/login', 'auth.login')->name('login');
-        Route::post('/login', LoginController::class)->middleware('throttle:login')->name('login.attempt');
-    });
+    Route::view('/login', 'auth.login')->name('login');
+    Route::post('/login', LoginController::class)->middleware('throttle:login')->name('login.attempt');
 
     Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.request');
     Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email');

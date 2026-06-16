@@ -320,7 +320,7 @@
                         @endauth
 
                         @guest
-                            <a href="{{ route('auth.login') }}" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2 alert-link">
+                            <a href="{{ route('login') }}" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2 alert-link">
                                 Sign in to write a review
                             </a>
                         @endguest

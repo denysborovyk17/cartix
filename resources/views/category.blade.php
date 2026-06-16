@@ -67,7 +67,7 @@
                                     name="product_variant_id"
                                     data-product-variant-id="{{ $product->variants->first()->id }}">
                                 @guest
-                                    <a class="ri-heart-line" style="text-decoration: none" href="{{ route('auth.login') }}"></a>
+                                    <a class="ri-heart-line" style="text-decoration: none" href="{{ route('login') }}"></a>
                                 @endguest
 
                                 @auth

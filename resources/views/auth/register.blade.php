@@ -66,7 +66,7 @@
                 <h1 class="text-center mb-5 fs-2 fw-bold">Register</h1>
 
                 @include('errors.form-errors')
-                <form method="POST" action="{{ route('auth.register.store') }}">
+                <form method="POST" action="{{ route('register.store') }}">
                     @csrf
                     <div class="form-group">
                       <label class="form-label" for="register-fname">Name</label>
@@ -91,7 +91,7 @@
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Sign Up</button>
                   </form>
 
-                  <p class="d-block text-center text-muted">Already registered? <a class="text-muted" href="{{ route('auth.login') }}">Sign in</a></p>
+                  <p class="d-block text-center text-muted">Already registered? <a class="text-muted" href="{{ route('login') }}">Sign in</a></p>
             </div>
 
         </div>
