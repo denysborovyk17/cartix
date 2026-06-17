@@ -79,6 +79,10 @@
                             <a class="text-muted small" href="{{ route('password.request') }}">Forgot your password?</a>
                         </label>
                         <input type="password" class="form-control" name="password" id="login-password" placeholder="Enter your password">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="remember" class="rounded text-indigo-600">
+                            <span class="ml-2 text-sm">Remember Me</span>
+                        </label>
                     </div>
 
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Sign in</button>

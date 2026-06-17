@@ -11,8 +11,9 @@ final readonly class LoginController
     public function __invoke(LoginRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
+        $remember = $request->has('remember');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             return redirect()->route('index');
