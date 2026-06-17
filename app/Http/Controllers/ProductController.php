@@ -9,8 +9,8 @@ use Illuminate\View\View;
 final readonly class ProductController
 {
     public function __construct(
-        private readonly ProductRepository $productRepository,
-        private readonly ReviewRepository $reviewRepository
+        private ProductRepository $productRepository,
+        private ReviewRepository $reviewRepository
     ) {
     }
 
