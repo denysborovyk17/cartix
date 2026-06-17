@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Actions\Checkout\ConfirmPaymentAction;
 use App\Http\Requests\ConfirmPaymentRequest;
-use App\Models\Payment\Payment;
 use App\Repositories\{OrderRepository, PaymentRepository};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
