@@ -28,13 +28,13 @@ final readonly class CartController
     {
         $productVariantId = (int) $request->input('product_variant_id');
 
-        $action = $action->handle($productVariantId);
+        $result = $action->handle($productVariantId);
 
         return response()->json([
-            'cartItem' => new CartItemResource($action['cartItem']),
-            'itemTotal' => $this->moneyFormatterService->format($action['itemTotal']),
-            'cartTotal' => $this->moneyFormatterService->format($action['cartTotal']),
-            'cartCounter' => $action['cartCounter']
+            'cartItem' => new CartItemResource($result['cartItem']),
+            'itemTotal' => $this->moneyFormatterService->format($result['itemTotal']),
+            'cartTotal' => $this->moneyFormatterService->format($result['cartTotal']),
+            'cartCounter' => $result['cartCounter']
         ]);
     }
 
@@ -45,21 +45,21 @@ final readonly class CartController
     {
         $quantity = $request->input('quantity');
 
-        $action = $action->handle($productVariantId, $quantity);
+        $result = $action->handle($productVariantId, $quantity);
 
         return response()->json([
             'quantity' => $action['quantity'],
-            'itemTotal' => $this->moneyFormatterService->format($action['itemTotal']),
-            'cartTotal' => $this->moneyFormatterService->format($action['cartTotal'])
+            'itemTotal' => $this->moneyFormatterService->format($result['itemTotal']),
+            'cartTotal' => $this->moneyFormatterService->format($result['cartTotal'])
         ]);
     }
 
     public function destroy(RemoveCartItemAction $action, int $productVariantId): JsonResponse
     {
-        $action = $action->handle($productVariantId);
+        $result = $action->handle($productVariantId);
 
         return response()->json([
-            'cartTotal' => $this->moneyFormatterService->format($action['cartTotal'])
+            'cartTotal' => $this->moneyFormatterService->format($result['cartTotal'])
         ]);
     }
 }

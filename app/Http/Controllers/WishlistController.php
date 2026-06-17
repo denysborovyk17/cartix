@@ -24,11 +24,11 @@ final readonly class WishlistController
 
     public function toggle(ToggleWishlistItemAction $action, int $productVariantId): JsonResponse
     {
-        $action = $action->handle($productVariantId);
+        $result = $action->handle($productVariantId);
 
         return response()->json([
-            'wishlistCounter' => $action['wishlistCounter'],
-            'status' => $action['status']
+            'wishlistCounter' => $result['wishlistCounter'],
+            'status' => $result['status']
         ]);
     }
 }
