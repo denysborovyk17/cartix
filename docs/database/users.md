@@ -31,6 +31,9 @@
 | `email`             | `varchar(255)`    | `NO`  |         | Електронна адреса користувача.        |
 | `email_verified_at` | `timestamp`       | `YES` |         | Підтвердження електронної адреси.     |
 | `password`          | `varchar(255)`    | `NO`  |         | Хешований пароль користувача.         |
+| `avatar_path`       | `varchar(255)`    | `YES` |         | Шлях до аватару користувача.          |
+| `phone`             | `varchar(255)`    | `YES` |         | Номер телефону користувача.           |
+| `birthday`          | `date`            | `YES` |         | День народження користувача.          |
 | `remember_token`    | `varchar(100)`    | `YES` |         | Токен для системи Remember Me.        |
 | `created_at`        | `timestamp`       | `YES` |         | Дата створення запису.                |
 | `updated_at`        | `timestamp`       | `YES` |         | Дата оновлення запису.                |
