@@ -10,6 +10,8 @@
 │   ├── [0002: Скидання пароля](adr/0002-custom-reset-password.md)  
 │   ├── [0003: Пошук Laravel Scout](adr/0003-laravel-scout-search-system.md)  
 │   └── [0004: Пошук та фільтрація](adr/0004-custom-search-and-filter-system.md)  
+│   └── [0005: Списання товару зі складу](adr/0005-move-stock-deductions-to-payment-confirmation.md)  
+│   └── [0006: Емуляція платіжної системи](adr/0006-custom-emulation-payment-system.md)  
 ├── [Architecture/](architecture)  
 │   └── [Concepts](architecture/concepts.md)  
 ├── [Assets/](assets)  
