@@ -21,7 +21,7 @@ final readonly class ProfileController
 
     public function update(UpdateProfileRequest $request, UpdateProfileAction $action): RedirectResponse
     {
-        $action->handle($request->getData(), auth()->id());
+        $action->handle($request->getData());
 
         return redirect()->back();
     }
