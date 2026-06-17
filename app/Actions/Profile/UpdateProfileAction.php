@@ -4,20 +4,18 @@ namespace App\Actions\Profile;
 
 use App\Data\UpdateProfileData;
 use App\Models\User\User;
-use App\Repositories\UserRepository;
 use App\Services\AvatarService;
 
 readonly class UpdateProfileAction
 {
     public function __construct(
-        private UserRepository $userRepository,
         private AvatarService $avatarService
     ) {
     }
 
-    public function handle(UpdateProfileData $data, int $userId): User
+    public function handle(UpdateProfileData $data): User
     {
-        $user = $this->userRepository->findById($userId);
+        $user = auth()->user();
 
         $avatarPath = $this->avatarService->updateForUser($data, $user->avatar_path);
 
