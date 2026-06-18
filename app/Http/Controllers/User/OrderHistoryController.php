@@ -14,9 +14,7 @@ final readonly class OrderHistoryController
 
     public function index(): View
     {
-        $user = auth()->user();
-
-        $orders = $this->orderRepository->getHistory($user->id);
+        $orders = $this->orderRepository->getHistory(auth()->id());
 
         return view('profile.order-history', compact('orders'));
     }
