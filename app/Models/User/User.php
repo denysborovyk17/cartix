@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models\User;
 
@@ -80,5 +80,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatarPathUrlAttribute(): string|null
     {
         return $this->avatar_path ? asset('storage/' . $this->avatar_path) : null;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::ADMIN;
     }
 }
