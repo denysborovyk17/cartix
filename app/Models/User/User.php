@@ -24,6 +24,8 @@ use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
  * @property string|null $avatar_path_url Аватар користувача (URL)
  * @property string|null $phone Номер телефону користувача
  * @property CarbonInterface|null $birthday День народження користувача
+ * @property CarbonInterface|null $created_at Дата створення запису
+ * @property CarbonInterface|null $updated_at Дата оновлення запису
  * @property UserRole $role Роль користувача
  */
 class User extends Authenticatable implements MustVerifyEmail
