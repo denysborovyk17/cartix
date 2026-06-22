@@ -76,7 +76,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function wishlistItems(): BelongsToMany
     {
-        return $this->belongsToMany(ProductVariant::class, 'wishlist_items');
+        return $this->belongsToMany(ProductVariant::class, 'wishlist_items')
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
     public function getAvatarPathUrlAttribute(): string|null
