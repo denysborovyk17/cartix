@@ -34,9 +34,9 @@
                     <div class="card mb-4 mb-xl-0">
                         <div class="card-header">Profile Picture</div>
                         <div class="card-body text-center">
-                            <img class="img-account-profile rounded-circle mb-2" src="{{ auth()->user()->avatar_path_url }}" alt="">
                             <input type="file" class="btn btn-primary" name="avatar_path" accept="image/*">
                             @if (auth()->user()->avatar_path)
+                                <img class="img-account-profile rounded-circle mb-2" src="{{ auth()->user()->avatar_path_url }}" alt="">
                                 Delete Avatar <input type="checkbox" name="remove_avatar_path" value="1">
                             @endif
                         </div>
