@@ -6,7 +6,7 @@ use App\Data\UpdateProfileData;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-readonly class AvatarService
+readonly class FileService
 {
     public function __construct(
         //
