@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\{CartController, CategoryController, ProductController, CheckoutController, OrderController, ReviewController, WishlistController};
 use App\Http\Controllers\Auth\{RegisterController, LoginController, LogoutController, ForgotPasswordController, ResetPasswordController};
+use App\Http\Controllers\Admin\{
+    BrandController as AdminBrandController,
+};
 use App\Http\Controllers\User\{ProfileController, OrderHistoryController, PasswordController};
 use Illuminate\Support\Facades\Route;
 
@@ -10,7 +13,7 @@ Route::get('/', fn() => view('index'))->name('index');
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
-Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
+Route::resource('/cart', CartController::class)->except('create', 'show', 'edit');
 
 Route::middleware('guest')->group(function () {
     Route::view('/register', 'auth.register')->name('register');
@@ -53,4 +56,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/security', [PasswordController::class, 'index'])->name('security');
         Route::put('/security', [PasswordController::class, 'update'])->name('security.update');
     });
+});
+
+Route::get('/admin', fn() => view('sbadmin2.index'))->middleware('ensureIsAdmin')->name('admin.index');
+
+Route::prefix('admin')->as('admin.')->middleware('ensureIsAdmin')->group(function () {
+    Route::view('/profile', 'sbadmin2.profile')->name('profile');
+    Route::view('/profile/security', 'sbadmin2.security')->name('profile.security');
+
+    Route::view('/forgot-password', 'sbadmin2.forgot-password')->name('forgot.password');
+
+    Route::resource('/brands', AdminBrandController::class)->except('show');
 });

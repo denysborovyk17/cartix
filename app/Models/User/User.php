@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models\User;
 
@@ -24,6 +24,8 @@ use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
  * @property string|null $avatar_path_url Аватар користувача (URL)
  * @property string|null $phone Номер телефону користувача
  * @property CarbonInterface|null $birthday День народження користувача
+ * @property CarbonInterface|null $created_at Дата створення запису
+ * @property CarbonInterface|null $updated_at Дата оновлення запису
  * @property UserRole $role Роль користувача
  */
 class User extends Authenticatable implements MustVerifyEmail
@@ -74,11 +76,18 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function wishlistItems(): BelongsToMany
     {
-        return $this->belongsToMany(ProductVariant::class, 'wishlist_items');
+        return $this->belongsToMany(ProductVariant::class, 'wishlist_items')
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
     public function getAvatarPathUrlAttribute(): string|null
     {
         return $this->avatar_path ? asset('storage/' . $this->avatar_path) : null;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::ADMIN;
     }
 }

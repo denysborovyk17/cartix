@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\{EnsureCartIsNotEmpty, EnsureOwnsOrder};
+use App\Http\Middleware\{EnsureCartIsNotEmpty, EnsureIsAdmin, EnsureOwnsOrder};
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\{Middleware, Exceptions};
 
@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'ensureCartIsNotEmpty' => EnsureCartIsNotEmpty::class,
             'ensureOwnsOrder' => EnsureOwnsOrder::class,
+            'ensureIsAdmin' => EnsureIsAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
