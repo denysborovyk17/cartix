@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Data\ProductSearchFilterData;
+use App\Repositories\BrandRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ final readonly class CategoryController
 {
     public function __construct(
         private CategoryRepository $categoryRepository,
-        private ProductRepository $productRepository
+        private ProductRepository $productRepository,
+        private BrandRepository $brandRepository
     ) {
     }
 
@@ -31,7 +33,7 @@ final readonly class CategoryController
             perPage: config('custom.pagination.per_page')
         ), $category->id);
 
-        $brands = $this->productRepository->getBrands();
+        $brands = $this->brandRepository->getBrands();
         $colors = $this->productRepository->getColors();
         $sizes = $this->productRepository->getSizes();
 
