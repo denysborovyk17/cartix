@@ -18,7 +18,7 @@ readonly class ConfirmPaymentAction
     public function __construct(
         private OrderRepository $orderRepository,
         private CurrentCartService $currentCartService,
-        private FakePaymentGatewayService $fakePaymentGateway
+        private FakePaymentGatewayService $fakePaymentGatewayService
     ) {
     }
 
@@ -34,7 +34,7 @@ readonly class ConfirmPaymentAction
                 'status' => OrderStatus::PENDING
             ]);
 
-            $chance = $this->fakePaymentGateway->emulation();
+            $chance = $this->fakePaymentGatewayService->emulation();
 
             if ($chance) {
                 foreach ($order->items as $orderItem) {
