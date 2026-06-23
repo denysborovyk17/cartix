@@ -16,7 +16,7 @@ final readonly class PasswordController
 
     public function update(UpdatePasswordRequest $request, UpdatePasswordAction $action): RedirectResponse
     {
-        $action->handle($request->getData());
+        $action->handle($request->getData(), auth()->id());
 
         return redirect()->route('profile');
     }

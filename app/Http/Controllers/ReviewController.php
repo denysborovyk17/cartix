@@ -23,7 +23,7 @@ final readonly class ReviewController
 
     public function store(StoreReviewRequest $request, CreateReviewAction $action, string $productSlug): RedirectResponse
     {
-        $action->handle($request->getData(), $productSlug);
+        $action->handle($request->getData(), $productSlug, auth()->id());
 
         return redirect()->route('products.show', $productSlug);
     }
