@@ -24,6 +24,7 @@
         <a class="nav-link active" href="{{ route('admin.brands.create') }}">Create Brand</a>
     </nav>
     <hr class="mt-0 mb-4">
+    @include('errors.form-errors')
     <form method="POST" action="{{ route('admin.brands.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -39,7 +40,6 @@
                 <div class="card mb-4">
                     <div class="card-header">Brand Details</div>
                     <div class="card-body">
-                        @include('errors.form-errors')
                         <div class="mb-3">
                             <label class="small mb-1" for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter brand name">

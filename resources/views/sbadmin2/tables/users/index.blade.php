@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Brands Table</title>
+    <title>Users Table</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -43,10 +43,10 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <a href="{{ route('admin.brands.create') }}" class="text-blue-600" style="float: right">Create Brand</a>
+                    <a href="{{ route('admin.users.create') }}" class="text-blue-600" style="float: right">Create User</a>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Brands Table</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Users Table</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -57,24 +57,30 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Slug</th>
-                                            <th>Image</th>
+                                            <th>Email</th>
+                                            <th>Avatar path</th>
+                                            <th>Phone</th>
+                                            <th>Birthday</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
+                                            <th>Role</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($brands as $brand)
+                                        @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $brand->id }}</td>
-                                                <td>{{ $brand->name }}</td>
-                                                <td>{{ $brand->slug }}</td>
-                                                <td>{{ $brand->image }}</td>
-                                                <td>{{ $brand->created_at }}</td>
-                                                <td>{{ $brand->updated_at }}</td>
+                                                <td>{{ $user->id }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->avatar_path }}</td>
+                                                <td>{{ $user->phone }}</td>
+                                                <td>{{ $user->birthday?->format('Y-m-d') }}</td>
+                                                <td>{{ $user->created_at }}</td>
+                                                <td>{{ $user->updated_at }}</td>
+                                                <td>{{ $user->role }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.brands.edit', $brand->id) }}" style="color: blue; padding: 20px;">Edit</a>
-                                                    <form method="POST" action="{{ route('admin.brands.destroy', $brand->id) }}">
+                                                    <a href="{{ route('admin.users.edit', $user->id) }}" style="color: blue; padding: 20px;">Edit</a>
+                                                    <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn" style="color: red">Delete</button>
@@ -93,6 +99,10 @@
 
             </div>
             <!-- End of Main Content -->
+
+            <div>
+                {{ $users->links() }}
+            </div>
 
             @include('sbadmin2.components.footer')
 

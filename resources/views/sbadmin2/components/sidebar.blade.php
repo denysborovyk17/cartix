@@ -28,50 +28,50 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.users.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Users Table</span></a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.brands.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Brands Table</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.categories.index') }}">
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Categories Table</span></a>
+            <span>Users Table</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.payments.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Payments Table</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.orders.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Orders Table</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.reviews.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Reviews Table</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.carts.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Carts Table</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.product-variants.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Product Variants Table</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.wishlists.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Wishlist Items Table</span></a>
-    </li>
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('admin.categories.index') }}">--}}
+{{--            <i class="fas fa-fw fa-table"></i>--}}
+{{--            <span>Categories Table</span></a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('admin.payments.index') }}">--}}
+{{--            <i class="fas fa-fw fa-table"></i>--}}
+{{--            <span>Payments Table</span></a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('admin.orders.index') }}">--}}
+{{--            <i class="fas fa-fw fa-table"></i>--}}
+{{--            <span>Orders Table</span></a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('admin.reviews.index') }}">--}}
+{{--            <i class="fas fa-fw fa-table"></i>--}}
+{{--            <span>Reviews Table</span></a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('admin.carts.index') }}">--}}
+{{--            <i class="fas fa-fw fa-table"></i>--}}
+{{--            <span>Carts Table</span></a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('admin.product-variants.index') }}">--}}
+{{--            <i class="fas fa-fw fa-table"></i>--}}
+{{--            <span>Product Variants Table</span></a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link" href="{{ route('admin.wishlists.index') }}">--}}
+{{--            <i class="fas fa-fw fa-table"></i>--}}
+{{--            <span>Wishlist Items Table</span></a>--}}
+{{--    </li>--}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
