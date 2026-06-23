@@ -73,10 +73,10 @@
                                                 <td>{{ $brand->created_at }}</td>
                                                 <td>{{ $brand->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.brands.edit', $brand->id) }}" style="color: blue">Edit</a>
-                                                    <form method="POST" action="{{ route('admin.brands.destroy', $brand->id) }}" style="display: inline">
+                                                    <a href="{{ route('admin.brands.edit', $brand->id) }}" style="color: blue; padding: 20px;">Edit</a>
+                                                    <form method="POST" action="{{ route('admin.brands.destroy', $brand->id) }}">
                                                         @csrf
-                                                        @method('DELETe')
+                                                        @method('DELETE')
                                                         <button type="submit" class="btn" style="color: red">Delete</button>
                                                     </form>
                                                 </td>
