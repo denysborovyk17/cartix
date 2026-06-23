@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Admin\Brand\CreateBrandAction;
-use App\Actions\Admin\Brand\DeleteBrandAction;
-use App\Actions\Admin\Brand\UpdateBrandAction;
-use App\Http\Requests\Admin\StoreBrandRequest;
-use App\Http\Requests\Admin\UpdateBrandRequest;
+use App\Actions\Admin\Brand\{CreateBrandAction, UpdateBrandAction, DeleteBrandAction};
+use App\Http\Requests\Admin\{StoreBrandRequest, UpdateBrandRequest};
 use App\Repositories\BrandRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -15,7 +12,8 @@ final readonly class BrandController
 {
     public function __construct(
         private BrandRepository $brandRepository
-    ) {}
+    ) {
+    }
 
     public function index(): View
     {
