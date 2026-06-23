@@ -24,6 +24,7 @@
                     <div class="card-header">Edit Brand</div>
                 </div>
                 <div class="card-body">
+                    @include('errors.form-errors')
                     <form method="POST" action="{{ route('admin.brands.update', $brand->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
