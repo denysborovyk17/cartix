@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Admin\User\{CreateUserAction, UpdateUserAction, DeleteUserAction};
-use App\Http\Requests\Admin\{StoreUserRequest, UpdateUserRequest};
+use App\Actions\Admin\User\{CreateUserAction, DeleteUserAction, UpdateUserAction};
+use App\Http\Requests\Admin\{App\Http\Requests\Admin\User\StoreUserRequest,
+    App\Http\Requests\Admin\User\UpdateUserRequest};
 use App\Repositories\UserRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -27,7 +28,7 @@ final readonly class UserController
         return view('sbadmin2.tables.users.create');
     }
 
-    public function store(StoreUserRequest $request, CreateUserAction $action): RedirectResponse
+    public function store(\App\Http\Requests\Admin\User\StoreUserRequest $request, CreateUserAction $action): RedirectResponse
     {
         $action->handle($request->getData());
 
@@ -41,7 +42,7 @@ final readonly class UserController
         return view('sbadmin2.tables.users.edit', compact('user'));
     }
 
-    public function update(UpdateUserRequest $request, UpdateUserAction $action, int $userId): RedirectResponse
+    public function update(\App\Http\Requests\Admin\User\UpdateUserRequest $request, UpdateUserAction $action, int $userId): RedirectResponse
     {
         $action->handle($request->getData(), $userId);
 
