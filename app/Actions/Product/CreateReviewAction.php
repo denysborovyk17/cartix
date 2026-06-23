@@ -12,13 +12,13 @@ readonly class CreateReviewAction
         private ProductRepository $productRepository,
     ) {}
 
-    public function handle(CreateReviewData $data, string $slug): Review
+    public function handle(CreateReviewData $data, string $productSlug, int $userId): Review
     {
-        $product = $this->productRepository->findBySlug($slug);
+        $product = $this->productRepository->findBySlug($productSlug);
 
         return Review::query()->updateOrCreate([
                 'product_id' => $product->id,
-                'user_id' => auth()->id(),
+                'user_id' => $userId,
             ],
             [
                 'rating' => $data->getRating(),
