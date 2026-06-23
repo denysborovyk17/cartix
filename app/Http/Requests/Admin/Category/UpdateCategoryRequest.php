@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Admin\Category;
 
-use App\Data\Admin\BrandData;
+use App\Data\Admin\CategoryData;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBrandRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,12 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048']
+            'parent' => ['nullable', 'string', 'exists:categories,name']
         ];
     }
 
-    public function getData(): BrandData
+    public function getData(): CategoryData
     {
-        return BrandData::fromArray($this->validated());
+        return CategoryData::fromArray($this->validated());
     }
 }

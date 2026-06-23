@@ -12,13 +12,13 @@ readonly class SlugService
     ) {
     }
 
-    public function generateUnique(string $name, Model $model): string
+    public function generateUnique(string $name, Model $model, ?int $id = null): string
     {
         $slug = Str::slug($name);
         $originalSlug = $slug;
         $counter = 1;
 
-        while ($model->newQuery()->where('slug', $slug)->exists()) {
+        while ($model->newQuery()->where('slug', $slug)->when($id, fn($q) => $q->whereNot('id', $id))->exists()) {
             $slug = $originalSlug . '-' . $counter++;
         }
 

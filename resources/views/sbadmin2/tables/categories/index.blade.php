@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Users Table</title>
+    <title>Categories Table</title>
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -36,10 +36,10 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <a href="{{ route('admin.users.create') }}" class="text-blue-600" style="float: right">Create User</a>
+                    <a href="{{ route('admin.categories.create') }}" class="text-blue-600" style="float: right">Create Category</a>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Users Table</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Categories Table</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -50,30 +50,24 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Avatar path</th>
-                                            <th>Phone</th>
-                                            <th>Birthday</th>
+                                            <th>Slug</th>
+                                            <th>Parent ID</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
-                                            <th>Role</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $user)
+                                        @foreach ($categories as $category)
                                             <tr>
-                                                <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->avatar_path }}</td>
-                                                <td>{{ $user->phone }}</td>
-                                                <td>{{ $user->birthday?->format('Y-m-d') }}</td>
-                                                <td>{{ $user->created_at }}</td>
-                                                <td>{{ $user->updated_at }}</td>
-                                                <td>{{ $user->role }}</td>
+                                                <td>{{ $category->id }}</td>
+                                                <td>{{ $category->name }}</td>
+                                                <td>{{ $category->slug }}</td>
+                                                <td>{{ $category->parent?->name }}</td>
+                                                <td>{{ $category->created_at }}</td>
+                                                <td>{{ $category->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.users.edit', $user->id) }}" style="color: blue; padding: 20px;">Edit</a>
-                                                    <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+                                                    <a href="{{ route('admin.categories.edit', $category->id) }}" style="color: blue; padding: 20px;">Edit</a>
+                                                    <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn" style="color: red">Delete</button>
@@ -94,7 +88,7 @@
             <!-- End of Main Content -->
 
             <div>
-                {{ $users->links() }}
+                {{ $categories->links() }}
             </div>
 
             @include('sbadmin2.components.footer')

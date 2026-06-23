@@ -37,11 +37,11 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Users Table</span></a>
     </li>
-{{--    <li class="nav-item">--}}
-{{--        <a class="nav-link" href="{{ route('admin.categories.index') }}">--}}
-{{--            <i class="fas fa-fw fa-table"></i>--}}
-{{--            <span>Categories Table</span></a>--}}
-{{--    </li>--}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.categories.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Categories Table</span></a>
+    </li>
 {{--    <li class="nav-item">--}}
 {{--        <a class="nav-link" href="{{ route('admin.payments.index') }}">--}}
 {{--            <i class="fas fa-fw fa-table"></i>--}}

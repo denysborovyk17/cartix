@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Admin\Brand;
 
 use App\Data\Admin\BrandData;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBrandRequest extends FormRequest
+class StoreBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'max:50'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
-            'remove_image' => ['sometimes', 'boolean']
+            'name' => ['required', 'string', 'max:50'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048']
         ];
     }
 
