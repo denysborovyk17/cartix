@@ -23,13 +23,25 @@
 
 -
 
+## [0.24.0] - 2026-06-23
+
+### Додано
+
+- `UserData` (DTO), `StoreUserRequest` та `UpdateUserRequest` для типізації та валідації даних при створенні та оновленні користувача.
+- Екшени `CreateUserAction`, `UpdateUserAction` та `DeleteUserAction` для CRUD операцій з користувачем.
+- `CategoryData` (DTO), `StoreCategoryRequest` та `UpdateCategoryRequest` для типізації та валідації даних при створенні та оновленні категорії.
+- Методи в `CategoryRepository` для пошуку категорії за ID, батьківською категорією та отримання всіх записів.
+- Зв'язок `belongsTo` (`parent()`) у моделі `Category` для доступу до батьківських категорій.
+- Екшени `CreateCategoryAction`, `UpdateCategoryAction` та `DeleteCategoryAction` для CRUD операцій з категорією.
+- Контролер `UserController`, `CategoryController`, нові маршрути та Blade-шаблони `tables/users/*`, `tables/categories/tables` для роботи з користувачами та категоріями.
+
 ## [0.23.0] - 2026-06-22
 
 ### Додано
 
 - Передачу ID авторизованого користувача через глобальний хелпер `auth()->id()` в `UpdateProfileAction` всередині `ProfileController`.
 - Метод `isAdmin` у моделі `User` для перевірки ролі користувача.
-- Мідлвар `EnsureIsAdmin` для блокування доступу до адмінської частини, якщо роль користувача `user` (глобальна реєстрація в `bootstrapp/app.php`).
+- Мідлвар `EnsureIsAdmin` для блокування доступу до адмінської частини, якщо роль користувача `user` (глобальна реєстрація в `bootstrap/app.php`).
 - Методи для отримання ID та `Timestamps` проміжної таблиці в моделі `User` для зв'язку `wishlistItems`.
 - Репозиторій `BrandRepository` для отримання брендів та пошуку бренду за ID.
 - `BrandData` (DTO), `StoreBrandRequest` та `UpdateBrandRequest` для типізації та валідації даних при створенні та оновленні бренду.
@@ -160,8 +172,8 @@
 
 - Blade-шаблон `checkout/checkout-success.blade.php` який містить інформацію про замовлення.
 - Контролер `OrderController` для управління станом та відображення інформації про замовлення.
-- Мідлвар `EnsureCartIsNotEmpty` для блокування доступу до сторінки оформлення замовлення, якщо кошик порожній (глобальна реєстрація в `bootstrapp/app.php`).
-- Мідлвар `EnsureOwnsOrder` для захисту сторінки замовлення від переглядну іншими користувачами за ID (глобальна реєстрація в `bootstrapp/app.php`).
+- Мідлвар `EnsureCartIsNotEmpty` для блокування доступу до сторінки оформлення замовлення, якщо кошик порожній (глобальна реєстрація в `bootstrap/app.php`).
+- Мідлвар `EnsureOwnsOrder` для захисту сторінки замовлення від переглядну іншими користувачами за ID (глобальна реєстрація в `bootstrap/app.php`).
 - Збереження унікального ідентифікатора замовлення в сесії всередині `CheckoutController` з метою його перевірки в мідлварі `EnsureOwnsOrder`.
 - Метод `resolvePrice` в `CartService` для автоматичного визначення ціни товару з урахуванням можливої знижки.
 
