@@ -25,7 +25,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'parent' => ['nullable', 'string', 'exists:categories,name']
+            'parent' => ['nullable', 'string', 'exists:categories,name', 'different:name']
         ];
     }
 
