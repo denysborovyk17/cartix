@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Data\ProductSearchFilterData;
 use Illuminate\Support\Facades\DB;
-use App\Models\Product\{Product, Brand, OptionValue};
+use App\Models\Product\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -36,27 +36,6 @@ readonly class ProductRepository
             ->latest()
             ->take(4)
             ->get();
-    }
-
-    public function getBrands(): Collection
-    {
-        return Brand::query()->get();
-    }
-
-    public function getColors(): array
-    {
-        return OptionValue::query()
-            ->whereHas('option', fn($q) => $q->where('name', 'Color'))
-            ->pluck('value')
-            ->toArray();
-    }
-
-    public function getSizes(): array
-    {
-        return OptionValue::query()
-            ->whereHas('option', fn($q) => $q->where('name', 'Size'))
-            ->pluck('value')
-            ->toArray();
     }
 
     public function findBySearchAndFilter(ProductSearchFilterData $data, int $categoryId): LengthAwarePaginator
