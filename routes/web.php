@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\{
     UserController as AdminUserController,
     CategoryController as AdminCategoryController,
     OptionController as AdminOptionController,
+    OptionValueController as AdminOptionValueController,
 };
 use App\Http\Controllers\User\{ProfileController, OrderHistoryController, PasswordController};
 use Illuminate\Support\Facades\Route;
@@ -73,4 +74,5 @@ Route::prefix('admin')->as('admin.')->middleware('ensureIsAdmin')->group(functio
     Route::resource('/users', AdminUserController::class)->except('show');
     Route::resource('/categories', AdminCategoryController::class)->except('show');
     Route::resource('/options', AdminOptionController::class)->except('show');
+    Route::resource('/option-values', AdminOptionValueController::class)->except('show');
 });

@@ -21,4 +21,9 @@ readonly class OptionRepository
     {
         return Option::query()->findOrFail($optionId);
     }
+
+    public function findByName(string $name): Option
+    {
+        return Option::query()->where('name', $name)->firstOrFail();
+    }
 }
