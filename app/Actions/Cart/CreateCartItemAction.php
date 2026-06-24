@@ -6,7 +6,7 @@ use App\Models\Cart\CartItem;
 use App\Services\Cart\CartService;
 use App\Services\Cart\CurrentCartService;
 
-readonly class AddCartItemAction
+readonly class CreateCartItemAction
 {
     public function __construct(
         private CurrentCartService $currentCartService,

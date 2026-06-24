@@ -5,7 +5,7 @@ namespace App\Actions\Cart;
 use App\Services\Cart\CartService;
 use App\Services\Cart\CurrentCartService;
 
-readonly class RemoveCartItemAction
+readonly class DeleteCartItemAction
 {
     public function __construct(
         private CurrentCartService $currentCartService,
