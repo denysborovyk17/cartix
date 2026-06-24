@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Cart\{AddCartItemAction, RemoveCartItemAction, UpdateCartItemAction};
+use App\Actions\Cart\{CreateCartItemAction, DeleteCartItemAction, UpdateCartItemAction};
 use App\Exceptions\ProductVariantOutOfStockException;
 use App\Http\Requests\Cart\{StoreCartItemRequest, UpdateCartItemRequest};
 use App\Http\Resources\CartItemResource;
@@ -24,7 +24,7 @@ final readonly class CartController
         return view('cart', compact('cart'));
     }
 
-    public function store(StoreCartItemRequest $request, AddCartItemAction $action): JsonResponse
+    public function store(StoreCartItemRequest $request, CreateCartItemAction $action): JsonResponse
     {
         $productVariantId = (int) $request->input('product_variant_id');
 
@@ -54,7 +54,7 @@ final readonly class CartController
         ]);
     }
 
-    public function destroy(RemoveCartItemAction $action, int $productVariantId): JsonResponse
+    public function destroy(DeleteCartItemAction $action, int $productVariantId): JsonResponse
     {
         $result = $action->handle($productVariantId);
 
