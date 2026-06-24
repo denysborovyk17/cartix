@@ -18,16 +18,13 @@ readonly class UpdateCategoryAction
     public function handle(CategoryData $data, int $categoryId): Category
     {
         $category = $this->categoryRepository->findById($categoryId);
+        $slug = $this->slugService->generateUnique($data->getName(), new Category(), $category->id) ?? $category->slug;
         $parent = $this->categoryRepository->findByParentName($data->getParent());
-
-        if ($category->id === $parent->id) {
-            $parent->id = null;
-        }
 
         $category->update([
             'name' => $data->getName(),
-            'slug' => $this->slugService->generateUnique($data->getName(), new Category(), $category->id),
-            'parent_id' => $parent->id
+            'slug' => $slug,
+            'parent_id' => $parent->id ?? null
         ]);
 
         return $category;

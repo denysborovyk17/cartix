@@ -19,11 +19,12 @@ readonly class UpdateBrandAction
     public function handle(BrandData $data, int $brandId): Brand
     {
         $brand = $this->brandRepository->findById($brandId);
+        $slug = $this->slugService->generateUnique($data->getName(), new Brand(), $brand->id) ?? $brand->slug;
         $imagePath = $this->fileService->update($data->getRemoveImage(), $data->getImage(), $brand->image);
 
         $brand->update([
             'name' => $data->getName(),
-            'slug' => $this->slugService->generateUnique($data->getName(), new Brand(), $brand->id) ?? $brand->slug,
+            'slug' => $slug,
             'image' => $imagePath
         ]);
 

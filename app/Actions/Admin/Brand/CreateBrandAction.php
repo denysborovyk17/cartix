@@ -15,9 +15,11 @@ readonly class CreateBrandAction
 
     public function handle(BrandData $data): Brand
     {
+        $slug = $this->slugService->generateUnique($data->getName(), new Brand());
+
         return Brand::create([
             'name' => $data->getName(),
-            'slug' => $this->slugService->generateUnique($data->getName(), new Brand()),
+            'slug' => $slug,
             'image' => $data->getImage()
         ]);
     }

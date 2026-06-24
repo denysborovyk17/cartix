@@ -17,11 +17,12 @@ readonly class CreateCategoryAction
 
     public function handle(CategoryData $data): Category
     {
+        $slug = $this->slugService->generateUnique($data->getName(), new Category());
         $parent = $this->categoryRepository->findByParentName($data->getParent());
 
         return Category::create([
             'name' => $data->getName(),
-            'slug' => $this->slugService->generateUnique($data->getName(), new Category()),
+            'slug' => $slug,
             'parent_id' => $parent->id ?? null
         ]);
     }
