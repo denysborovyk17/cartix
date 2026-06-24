@@ -23,6 +23,25 @@
 
 -
 
+## [0.25.0] - 2026-06-24
+
+### Додано
+
+- Метод в `UserRepository` для отримання всіх користувачів.
+- `OptionData` (DTO), `StoreOptionRequest` та `UpdateOptionRequest` для типізації та валідації даних при створенні та оновленні опцій.
+- `OptionValueData` (DTO), `StoreOptionValueRequest` та `UpdateOptionValueRequest` для типізації та валідації даних при створенні та оновленні значень опцій.
+- Репозиторій `OptionRepository` для пошуку за ID, іменем та отримання всіх записів.
+- Репозиторій `OptionValueRepository` для пошуку за ID, отримання опцій товарів та всіх записів.
+- Екшени `CreateOptionAction`, `UpdateOptionAction` та `DeleteOptionAction` для CRUD операцій з опцією.
+- Екшени `CreateOptionValueAction`, `UpdateOptionValueAction` та `DeleteOptionValueAction` для CRUD операцій зі значеннями опції.
+- Контролер `OptionController`, `OptionValueController`, нові маршрути та Blade-шаблони `tables/options/*`, `tables/option-values/*` для роботи з опціями та їхніми значеннями.
+- Ін'єктовано `OptionValueRepository` до `CategoryController` для передачі списку значень опцій товарів на сторінку категорії.
+- Правило валідації в `UpdateCategoryRequest`, яке забороняє встановлювати власну категорію як батьківську.
+
+### Змінено
+
+- Розташування методів для отримання опцій товарів, перенесено з `ProductRepository` до `OptionValueRepository`.
+
 ## [0.24.0] - 2026-06-23
 
 ### Додано
@@ -33,7 +52,7 @@
 - Методи в `CategoryRepository` для пошуку категорії за ID, батьківською категорією та отримання всіх записів.
 - Зв'язок `belongsTo` (`parent()`) у моделі `Category` для доступу до батьківських категорій.
 - Екшени `CreateCategoryAction`, `UpdateCategoryAction` та `DeleteCategoryAction` для CRUD операцій з категорією.
-- Контролер `UserController`, `CategoryController`, нові маршрути та Blade-шаблони `tables/users/*`, `tables/categories/tables` для роботи з користувачами та категоріями.
+- Контролер `UserController`, `CategoryController`, нові маршрути та Blade-шаблони `tables/users/*`, `tables/categories/*` для роботи з користувачами та категоріями.
 
 ## [0.23.0] - 2026-06-22
 
