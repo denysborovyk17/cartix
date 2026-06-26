@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
  * @property string $slug Унікальний слаг товару
  * @property string|null $description Опис товару
  * @property string|null $image Картинка товару
+ * @property string|null $image_url Картинка товару (URL)
  * @property bool is_active Статус, чи товар активний
  * @property CarbonInterface|null $created_at Дата створення запису
  * @property CarbonInterface|null $updated_at Дата оновлення запису
@@ -57,6 +58,11 @@ class Product extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function getImageUrlAttribute(): string|null
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
     }
 
     #[Scope]
