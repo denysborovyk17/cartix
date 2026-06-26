@@ -17,7 +17,7 @@ final readonly class CategoryController
 
     public function index(): View
     {
-        $categories = $this->categoryRepository->getCategories();
+        $categories = $this->categoryRepository->getAll();
 
         return view('sbadmin2.tables.categories.index', compact('categories'));
     }
