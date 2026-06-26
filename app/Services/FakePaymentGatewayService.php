@@ -9,14 +9,8 @@ readonly class FakePaymentGatewayService
     ) {
     }
 
-    public function emulation(): bool
+    public function emulation(int $successChancePercent = 50): bool
     {
-        $chance = rand(0, 100);
-
-        if ($chance >= 15) {
-            return true;
-        } else {
-            return false;
-        }
+        return rand(1, 100) <= $successChancePercent;
     }
 }
