@@ -26,7 +26,9 @@ final readonly class OptionValueController
 
     public function create(): View
     {
-        return view('sbadmin2.tables.option-values.create');
+        $options = $this->optionRepository->getAllCollection();
+
+        return view('sbadmin2.tables.option-values.create', compact('options'));
     }
 
     public function store(StoreOptionValueRequest $request, CreateOptionValueAction $action): RedirectResponse
