@@ -29,7 +29,7 @@ readonly class CreateCartItemAction
                 'quantity' => $quantity
             ]);
         }
-        $cartItem->load('productVariant.optionValues');
+        $cartItem->load('productVariant.optionValues.option');
 
         return [
             'cartItem' => $cartItem,
