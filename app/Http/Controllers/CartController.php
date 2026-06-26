@@ -48,7 +48,7 @@ final readonly class CartController
         $result = $action->handle($productVariantId, $quantity);
 
         return response()->json([
-            'quantity' => $action['quantity'],
+            'quantity' => $result['quantity'],
             'itemTotal' => $this->moneyFormatterService->format($result['itemTotal']),
             'cartTotal' => $this->moneyFormatterService->format($result['cartTotal'])
         ]);
