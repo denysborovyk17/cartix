@@ -13,20 +13,20 @@ readonly class FileService
     ) {
     }
 
-    public function update(bool $removeAvatarPath, ?UploadedFile $avatarPath, ?string $currentAvatarPath): string|null
+    public function update(bool $removeFile, ?UploadedFile $file, ?string $currentFile = null): string|null
     {
-        if ($removeAvatarPath && $currentAvatarPath) {
-            Storage::disk('public')->delete($currentAvatarPath);
-            $currentAvatarPath = null;
+        if ($removeFile && $currentFile) {
+            Storage::disk('public')->delete($currentFile);
+            $currentFile = null;
         }
 
-        if ($avatarPath) {
-            if ($currentAvatarPath) {
-                Storage::disk('public')->delete($currentAvatarPath);
+        if ($file) {
+            if ($currentFile) {
+                Storage::disk('public')->delete($currentFile);
             }
-            $currentAvatarPath = $avatarPath->store('avatars', 'public');
+            $currentFile = $file->store('avatars', 'public');
         }
 
-        return $currentAvatarPath;
+        return $currentFile;
     }
 }
