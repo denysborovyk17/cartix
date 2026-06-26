@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Data\ProductSearchFilterData;
+use App\Models\Product\ProductVariant;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -10,6 +11,24 @@ use Illuminate\Support\Collection;
 
 readonly class ProductRepository
 {
+    public function getAll(): Collection
+    {
+        return Product::query()->with(['variants.optionValues', 'options'])->get();
+    }
+
+    public function getAllProductVariants(): LengthAwarePaginator
+    {
+        return ProductVariant::query()
+            ->with(['product.options', 'optionValues'])
+            ->latest()
+            ->paginate(config('custom.pagination.per_page'));
+    }
+
+    public function findById(int $productId): Product
+    {
+        return Product::query()->with(['options', 'variants.optionValues'])->findOrFail($productId);
+    }
+
     public function findBySlug(string $slug): Product
     {
         return Product::query()
