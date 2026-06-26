@@ -80,7 +80,7 @@
                             </button>
 
                             <picture class="d-block bg-light h-100">
-                                <img class="w-100 h-100 object-fit-cover" src="{{ $product->image }}" alt="">
+                                <img class="w-100 h-100 object-fit-cover" src="{{ $product->image_url }}" alt="">
                             </picture>
                         </div>
 

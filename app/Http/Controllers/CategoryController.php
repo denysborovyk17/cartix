@@ -32,7 +32,7 @@ final readonly class CategoryController
             perPage: config('custom.pagination.per_page')
         ), $category->id);
 
-        $brands = $this->brandRepository->getBrands();
+        $brands = $this->brandRepository->getAll();
         $colors = $this->optionValueRepository->getColors();
         $sizes = $this->optionValueRepository->getSizes();
 

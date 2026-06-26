@@ -30,7 +30,7 @@
                 <div class="row g-3" data-aos="fade-right">
                     <div class="col-12">
                         <picture>
-                            <img class="img-fluid" data-zoomable src="{{ $product->image }}" alt="HTML Bootstrap Template by Pixel Rocket">
+                            <img class="img-fluid" data-zoomable src="{{ $product->image_url }}" alt="HTML Bootstrap Template by Pixel Rocket">
                         </picture>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
                                     </div>
                                     <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                     <picture class="position-relative overflow-hidden d-block bg-light">
-                                        <img class="w-100 h-100 img-fluid position-relative z-index-10" title="" src="{{ $relatedProduct->image }}" alt="">
+                                        <img class="w-100 h-100 img-fluid position-relative z-index-10" title="" src="{{ $relatedProduct->image_url }}" alt="">
                                     </picture>
                                 </div>
                                 @if ($relatedProduct->variants->first()->stock > 0)

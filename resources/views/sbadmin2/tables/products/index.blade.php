@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Brands Table</title>
+    <title>Products Table</title>
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -36,10 +36,10 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <a href="{{ route('admin.brands.create') }}" class="text-blue-600" style="float: right">Create Brand</a>
+                    <a href="{{ route('admin.products.create') }}" class="text-blue-600" style="float: right">Create Product</a>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Brands Table</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Products Table</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -49,25 +49,47 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Product ID</th>
+                                            <th>Category ID</th>
+                                            <th>Brand ID</th>
                                             <th>Name</th>
                                             <th>Slug</th>
+                                            <th>Description</th>
                                             <th>Image</th>
+                                            <th>Is Active</th>
+                                            <th>Price</th>
+                                            <th>Discount Price</th>
+                                            <th>Currency</th>
+                                            <th>Stock</th>
+                                            <th>Option ID</th>
+                                            <th>Option Value ID</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($brands as $brand)
+                                        @foreach ($productVariants as $productVariant)
                                             <tr>
-                                                <td>{{ $brand->id }}</td>
-                                                <td>{{ $brand->name }}</td>
-                                                <td>{{ $brand->slug }}</td>
-                                                <td>{{ $brand->image }}</td>
-                                                <td>{{ $brand->created_at }}</td>
-                                                <td>{{ $brand->updated_at }}</td>
+                                                <td>{{ $productVariant->id }}</td>
+                                                <td>{{ $productVariant->product->id }}</td>
+                                                <td>{{ $productVariant->product->category_id  }}</td>
+                                                <td>{{ $productVariant->product->brand_id  }}</td>
+                                                <td>{{ $productVariant->product->name }}</td>
+                                                <td>{{ $productVariant->product->slug }}</td>
+                                                <td>{{ $productVariant->product->description }}</td>
+                                                <td>{{ $productVariant->product->image }}</td>
+                                                <td>{{ $productVariant->product->is_active }}</td>
+                                                <td>{{ $productVariant->price  }}</td>
+                                                <td>{{ $productVariant->discount_price }}</td>
+                                                <td>{{ $productVariant->currency }}</td>
+                                                <td>{{ $productVariant->stock}}</td>
+                                                <td>{{ $productVariant->product->options->pluck('name')->implode(',') ?? null }}</td>
+                                                <td>{{ $productVariant->optionValues->pluck('value')->implode(',') ?? null }}</td>
+                                                <td>{{ $productVariant->product->created_at }}</td>
+                                                <td>{{ $productVariant->product->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.brands.edit', $brand->id) }}" style="color: blue; padding: 20px;">Edit</a>
-                                                    <form method="POST" action="{{ route('admin.brands.destroy', $brand->id) }}">
+                                                    <a href="{{ route('admin.products.edit', $productVariant->product->id) }}" style="color: blue; padding: 20px;">Edit</a>
+                                                    <form method="POST" action="{{ route('admin.products.destroy', $productVariant->product->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn" style="color: red">Delete</button>
@@ -88,7 +110,7 @@
             <!-- End of Main Content -->
 
             <div>
-                {{ $brands->links() }}
+                {{ $productVariants->links() }}
             </div>
 
             @include('sbadmin2.components.footer')

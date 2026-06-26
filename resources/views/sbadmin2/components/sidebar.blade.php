@@ -52,6 +52,11 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Option Values Table</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.products.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Products Table</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

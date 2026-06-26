@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Actions\Admin\Brand\{CreateBrandAction, DeleteBrandAction, UpdateBrandAction};
-use App\Http\Requests\Admin\{App\Http\Requests\Admin\Brand\StoreBrandRequest,
-    App\Http\Requests\Admin\Brand\UpdateBrandRequest};
+use App\Http\Requests\Admin\Brand\{StoreBrandRequest, UpdateBrandRequest};
 use App\Repositories\BrandRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -18,7 +17,7 @@ final readonly class BrandController
 
     public function index(): View
     {
-        $brands = $this->brandRepository->getBrands();
+        $brands = $this->brandRepository->getAll();
 
         return view('sbadmin2.tables.brands.index', compact('brands'));
     }
@@ -28,7 +27,7 @@ final readonly class BrandController
         return view('sbadmin2.tables.brands.create');
     }
 
-    public function store(\App\Http\Requests\Admin\Brand\StoreBrandRequest $request, CreateBrandAction $action): RedirectResponse
+    public function store(StoreBrandRequest $request, CreateBrandAction $action): RedirectResponse
     {
         $action->handle($request->getData());
 
@@ -42,7 +41,7 @@ final readonly class BrandController
         return view('sbadmin2.tables.brands.edit', compact('brand'));
     }
 
-    public function update(\App\Http\Requests\Admin\Brand\UpdateBrandRequest $request, UpdateBrandAction $action, int $brandId): RedirectResponse
+    public function update(UpdateBrandRequest $request, UpdateBrandAction $action, int $brandId): RedirectResponse
     {
         $action->handle($request->getData(), $brandId);
 
