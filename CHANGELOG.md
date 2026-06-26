@@ -23,6 +23,20 @@
 
 -
 
+## [0.26.0] - 2026-06-26
+
+### Додано
+
+- Метод `getImageUrlAttribute` у моделі `Product` для отримання URL зображення товару.
+- Метод `findByName` для пошуку бренду за полем `name`.
+- Методи `getAll` та `getAllCollection` в `CategoryRepository` для отримання категорій з використанням пагінації та без неї.
+- Методи `getAllProductVariants`, `getAll` та `findById` в `ProductRepository` для отримання всіх варіантів товару, всіх товарів та пошуку товару за його ID.
+- Метод `getIdsByNames` в `OptionRepository` для отримання масиву ID опцій на основні пошуку за їхньої назвою.
+- Метод `getIdsByValues` в `OptionValueRepository` для отримання масиву ID значень опцій на основні пошуку за їхнього значення.
+- `ProductData` (DTO), `StoreProductRequest` та `UpdateProductRequest` для типізації та валідації даних при створенні та оновленні продукту.
+- Екшени `CreateProductAction`, `UpdateProductAction` та `DeleteProductAction` для CRUD операцій з продуктом.
+- Контролер `ProductController`, нові маршрути та Blade-шаблони `tables/products/*` для роботи з продуктами.
+
 ## [0.25.0] - 2026-06-24
 
 ### Додано
