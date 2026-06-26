@@ -143,7 +143,7 @@
                                 <div class="row mx-0 py-4 g-0 border-bottom">
                                     <div class="col-2 position-relative">
                                         <picture class="d-block border">
-                                            <img class="img-fluid" src="{{ $cartItem->productVariant->product->image }}" alt="HTML Bootstrap Template by Pixel Rocket">
+                                            <img class="img-fluid" src="{{ $cartItem->productVariant->product->image_url }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                         </picture>
                                     </div>
                                     <div class="col-9 offset-1">

@@ -69,7 +69,7 @@
                             </button>
 
                             <picture class="d-block bg-light h-100">
-                                <img class="w-100 h-100 object-fit-cover" src="{{ $wishlistItem->product->image }}" alt="">
+                                <img class="w-100 h-100 object-fit-cover" src="{{ $wishlistItem->product->image_url }}" alt="">
                             </picture>
                         </div>
 
@@ -110,7 +110,7 @@
                             @else
                                 <p class="mt-2 mb-0 small">
                                     <span>
-                                        ${{ number_format($wishlistItem->min('price') / 100, 2) }}
+                                        ${{ number_format($wishlistItem->price / 100, 2) }}
                                     </span>
                                 </p>
                             @endif
