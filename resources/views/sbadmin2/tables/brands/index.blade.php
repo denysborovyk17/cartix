@@ -87,6 +87,10 @@
             </div>
             <!-- End of Main Content -->
 
+            <div>
+                {{ $brands->links() }}
+            </div>
+
             @include('sbadmin2.components.footer')
 
         </div>
