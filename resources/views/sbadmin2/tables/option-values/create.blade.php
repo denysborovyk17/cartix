@@ -34,7 +34,11 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="small mb-1" for="optionName">Option Name</label>
-                            <input type="text" class="form-control" id="optionName" name="option_name" placeholder="Enter option name">
+                            <select name="option_value">
+                                @foreach ($options as $option)
+                                    <option value="{{ $option->name }}">{{ $option->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="value">Value</label>
