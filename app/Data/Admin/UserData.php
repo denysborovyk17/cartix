@@ -12,10 +12,10 @@ readonly class UserData
     public function __construct(
         private string $name,
         private string $email,
-        private ?string $password,
-        private ?UploadedFile $avatarPath,
-        private ?PhoneNumber $phone,
-        private ?CarbonInterface $birthday,
+        private string|null $password,
+        private UploadedFile|null $avatarPath,
+        private PhoneNumber|null $phone,
+        private CarbonInterface|null $birthday,
         private string $role,
         private bool $removeAvatarPath
     ) {

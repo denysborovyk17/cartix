@@ -5,13 +5,13 @@ namespace App\Data;
 readonly class ProductSearchFilterData
 {
     public function __construct(
-        private ?string $search,
-        private ?string $sortByPrice,
-        private ?int $minPrice,
-        private ?int $maxPrice,
-        private ?array $brands,
-        private ?array $colors,
-        private ?array $sizes,
+        private string|null $search,
+        private string|null $sortByPrice,
+        private int|null $minPrice,
+        private int|null $maxPrice,
+        private array|null $brands,
+        private array|null $colors,
+        private array|null $sizes,
         private int $perPage
     ) {
     }
@@ -21,7 +21,7 @@ readonly class ProductSearchFilterData
         return $this->search;
     }
 
-    public function getSortByPrice(): ?string
+    public function getSortByPrice(): string|null
     {
         return $this->sortByPrice;
     }

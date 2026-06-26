@@ -6,7 +6,7 @@ readonly class CategoryData
 {
     public function __construct(
         private string $name,
-        private ?string $parent
+        private string|null $parent
     ) {
     }
 

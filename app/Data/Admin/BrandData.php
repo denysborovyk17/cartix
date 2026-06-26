@@ -8,7 +8,7 @@ readonly class BrandData
 {
     public function __construct(
         private string $name,
-        private ?UploadedFile $image,
+        private UploadedFile|null $image,
         private bool $removeImage
     ) {
     }
@@ -32,7 +32,7 @@ readonly class BrandData
         return $this->image;
     }
 
-    public function getRemoveImage(): ?bool
+    public function getRemoveImage(): bool
     {
         return $this->removeImage;
     }

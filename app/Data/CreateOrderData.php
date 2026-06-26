@@ -13,7 +13,7 @@ readonly class CreateOrderData
         private PhoneNumber $phone,
         private string $city,
         private string $address,
-        private ?string $notes
+        private string|null $notes
     ) {
     }
 

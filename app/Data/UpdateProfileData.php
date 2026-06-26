@@ -11,9 +11,9 @@ readonly class UpdateProfileData
 {
     public function __construct(
         private string $name,
-        private ?UploadedFile $avatarPath,
-        private ?PhoneNumber $phone,
-        private ?CarbonInterface $birthday,
+        private UploadedFile|null $avatarPath,
+        private PhoneNumber|null $phone,
+        private CarbonInterface|null $birthday,
         private bool $removeAvatarPath
     ) {
     }
