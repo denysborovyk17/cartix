@@ -71,9 +71,9 @@
                                         @foreach ($productVariants as $productVariant)
                                             <tr>
                                                 <td>{{ $productVariant->id }}</td>
-                                                <td>{{ $productVariant->product->id }}</td>
-                                                <td>{{ $productVariant->product->category_id  }}</td>
-                                                <td>{{ $productVariant->product->brand_id  }}</td>
+                                                <td>{{ $productVariant->product->name }}</td>
+                                                <td>{{ $productVariant->product->category->name  }}</td>
+                                                <td>{{ $productVariant->product->brand->name ?? null }}</td>
                                                 <td>{{ $productVariant->product->name }}</td>
                                                 <td>{{ $productVariant->product->slug }}</td>
                                                 <td>{{ $productVariant->product->description }}</td>
