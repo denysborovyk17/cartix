@@ -19,7 +19,7 @@ readonly class ProductRepository
     public function getAllProductVariants(): LengthAwarePaginator
     {
         return ProductVariant::query()
-            ->with(['product.options', 'optionValues'])
+            ->with([ 'product.category', 'product.brand', 'product.options', 'optionValues'])
             ->latest()
             ->paginate(config('custom.pagination.per_page'));
     }
