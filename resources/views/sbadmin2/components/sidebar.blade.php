@@ -62,6 +62,11 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Orders Table</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.reviews.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Reviews Table</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
