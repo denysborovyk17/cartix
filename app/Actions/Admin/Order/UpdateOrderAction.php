@@ -3,6 +3,7 @@
 namespace App\Actions\Admin\Order;
 
 use App\Data\Admin\OrderData;
+use App\Models\Order\OrderItem;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\DB;
 use App\Models\Order\Order;
@@ -45,17 +46,15 @@ readonly class UpdateOrderAction
 
             $order->items()->delete();
 
-            $itemsData = [];
             foreach ($productVariants as $productVariant) {
-                $itemsData[] = [
+                OrderItem::create([
+                    'order_id' => $order->id,
                     'product_variant_id' => $productVariant->id,
                     'product_name' => $productVariant->product->name,
                     'quantity' => $quantity,
                     'price' => $productVariant->discount_price ?? $productVariant->price
-                ];
+                ]);
             }
-
-            $order->items()->createMany($itemsData);
 
             return $order;
         });
