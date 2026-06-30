@@ -67,7 +67,7 @@
                             <label class="small mb-1" for="role">Role</label>
                             <select name="role">
                                 @foreach (\App\Enums\UserRole::cases() as $role)
-                                    <option value="{{ $role->value }}" {{ old('role', $user->role->value) === $role->value ? 'selected' : '' }}>
+                                    <option value="{{ $role }}" {{ old('role', $user->role) === $role ? 'selected' : '' }}>
                                         {{ ucfirst($role->value) }}
                                     </option>
                                 @endforeach

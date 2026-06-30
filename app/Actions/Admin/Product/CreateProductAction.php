@@ -42,7 +42,7 @@ readonly class CreateProductAction
                 'is_active' => $data->getIsActive()
             ]);
 
-            $arrayOfOptionIds = $this->optionRepository->getIdsByNames($data->getOptions());
+            $arrayOfOptionIds = $this->optionRepository->findIdsByNames($data->getOptions());
 
             $product->options()->sync($arrayOfOptionIds);
 
@@ -54,7 +54,7 @@ readonly class CreateProductAction
                 'stock' => $data->getStock()
             ]);
 
-            $arrayOfOptionValueIds = $this->optionValueRepository->getIdsByValues($data->getOptionValues());
+            $arrayOfOptionValueIds = $this->optionValueRepository->findIdsByValues($data->getOptionValues());
 
             $productVariant->optionValues()->sync($arrayOfOptionValueIds);
 

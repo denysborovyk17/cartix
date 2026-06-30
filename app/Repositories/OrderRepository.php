@@ -12,9 +12,14 @@ readonly class OrderRepository
     ) {
     }
 
+    public function getAll(): LengthAwarePaginator
+    {
+        return Order::query()->with('items.productVariant')->paginate(config('custom.pagination.per_page'));
+    }
+
     public function findById(int $orderId): Order
     {
-        return Order::query()->findOrFail($orderId);
+        return Order::query()->with('items.productVariant')->findOrFail($orderId);
     }
 
     public function getHistory(int $userId): LengthAwarePaginator

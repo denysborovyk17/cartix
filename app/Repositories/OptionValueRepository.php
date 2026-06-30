@@ -44,7 +44,7 @@ readonly class OptionValueRepository
             ->toArray();
     }
 
-    public function getIdsByValues(array $values): array
+    public function findIdsByValues(array $values): array
     {
         return OptionValue::query()->whereIn('value', $values)->pluck('id')->toArray();
     }

@@ -11,17 +11,27 @@ use Illuminate\Support\Collection;
 
 readonly class ProductRepository
 {
-    public function getAll(): Collection
-    {
-        return Product::query()->with(['variants.optionValues', 'options'])->get();
-    }
-
     public function getAllProductVariants(): LengthAwarePaginator
     {
         return ProductVariant::query()
             ->with([ 'product.category', 'product.brand', 'product.options', 'optionValues'])
             ->latest()
             ->paginate(config('custom.pagination.per_page'));
+    }
+
+    public function getAllProductVariantsCollection(): Collection
+    {
+        return ProductVariant::query()->get();
+    }
+
+    public function findProductVariantByIds(array $productVariantIds): Collection
+    {
+        return ProductVariant::query()->with('product')->whereIn('id', $productVariantIds)->get();
+    }
+
+    public function getAll(): Collection
+    {
+        return Product::query()->with(['variants.optionValues', 'options'])->get();
     }
 
     public function findById(int $productId): Product

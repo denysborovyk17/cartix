@@ -33,7 +33,7 @@ readonly class OptionRepository
         return Option::query()->where('name', $name)->firstOrFail();
     }
 
-    public function getIdsByNames(array $names): array
+    public function findIdsByNames(array $names): array
     {
         return Option::query()->whereIn('name', $names)->pluck('id')->toArray();
     }

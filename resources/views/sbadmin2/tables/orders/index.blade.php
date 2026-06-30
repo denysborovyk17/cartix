@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Products Table</title>
+    <title>Orders Table</title>
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -36,10 +36,10 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <a href="{{ route('admin.products.create') }}" class="text-blue-600" style="float: right">Create Product</a>
+                    <a href="{{ route('admin.orders.create') }}" class="text-blue-600" style="float: right">Create Order</a>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Products Table</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Orders Table</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -49,47 +49,47 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Product ID</th>
-                                            <th>Category ID</th>
-                                            <th>Brand ID</th>
-                                            <th>Name</th>
-                                            <th>Slug</th>
-                                            <th>Description</th>
-                                            <th>Image</th>
-                                            <th>Is Active</th>
+                                            <th>User ID</th>
+                                            <th>Status</th>
+                                            <th>Total</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>City</th>
+                                            <th>Address</th>
+                                            <th>Notes</th>
+                                            <th>Product Variant IDs</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
                                             <th>Price</th>
-                                            <th>Discount Price</th>
-                                            <th>Currency</th>
-                                            <th>Stock</th>
-                                            <th>Option ID</th>
-                                            <th>Option Value ID</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($productVariants as $productVariant)
+                                        @foreach ($orders as $order)
                                             <tr>
-                                                <td>{{ $productVariant->id }}</td>
-                                                <td>{{ $productVariant->product->name }}</td>
-                                                <td>{{ $productVariant->product->category->name }}</td>
-                                                <td>{{ $productVariant->product->brand->name ?? null }}</td>
-                                                <td>{{ $productVariant->product->name }}</td>
-                                                <td>{{ $productVariant->product->slug }}</td>
-                                                <td>{{ $productVariant->product->description }}</td>
-                                                <td>{{ $productVariant->product->image }}</td>
-                                                <td>{{ $productVariant->product->is_active }}</td>
-                                                <td>{{ $productVariant->price  }}</td>
-                                                <td>{{ $productVariant->discount_price }}</td>
-                                                <td>{{ $productVariant->currency }}</td>
-                                                <td>{{ $productVariant->stock}}</td>
-                                                <td>{{ $productVariant->product->options->pluck('name')->implode(' + ') ?? null }}</td>
-                                                <td>{{ $productVariant->optionValues->pluck('value')->implode(' + ') ?? null }}</td>
-                                                <td>{{ $productVariant->product->created_at }}</td>
-                                                <td>{{ $productVariant->product->updated_at }}</td>
+                                                <td>{{ $order->id }}</td>
+                                                <td>{{ $order->user_id }}</td>
+                                                <td>{{ $order->status }}</td>
+                                                <td>{{ $order->total }}</td>
+                                                <td>{{ $order->first_name }}</td>
+                                                <td>{{ $order->last_name }}</td>
+                                                <td>{{ $order->email }}</td>
+                                                <td>{{ $order->phone }}</td>
+                                                <td>{{ $order->city }}</td>
+                                                <td>{{ $order->address }}</td>
+                                                <td>{{ $order->notes }}</td>
+                                                <td>{{ $order->items->pluck('product_variant_id')->implode(',') }}</td>
+                                                <td>{{ $order->items->pluck('product_name')->implode(',') ?? null }}</td>
+                                                <td>{{ $order->items->pluck('quantity')->implode(',') ?? null }}</td>
+                                                <td>{{ $order->items->pluck('price')->implode(', ') ?? null }}</td>
+                                                <td>{{ $order->created_at }}</td>
+                                                <td>{{ $order->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.products.edit', $productVariant->product->id) }}" style="color: blue; padding: 20px;">Edit</a>
-                                                    <form method="POST" action="{{ route('admin.products.destroy', $productVariant->product->id) }}">
+                                                    <a href="{{ route('admin.orders.edit', $order->id) }}" style="color: blue; padding: 20px;">Edit</a>
+                                                    <form method="POST" action="{{ route('admin.orders.destroy', $order->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn" style="color: red">Delete</button>
@@ -110,7 +110,7 @@
             <!-- End of Main Content -->
 
             <div>
-                {{ $productVariants->links() }}
+                {{ $orders->links() }}
             </div>
 
             @include('sbadmin2.components.footer')

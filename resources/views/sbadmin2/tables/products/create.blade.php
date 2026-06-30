@@ -73,7 +73,7 @@
                             <select name="existing_product_name">
                                 <option value="">NONE</option>
                                 @foreach ($products as $product)
-                                    <option value="{{ $product->name, old('existing_product_name') }}">
+                                    <option value="{{ $product->name}} {{ old('existing_product_name') }}">
                                         {{ ucfirst($product->name) }}
                                     </option>
                                 @endforeach
@@ -102,9 +102,9 @@
                         <div class="mb-3">
                             <label class="small mb-1" for="options">Options</label>
                             <select name="options[]" multiple>
-                                <option value="">Choose an option...</option>
+                                <option value="">--- Select ---</option>
                                 @foreach ($options as $option)
-                                    <option value="{{ $option->name, old('options[]') }}">
+                                    <option value="{{ $option->name}} {{ old('options') }}">
                                         {{ ucfirst($option->name) }}
                                     </option>
                                 @endforeach
@@ -113,9 +113,9 @@
                         <div class="mb-3">
                             <label class="small mb-1" for="options">Option Values</label>
                             <select name="option_values[]" multiple>
-                                <option value="">Choose an option value...</option>
+                                <option value="">--- Select ---</option>
                                 @foreach ($optionValues as $optionValue)
-                                    <option value="{{ $optionValue->value, old('option_values[]') }}">
+                                    <option value="{{ $optionValue->value }} {{ old('option_values') }}">
                                         {{ ucfirst($optionValue->value) }}
                                     </option>
                                 @endforeach
