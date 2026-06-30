@@ -23,12 +23,26 @@
 
 -
 
+## [0.27.0] - 2026-06-30
+
+### Додано
+
+- Метод `getAll` в `OrderRepository` для отримання всіх замовлень.
+- Метод `findProductVariantByIds` в `ProductRepository` для пошуку варіантів товарів за їхніми ID.
+- `OrderData` (DTO), `StoreOrderRequest` та `UpdateOrderRequest` для типізації та валідації даних при створенні та оновленні замовлення.
+- Екшени `CreateOrderAction`, `UpdateOrderAction` та `DeleteOrderAction` для CRUD операцій із замовленням.
+- Контролер `OrderController`, нові маршрути та Blade-шаблони `tables/orders/*` для роботи із замовленнями.
+- Метод `getAll` в `ReviewRepository` для отримання всіх відгуків.
+- `UpdateReviewData` (DTO), та `UpdateReviewRequest` для типізації та валідації даних при оновленні відгуку.
+- Екшени `UpdateReviewAction` та `DeleteReviewAction` для оновлення та видалення відгуку.
+- Контролер `ReviewController`, нові маршрути та Blade-шаблони `tables/reviews/*` для роботи з відгуками.
+
 ## [0.26.0] - 2026-06-26
 
 ### Додано
 
 - Метод `getImageUrlAttribute` у моделі `Product` для отримання URL зображення товару.
-- Метод `findByName` для пошуку бренду за полем `name`.
+- Метод `findByName` в `BrandRepository` для пошуку бренду за полем `name`.
 - Методи `getAll` та `getAllCollection` в `CategoryRepository` для отримання категорій з використанням пагінації та без неї.
 - Методи `getAllProductVariants`, `getAll` та `findById` в `ProductRepository` для отримання всіх варіантів товару, всіх товарів та пошуку товару за його ID.
 - Метод `getIdsByNames` в `OptionRepository` для отримання масиву ID опцій на основні пошуку за їхньої назвою.
