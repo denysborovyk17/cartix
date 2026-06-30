@@ -101,6 +101,12 @@ readonly class ProductRepository
                 return $query->orderBy($subQuery, $sortByPrice);
             })
 
+            ->when($data->getColors(),
+                fn($q) => $q->whereHas('variants.optionValues',
+                    fn($q) => $q->whereIn('value', $data->getColors())
+                )
+            )
+
             ->when($data->getSizes(),
                 fn($q) => $q->whereHas('variants.optionValues',
                     fn($q) => $q->whereIn('value', $data->getSizes())
