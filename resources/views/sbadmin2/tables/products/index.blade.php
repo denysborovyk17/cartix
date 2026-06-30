@@ -72,7 +72,7 @@
                                             <tr>
                                                 <td>{{ $productVariant->id }}</td>
                                                 <td>{{ $productVariant->product->name }}</td>
-                                                <td>{{ $productVariant->product->category->name  }}</td>
+                                                <td>{{ $productVariant->product->category->name }}</td>
                                                 <td>{{ $productVariant->product->brand->name ?? null }}</td>
                                                 <td>{{ $productVariant->product->name }}</td>
                                                 <td>{{ $productVariant->product->slug }}</td>
@@ -83,8 +83,8 @@
                                                 <td>{{ $productVariant->discount_price }}</td>
                                                 <td>{{ $productVariant->currency }}</td>
                                                 <td>{{ $productVariant->stock}}</td>
-                                                <td>{{ $productVariant->product->options->pluck('name')->implode(',') ?? null }}</td>
-                                                <td>{{ $productVariant->optionValues->pluck('value')->implode(',') ?? null }}</td>
+                                                <td>{{ $productVariant->product->options->pluck('name')->implode(' + ') ?? null }}</td>
+                                                <td>{{ $productVariant->optionValues->pluck('value')->implode(' + ') ?? null }}</td>
                                                 <td>{{ $productVariant->product->created_at }}</td>
                                                 <td>{{ $productVariant->product->updated_at }}</td>
                                                 <td>
