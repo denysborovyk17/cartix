@@ -62,7 +62,7 @@ class Product extends Model
 
     public function getImageUrlAttribute(): string|null
     {
-        return $this->image ? asset('storage/' . $this->image) : null;
+        return $this->image ?? null;
     }
 
     #[Scope]
