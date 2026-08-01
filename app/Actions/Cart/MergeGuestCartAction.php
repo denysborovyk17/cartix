@@ -11,8 +11,12 @@ readonly class MergeGuestCartAction
     ) {
     }
 
-    public function handle(int $userId, string $sessionId): void
+    public function handle(int $userId, ?string $sessionId): void
     {
+        if (!$sessionId) {
+            return;
+        }
+
         $userCart = $this->cartRepository->findByUserId($userId);
         $guestCart = $this->cartRepository->findBySessionId($sessionId);
 
