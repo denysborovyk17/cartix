@@ -61,8 +61,8 @@
                                             <th>Discount Price</th>
                                             <th>Currency</th>
                                             <th>Stock</th>
-                                            <th>Option ID</th>
-                                            <th>Option Value ID</th>
+                                            <th>Options</th>
+                                            <th>Option Values</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
                                         </tr>
