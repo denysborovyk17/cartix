@@ -16,8 +16,8 @@ readonly class EnsureIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user()->isAdmin()) {
-            abort(HttpStatus::FORBIDDEN->value);
+        if (!$request->user() || !$request->user()->isAdmin()) {
+            abort(HttpStatus::NOT_FOUND->value);
         }
 
         return $next($request);
