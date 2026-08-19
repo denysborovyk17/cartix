@@ -91,13 +91,13 @@
                                 </div>
                             </div>
                             @if ($selectedVariant->stock > 0)
-                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
+                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-cart-item"
                                         name="product_variant_id"
                                         data-product-variant-id="{{ $selectedVariant->id }}">
                                     Add To Cart
                                 </button>
                             @else
-                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-item"
+                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow add-cart-item"
                                         name="product_variant_id"
                                         data-product-variant-id="{{ $selectedVariant->id }}"
                                         disabled>
@@ -243,7 +243,7 @@
                                 </div>
                                 @if ($relatedProduct->variants->first()->stock > 0)
                                     <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
-                                        <button class="btn btn-quick-add w-100 add-item"
+                                        <button class="btn btn-quick-add w-100 add-cart-item"
                                                 name="product_variant_id"
                                                 data-product-variant-id="{{ $relatedProduct->variants->first()->id }}">
                                             Add To Cart
@@ -251,7 +251,7 @@
                                     </div>
                                 @else
                                     <div class="p-2 opacity-100" style="position: relative; z-index: 50; opacity: 1 !important; visibility: visible !important;">
-                                        <button class="btn btn-quick-add w-100 add-item"
+                                        <button class="btn btn-quick-add w-100 add-cart-item"
                                                 name="product_variant_id"
                                                 data-product-variant-id="{{ $relatedProduct->variants->first()->id }}"
                                                 disabled>
