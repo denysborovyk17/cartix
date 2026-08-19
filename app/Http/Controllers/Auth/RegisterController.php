@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Actions\User\CreateUserAction;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Jobs\SendWelcomeMailJob;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,7 @@ final readonly class RegisterController
         $user = $action->handle($request->getData());
 
         Auth::login($user);
+        SendWelcomeMailJob::dispatch($user);
 
         return redirect()->route('index');
     }
