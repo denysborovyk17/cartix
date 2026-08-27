@@ -29,11 +29,13 @@ readonly class MergeGuestCartAction
                 $existingItem = $userCart->findItemByProductVariantId($cartItem->product_variant_id);
 
                 if ($existingItem) {
-                    $existingItem->quantity += $cartItem->quantity;
-                    $existingItem->save();
+                    $existingItem->update([
+                        'quantity' => $existingItem->quantity + $cartItem->quantity
+                    ]);
                 } else {
-                    $cartItem->cart_id = $userCart->id;
-                    $cartItem->save();
+                    $cartItem->update([
+                        'cart_id' => $userCart->id
+                    ]);
                 }
             }
 
@@ -41,8 +43,9 @@ readonly class MergeGuestCartAction
             return;
         }
 
-        $guestCart->user_id = $userId;
-        $guestCart->session_id = null;
-        $guestCart->save();
+        $guestCart->update([
+            'user_id' => $userId,
+            'session_id' => null
+        ]);
     }
 }
