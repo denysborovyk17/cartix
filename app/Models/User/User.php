@@ -85,9 +85,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->avatar_path ? asset('storage/' . $this->avatar_path) : null;
     }
-
-    public function isAdmin(): bool
-    {
-        return $this->role === UserRole::ADMIN;
-    }
 }
