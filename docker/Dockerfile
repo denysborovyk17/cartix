@@ -11,24 +11,25 @@ RUN apk add --no-cache \
     icu-dev \
     oniguruma-dev
 
-RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS
-
-RUN docker-php-ext-install \
+RUN apk add --no-cache --virtual .build-deps $PHPSIZE_DEPS && \
+    docker-php-ext-install \
     pdo \
     pdo_mysql \
     mbstring \
     intl \
     zip \
     bcmath \
-    opcache
-
-RUN pecl update-channels && pecl install redis && docker-php-ext-enable redis
-
-RUN apk del .build-deps
+    opcache && \
+    pecl update-channels && \
+    pecl install redis && \
+    docker-php-ext-enable redis && \
+    apk del .build-deps
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN adduser -D -u 1000 www
+RUN adduser -D -u 1000 -G www-data www
+
+USER www
 
 EXPOSE 9000
 
