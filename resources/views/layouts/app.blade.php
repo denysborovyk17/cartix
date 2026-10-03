@@ -198,6 +198,11 @@
                                                     ${{ number_format($cartItem->productVariant->price * $cartItem->quantity / 100, 2) }}
                                                 </p>
                                             @endif
+                                            @if ($cartItem->productVariant->stock <= 5)
+                                                <p class="mb-2" style="color: red">В наявності: {{ $cartItem->productVariant->stock }}</p>
+                                            @else
+                                                <p class="mb-2" style="color: green">В наявності</p>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach

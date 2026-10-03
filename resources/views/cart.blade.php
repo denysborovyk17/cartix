@@ -87,7 +87,8 @@
                                                                                     class="cart-item-quantity"
                                                                                     data-product-variant-id="{{ $cartItem->product_variant_id }}"
                                                                                     name="quantity" value="{{ $cartItem->quantity }}"
-                                                                                    min="1">
+                                                                                    min="1"
+                                                                                    max="{{ $cartItem->quantity }}">
                                                                 </h6>
                                                         </div>
 
@@ -113,6 +114,11 @@
                                                         <p class="m-0 fs-5 fw-bold item-total" data-product-variant-id="{{ $cartItem->product_variant_id }}">
                                                             ${{ number_format($cartItem->productVariant->price * $cartItem->quantity / 100, 2) }}
                                                         </p>
+                                                    @endif
+                                                    @if ($cartItem->productVariant->stock <= 5)
+                                                        <p class="mb-2" style="color: red">В наявності: {{ $cartItem->productVariant->stock }}</p>
+                                                    @else
+                                                        <p class="mb-2" style="color: green">В наявності</p>
                                                     @endif
                                                 </div>
                                             </div>
