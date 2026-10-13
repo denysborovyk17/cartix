@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Actions\Profile\UpdateProfileAction;
+use App\Actions\User\UpdateUserAction;
 use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -19,7 +19,7 @@ final readonly class ProfileController
         return view('profile.index');
     }
 
-    public function update(UpdateProfileRequest $request, UpdateProfileAction $action): RedirectResponse
+    public function update(UpdateProfileRequest $request, UpdateUserAction $action): RedirectResponse
     {
         $action->handle($request->getData(), auth()->id());
 

@@ -97,7 +97,7 @@
 
 ### Додано
 
-- Передачу ID авторизованого користувача через глобальний хелпер `auth()->id()` в `UpdateProfileAction` всередині `ProfileController`.
+- Передачу ID авторизованого користувача через глобальний хелпер `auth()->id()` в `UpdateUserAction` всередині `ProfileController`.
 - Метод `isAdmin` у моделі `User` для перевірки ролі користувача.
 - Мідлвар `EnsureIsAdmin` для блокування доступу до адмінської частини, якщо роль користувача `user` (глобальна реєстрація в `bootstrap/app.php`).
 - Методи для отримання ID та `Timestamps` проміжної таблиці в моделі `User` для зв'язку `wishlistItems`.
@@ -128,11 +128,11 @@
 - Директорію `public/storage/avatars` для локального збереження аватарів користувачів.
 - Контролер `OrderHistoryController` та метод `getHistory` репозиторію `OrderRepository` для передачі даних про історію замовлень авторизованих користувачів до Blade-шаблону.
 - `UpdateProfileData` (DTO) та `UpdateProfileRequest` для типізації та валідації даних при оновленні профілю.
-- Екшен `UpdateProfileAction` для того, щоб користувач міг оновлювати свій профіль.
+- Екшен `UpdateUserAction` для того, щоб користувач міг оновлювати свій профіль.
 - Реквест `UpdateProfileRequest` для валідації даних при оновленні профілю користувача.
 - Контролер `ProfileController`, нові маршрути, CSS стилі та Blade-шаблони `profile/*` для профілю користувача.
 - `UpdatePasswordData` (DTO) та `UpdatePasswordRequest` для типізації та валідації даних при оновленні пароля.
-- Екшен `UpdateProfileAction` для того, щоб користувач міг оновлювати свій пароль.
+- Екшен `UpdateUserAction` для того, щоб користувач міг оновлювати свій пароль.
 - Контролер `PasswordController` та нові маршрути.
 - Blade-шаблон `checkout/checkout-fail.blade.php` який містить інформацію про невдалу оплату замовлення.
 - Сервіс `FakePaymentGateWayService` який емулює оплату замовлення та генерує шанс на успіх або невдачу.

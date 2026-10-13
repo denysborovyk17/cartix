@@ -7,7 +7,7 @@ use App\Models\User\User;
 use App\Repositories\UserRepository;
 use App\Services\FileService;
 
-readonly class UpdateUserProfileAction
+readonly class UpdateUserAction
 {
     public function __construct(
         private UserRepository $userRepository,

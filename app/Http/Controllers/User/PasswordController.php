@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Actions\Profile\UpdatePasswordAction;
+use App\Actions\User\UpdatePasswordAction;
 use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;

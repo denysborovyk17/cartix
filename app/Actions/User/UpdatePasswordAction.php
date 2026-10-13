@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Actions\Profile;
+namespace App\Actions\User;
 
 use App\Data\UpdatePasswordData;
 use App\Models\User\User;
