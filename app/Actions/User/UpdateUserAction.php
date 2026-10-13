@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Actions\Profile;
+namespace App\Actions\User;
 
 use App\Data\UpdateProfileData;
 use App\Models\User\User;
 use App\Repositories\UserRepository;
 use App\Services\FileService;
 
-readonly class UpdateProfileAction
+readonly class UpdateUserProfileAction
 {
     public function __construct(
         private UserRepository $userRepository,
