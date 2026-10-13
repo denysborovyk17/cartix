@@ -88,7 +88,7 @@
                                                                                     data-product-variant-id="{{ $cartItem->product_variant_id }}"
                                                                                     name="quantity" value="{{ $cartItem->quantity }}"
                                                                                     min="1"
-                                                                                    max="{{ $cartItem->quantity }}">
+                                                                                    max="{{ $cartItem->productVariant->stock }}">
                                                                 </h6>
                                                         </div>
 
