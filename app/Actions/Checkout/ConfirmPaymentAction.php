@@ -51,7 +51,7 @@ readonly class ConfirmPaymentAction
                     'order_id' => $order->id,
                     'amount' => $order->total,
                     'status' => PaymentStatus::SUCCESS,
-                    'card_last4' => substr($data->getLastCard4(), -4),
+                    'card_last4' => substr($data->getCardLast4(), -4),
                     'gateway' => 'Monobank'
                 ]);
 
@@ -66,7 +66,7 @@ readonly class ConfirmPaymentAction
                     'order_id' => $order->id,
                     'amount' => $order->total,
                     'status' => PaymentStatus::FAILED,
-                    'card_last4' => substr($data->getLastCard4(), -4),
+                    'card_last4' => substr($data->getCardLast4(), -4),
                     'gateway' => 'Monobank'
                 ]);
 

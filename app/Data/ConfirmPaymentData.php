@@ -16,7 +16,7 @@ readonly class ConfirmPaymentData
         );
     }
 
-    public function getLastCard4(): string
+    public function getCardLast4(): string
     {
         return $this->cardLast4;
     }
