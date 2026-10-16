@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Enums\HttpStatus;
-use App\Enums\OrderStatus;
 use App\Models\Order\Order;
 use App\Models\User\User;
 use App\Models\Cart\{Cart, CartItem};
