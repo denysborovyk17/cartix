@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Actions\Cart\MergeGuestCartAction;
 use App\Enums\HttpStatus;
-use App\Models\Product\{Product, ProductVariant};
+use Exception;
+use App\Models\Product\{ProductVariant};
 use App\Models\User\User;
 use App\Models\Cart\{Cart, CartItem};
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,16 +24,7 @@ class CartTest extends TestCase
 
     public function test_product_can_be_added_to_cart(): void
     {
-        $product = Product::create([
-            'name' => 'Test',
-            'slug' => 'test'
-        ]);
-
-        $productVariant = ProductVariant::create([
-            'product_id' => $product->id,
-            'price' => 10000,
-            'currency' => 'UAH'
-        ]);
+        $productVariant = ProductVariant::factory()->create();
 
         $user = User::factory()->create();
 
@@ -49,18 +42,9 @@ class CartTest extends TestCase
 
     public function test_product_can_be_added_again_in_cart(): void
     {
-        $product = Product::create([
-            'name' => 'Test',
-            'slug' => 'test'
-        ]);
-
-        $productVariant = ProductVariant::create([
-            'product_id' => $product->id,
-            'price' => 10000,
-            'currency' => 'UAH'
-        ]);
-
         $user = User::factory()->create();
+
+        $productVariant = ProductVariant::factory()->create();
 
         $this->actingAs($user)->postJson(route('cart.store'), [
             'product_variant_id' => $productVariant->id,
@@ -82,21 +66,11 @@ class CartTest extends TestCase
 
     public function test_product_can_be_updated_in_cart(): void
     {
-        $product = Product::create([
-            'name' => 'Test',
-            'slug' => 'test'
-        ]);
-
-        $productVariant = ProductVariant::create([
-            'product_id' => $product->id,
-            'price' => 10000,
-            'currency' => 'UAH',
-            'stock' => 10
-        ]);
-
         $user = User::factory()->create();
 
         $cart = Cart::create(['user_id' => $user->id]);
+
+        $productVariant = ProductVariant::factory()->create();
 
         CartItem::create([
             'cart_id' => $cart->id,
@@ -119,17 +93,7 @@ class CartTest extends TestCase
 
     public function test_product_can_be_deleted_from_cart(): void
     {
-        $product = Product::create([
-            'name' => 'Test',
-            'slug' => 'test'
-        ]);
-
-        $productVariant = ProductVariant::create([
-            'product_id' => $product->id,
-            'price' => 10000,
-            'currency' => 'UAH',
-            'stock' => 10
-        ]);
+        $productVariant = ProductVariant::factory()->create();
 
         $user = User::factory()->create();
 
@@ -150,6 +114,39 @@ class CartTest extends TestCase
         $this->assertDatabaseMissing('cart_items', [
             'cart_id' => $cart->id,
             'product_variant_id' => $productVariant->id
+        ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function test_guest_cart_can_merge_with_user_cart(): void
+    {
+        $productVariant = ProductVariant::factory()->create();
+        $user = User::factory()->create();
+
+        $userCart = Cart::create(['user_id' => $user->id]);
+        CartItem::create([
+            'cart_id' => $userCart->id,
+            'product_variant_id' => $productVariant->id,
+            'quantity' => 1
+        ]);
+
+        $sessionId = 'session_id_1234';
+        $guestCart = Cart::create(['session_id' => $sessionId]);
+        CartItem::create([
+            'cart_id' => $guestCart->id,
+            'product_variant_id' => $productVariant->id,
+            'quantity' => 1
+        ]);
+
+        $mergeGuestCartAction = app(MergeGuestCartAction::class);
+        $mergeGuestCartAction->handle($user->id, $sessionId);
+
+        $this->assertDatabaseHas('cart_items', [
+            'cart_id' => $userCart->id,
+            'product_variant_id' => $productVariant->id,
+            'quantity' => 2
         ]);
     }
 }
