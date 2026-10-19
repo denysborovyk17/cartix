@@ -23,6 +23,14 @@
 
 -
 
+## [0.28.3] - 2026-10-19
+
+### Додано
+
+- Фабрики `OptionFactory` та `OptionValueFactory` для заповнення БД фейковими даними.
+- Трейт `CreatesAdminTrait` для перевикористання логіки створення адміна в БД у Feature-тестах.
+- Feature-тести `BrandCrudTest`, `CategoryCrudTest`, `UserCrudTest`, `OptionCrudTest` та `OptionValueCrudTest` для перевірки CRUD операцій з брендами, категоріями, користувачами, опціями та їх значеннями.
+
 ## [0.28.2] - 2026-10-17
 
 ### Додано
