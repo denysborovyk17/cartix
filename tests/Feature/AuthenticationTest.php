@@ -61,7 +61,7 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(route('index'));
     }
 
-    public function test_users_can_not_authenticate_with_invalid_password(): void
+    public function test_users_cannot_authenticate_with_invalid_password(): void
     {
         $user = User::factory()->create();
 
