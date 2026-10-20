@@ -49,9 +49,9 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Product ID</th>
-                                            <th>Category ID</th>
-                                            <th>Brand ID</th>
+                                            <th>Product</th>
+                                            <th>Category</th>
+                                            <th>Brand</th>
                                             <th>Name</th>
                                             <th>Slug</th>
                                             <th>Description</th>
