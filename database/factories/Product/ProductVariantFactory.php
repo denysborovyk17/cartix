@@ -21,7 +21,7 @@ class ProductVariantFactory extends Factory
             'product_id' => Product::factory(),
             'price' => fake()->numberBetween(10000, 100000),
             'currency' => 'USD',
-            'stock' => fake()->numberBetween(1, 100)
+            'stock' => fake()->numberBetween(10, 100)
         ];
     }
 }
