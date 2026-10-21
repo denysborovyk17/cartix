@@ -53,31 +53,31 @@ final readonly class ProductController
         return redirect()->back();
     }
 
-    public function edit(int $productId): View
+    public function edit(int $productVariantId): View
     {
-        $product = $this->productRepository->findById($productId);
+        $productVariant = $this->productRepository->findProductVariantById($productVariantId);
         $categories = $this->categoryRepository->getAllCollection();
         $brands = $this->brandRepository->getAllCollection();
         $products = $this->productRepository->getAll();
         $options = $this->optionRepository->getAllCollection();
         $optionValues = $this->optionValueRepository->getAllCollection();
 
-        return view('sbadmin2.tables.products.edit', compact('product', 'categories', 'brands', 'products', 'options', 'optionValues'));
+        return view('sbadmin2.tables.products.edit', compact('productVariant', 'categories', 'brands', 'products', 'options', 'optionValues'));
     }
 
     /**
      * @throws Throwable
      */
-    public function update(UpdateProductRequest $request, UpdateProductAction $action, int $productId): RedirectResponse
+    public function update(UpdateProductRequest $request, UpdateProductAction $action, int $productVariantId): RedirectResponse
     {
-        $action->handle($request->getData(), $productId);
+        $action->handle($request->getData(), $productVariantId);
 
         return redirect()->back();
     }
 
-    public function destroy(DeleteProductAction $action, int $productId): RedirectResponse
+    public function destroy(DeleteProductAction $action, int $productVariantId): RedirectResponse
     {
-        $action->handle($productId);
+        $action->handle($productVariantId);
 
         return redirect()->back();
     }
