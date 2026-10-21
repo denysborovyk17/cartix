@@ -88,8 +88,8 @@
                                                 <td>{{ $productVariant->product->created_at }}</td>
                                                 <td>{{ $productVariant->product->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.products.edit', $productVariant->product->id) }}" style="color: blue; padding: 20px;">Edit</a>
-                                                    <form method="POST" action="{{ route('admin.products.destroy', $productVariant->product->id) }}">
+                                                    <a href="{{ route('admin.products.edit', $productVariant->id) }}" style="color: blue; padding: 20px;">Edit</a>
+                                                    <form method="POST" action="{{ route('admin.products.destroy', $productVariant->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn" style="color: red">Delete</button>

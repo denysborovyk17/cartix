@@ -13,7 +13,7 @@
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
         <a class="nav-link" href="{{ route('admin.index') }}">Back to Admin</a>
-        <a class="nav-link active" href="{{ route('admin.products.edit', $product->id) }}">Edit Product</a>
+        <a class="nav-link active" href="{{ route('admin.products.edit', $productVariant->id) }}">Edit Product</a>
     </nav>
     <hr class="mt-0 mb-4">
     <div class="row">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body">
                     @include('errors.form-errors')
-                    <form method="POST" action="{{ route('admin.products.update', $product->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.products.update', $productVariant->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -32,7 +32,7 @@
                             <select name="category">
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->name }}"
-                                        {{ old('category', $product->category->name) === $category->name ? 'selected' : '' }}>
+                                        {{ old('category', $productVariant->product->category->name) === $category->name ? 'selected' : '' }}>
                                         {{ ucfirst($category->name) }}
                                     </option>
                                 @endforeach
@@ -43,7 +43,7 @@
                             <select name="brand">
                                 @foreach ($brands as $brand)
                                     <option value="{{ $brand->name }}"
-                                        {{ old('brand', $product->brand->name) === $brand->name ? 'selected' : '' }}>
+                                        {{ old('brand', $productVariant->product->brand->name) === $brand->name ? 'selected' : '' }}>
                                         {{ ucfirst($brand->name) }}
                                     </option>
                                 @endforeach
@@ -51,51 +51,51 @@
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}" placeholder="Enter product name">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $productVariant->product->name }}" placeholder="Enter product name">
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="description">Description</label>
-                            <input type="text" class="form-control" id="description" name="description" value="{{ $product->description }}" placeholder="Enter product description">
+                            <input type="text" class="form-control" id="description" name="description" value="{{ $productVariant->product->description }}" placeholder="Enter product description">
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="avatarPath">Image</label>
                             <input type="file" class="form-control" name="image" id="avatarPath" accept="image/*">
-                            @if ($product->image)
-                                <img class="img-account-profile rounded-circle mb-2" src="{{ $product->image_url }}" alt="">
+                            @if ($productVariant->product->image)
+                                <img class="img-account-profile rounded-circle mb-2" src="{{ $productVariant->product->image_url }}" alt="">
                                 Delete Image <input type="checkbox" name="remove_image" value="1">
                             @endif
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="isActive">Is Active</label>
                             <input type="checkbox" name="is_active" id="isActive" value="1"
-                                {{ $product->is_active ? 'checked' : '' }}>
+                                {{ $productVariant->product->is_active ? 'checked' : '' }}>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="existingProductName">Existing Products</label>
                             <select name="existing_product_name">
-                                <option value="">{{ $product->name ?? 'NONE' }}</option>
+                                <option value="">{{ $productVariant->product->name ?? 'NONE' }}</option>
                                 @foreach ($products as $product)
-                                    <option value="{{ $product->name }}
+                                    <option value="{{ $productVariant->product->name }}
                                         {{ old('existing_product_name') }}">
-                                        {{ ucfirst($product->name) }}
+                                        {{ ucfirst($productVariant->product->name) }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="price">Price</label>
-                            <input type="number" class="form-control" id="price" name="price" value="{{ $product->variants->first()->price }}" placeholder="Enter product price">
+                            <input type="number" class="form-control" id="price" name="price" value="{{ $productVariant->price }}" placeholder="Enter product price">
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="discountPrice">Discount Price</label>
-                            <input type="number" class="form-control" id="discountPrice" name="discount_price" value="{{ $product->variants->first()->discount_price }}" placeholder="Enter product discount price">
+                            <input type="number" class="form-control" id="discountPrice" name="discount_price" value="{{ $productVariant->discount_price }}" placeholder="Enter product discount price">
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="currency">Currency</label>
                             <select name="currency">
                                 @foreach (['UAH', 'USD', 'EUR'] as $currency)
                                     <option value="{{ $currency }}"
-                                        {{ old('currency', $product->variants->first()->currency) === $currency ? 'selected' : '' }}>
+                                        {{ old('currency', $productVariant->currency) === $currency ? 'selected' : '' }}>
                                         {{ $currency }}
                                     </option>
                                 @endforeach
@@ -103,7 +103,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="stock">Stock</label>
-                            <input type="number" class="form-control" id="stock" name="stock" value="{{ $product->variants->first()->stock }}" placeholder="Enter product stock">
+                            <input type="number" class="form-control" id="stock" name="stock" value="{{ $productVariant->stock }}" placeholder="Enter product stock">
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="options">Options</label>
