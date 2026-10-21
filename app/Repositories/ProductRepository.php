@@ -39,6 +39,11 @@ readonly class ProductRepository
         return Product::query()->with(['options', 'variants.optionValues'])->findOrFail($productId);
     }
 
+    public function findProductVariantById(int $productVariantId): ProductVariant
+    {
+        return ProductVariant::query()->with(['product.options', 'optionValues'])->findOrFail($productVariantId);
+    }
+
     public function findBySlug(string $slug): Product
     {
         return Product::query()
