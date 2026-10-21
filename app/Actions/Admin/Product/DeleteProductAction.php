@@ -11,10 +11,10 @@ readonly class DeleteProductAction
     ) {
     }
 
-    public function handle(int $productId): void
+    public function handle(int $productVariantId): void
     {
-        $product = $this->productRepository->findById($productId);
+        $productVariant = $this->productRepository->findProductVariantById($productVariantId);
 
-        $product->delete();
+        $productVariant->delete();
     }
 }
