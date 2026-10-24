@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\CreatesAdminTrait;
 
-class CategoryCrudTest extends TestCase
+class CategoryTest extends TestCase
 {
     use RefreshDatabase, CreatesAdminTrait;
 

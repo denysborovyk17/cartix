@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\CreatesAdminTrait;
 
-class ProductCrudTest extends TestCase
+class ProductTest extends TestCase
 {
     use RefreshDatabase, CreatesAdminTrait;
 

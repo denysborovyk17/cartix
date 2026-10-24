@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\CreatesAdminTrait;
 
-class OptionValueCrudTest extends TestCase
+class OptionValueTest extends TestCase
 {
     use RefreshDatabase, CreatesAdminTrait;
 
