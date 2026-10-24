@@ -23,13 +23,24 @@
 
 -
 
+## [0.28.4] - 2026-10-24
+
+### Додано
+
+- Фабрику `ReviewFactory` для заповнення БД фейковими даними.
+- Feature-тест `ReviewTest` для перевірки функціоналу операцій адміністратора з відгуками.
+
+### Змінено
+
+- Оновлено назви Feature-тестів у директорії `tests/Feature/Admin/`, прибравши суфікс `Crud`.
+
 ## [0.28.3] - 2026-10-19
 
 ### Додано
 
 - Фабрики `OptionFactory` та `OptionValueFactory` для заповнення БД фейковими даними.
 - Трейт `CreatesAdminTrait` для перевикористання логіки створення адміна в БД у Feature-тестах.
-- Feature-тести `BrandCrudTest`, `CategoryCrudTest`, `UserCrudTest`, `OptionCrudTest` та `OptionValueCrudTest` для перевірки CRUD операцій з брендами, категоріями, користувачами, опціями та їх значеннями.
+- Feature-тести `BrandTest`, `CategoryTest`, `UserTest`, `OptionTest` та `OptionValueTest` для перевірки CRUD операцій з брендами, категоріями, користувачами, опціями та їх значеннями.
 
 ## [0.28.2] - 2026-10-17
 
