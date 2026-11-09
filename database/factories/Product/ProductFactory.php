@@ -20,7 +20,7 @@ class ProductFactory extends Factory
     {
         return [
             'category_id' => Category::factory()->create(),
-            'brand_id' => Brand::factory()->create(),
+            'brand_id' => Brand::query()->inRandomOrder()->value('id'),
             'name' => fake()->words(2, true),
             'slug' => fake()->unique()->slug(),
             'description' => fake()->sentence(),
