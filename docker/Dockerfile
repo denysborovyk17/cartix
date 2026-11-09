@@ -6,24 +6,20 @@ RUN apk add --no-cache \
     bash \
     curl \
     git \
-    unzip \
-    libzip-dev \
-    icu-dev \
-    oniguruma-dev
+    unzip
 
-RUN apk add --no-cache --virtual .build-deps $PHPSIZE_DEPS && \
-    docker-php-ext-install \
+ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+
+RUN install-php-extensions \
     pdo \
     pdo_mysql \
     mbstring \
     intl \
     zip \
     bcmath \
-    opcache && \
-    pecl update-channels && \
-    pecl install redis && \
-    docker-php-ext-enable redis && \
-    apk del .build-deps
+    opcache \
+    redis
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
