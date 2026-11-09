@@ -60,13 +60,15 @@ class ProductTest extends TestCase
             'name' => 'Product before'
         ]);
 
+        $brand = Brand::factory()->create();
+
         $productVariant = ProductVariant::factory()->create([
             'product_id' => $product->id
         ]);
 
         $data = [
             'category' => $product->category->name,
-            'brand' => $product->brand->name,
+            'brand' => $brand->name,
             'name' => 'Product after',
             'description' => fake()->sentence(),
             'price' => $productVariant->price,
